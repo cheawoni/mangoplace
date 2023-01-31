@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script><!--함수정의는 해드태그안에 쓰는게 훨신 가독성이 좋음-->
+		function multiply() {
+			/*alert("multiyply 함수 실행됨!")*/
+			var num1 = Number(document.getElementById("n1").value); // element n1의 값을 가져오고 있음.
+			var num2 = Number(document.getElementById("n2").value);
+			var mul = num1 * num2;
+			//alert(mul);
+			document.getElementById("result").value = mul; // 곱한 값을 result에 넣어줌.
+		}
+	</script>
+</head>
+<body>
+	num1 : <input type="text" id="n1"/> <br/> <!-- input태그가 있다고 해서 꼭 form태그가 있어야되는 건 아니다. 태그하나하나당 요소: Element-->
+	num2 : <input type="text" id="n2"/> <br/>
+	<button onclick="multiply()">곱하기</button> <br/> <!-- 컨텐트의 내용을 버튼 위에 그려줌. -->
+	result : <input type="text" id="result"/>
+</body>
+</html>

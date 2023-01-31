@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script src="https://code.jquery.com/jquery-3.6.2.min.js" integrity="sha256-2krYZKh//PcchRtd+H+VyyQoZ/e3EcrkxhM8ycwASPA=" crossorigin="anonymous"></script>
+	<script>
+		$(function() {
+			$("#btn1").click(function() {						// 클릭 이벤트 핸들러를 부착
+				var num = Number($("#num").val());				// 넘버로 형변환 제이쿼리 값을 잡아옴
+				num++;											// 누를 경우 num이 +되고
+				$("#num").val(num);								// 그 값을 num에 넣어줌
+			});
+			$("#btn2").click(function() {
+				var num = Number($("#num").val());
+				num--;											// $("#num").val(Number($("#num").val())-1);
+				$("#num").val(num);								
+			});
+		});
+	</script>
+</head>
+<body>
+	카운트 : <input type="text" id="num" value="0"/> <br/>
+	<button id="btn1">클릭(+)!</button>
+	<button id="btn2">클릭(-)!</button>
+</body>
+</html>

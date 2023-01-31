@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>table</title>
+		<style>
+			table, td, th {
+				border: 1px solid black;
+			}
+			table {
+				border-collapse: collapse;
+				margin: 0 auto;
+			}
+			td, th {
+				padding: 8px;
+				text-align: center;
+			}
+			th {
+				font-size: 20px;
+				color: #506785;
+				background-color: yellow;
+			}
+		</style>
+</head>
+<body>
+	<table>		
+		<tr>
+			<th>과목</th>
+			<th colspan="2">난이도 및 중요도</th>	<!-- 옆으로 한개 합침-->
+		</tr>
+		<tr>
+			<td>JS(jQuery)</td>
+			<td>중/하</td>
+			<td>중</td>
+		</tr>
+		<tr>
+			<td>Servlet&amp;JSP</td>
+			<td>상</td>
+			<td rowspan="2">상상</td> <!-- 밑으로 두개 합침-->
+		</tr>
+		<tr>
+			<td>Spring Framework</td>
+			<td>상상</td>
+		</tr>
+	</table>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Mango : 망코플레이트 (맛집리스트 목록페이지)</title>
+	<link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css' rel='stylesheet' type='text/css'>
+	<style>
+	body { 
+			margin:0; 
+			font-family: "SpoqaHanSans", "Noto Sans SC", "APPLE SD Gothic NEO", "sans-serif";
+		}
+		body > div {
+			border: 1px solid #cfcfcf;
+		}
+		body > div:nth-child(1) { height:61px;}	/*nth:n번째*/
+		body > div:nth-child(2) { 
+			height: 236px;
+			background-color: #f7f7f7;
+			}
+		body > div:nth-child(3) > div {
+			width: 774px;
+			margin: 0 auto;
+		}
+		body > div:nth-child(3) > div.inner > div.
+		body > div:nth-child(3) > div.inner > div .list_item {
+			border-top: 1px solid #dbdbdb;
+			height: 295px;
+		}
+		body > div:nth-child(3) > div.sns_item {
+			height:	50px;
+			padding: 27px 0;
+		}
+		body > div:nth-child(3) >div.sns_item > div:nth-child(1) {
+			height: 100%;
+			width: 380px;
+		}
+		body > div:nth-cild(3) > div.sns_item > div:nth-child(2) {
+			height:100%;
+			width:270px;
+		}
+		span.title {
+			display:block;	/*인라인레벨요소를 블럭레벨요소로 바꿔줌	   인라인요소? <span><span>내용만큼만 붙여줌. 블럭레벨요소? div {margin 등등등 을 사용}오른쪽으로 한줄 다 차지함.*/
+			color : #ff792a;
+			font-size: 23px;
+			line-height: 27.6rem;
+			margin-bottom: 23px;
+		}
+		body > div:nth-child(3) > div.map_item > #img_map1 {
+			width: 100%;
+		}
+		body > div:nth-child(4) > div {
+			width: 774px;
+			margin: 0 auto;
+		}
+		body > div:nth-child(4) .top_list_title {
+			width:412px;
+			height: 194px;
+			boarder: 1px solid red;
+		}
+		body > div:nth-child(4) .top_list_title {
+			width:412px;
+			height: 194px;
+			boarder: 1px solid red;
+		}
+		body > div:nth-child(4) > div.inner > div.list_item_small {
+			width:190px;
+			height:186px;
+			border: 1px solid red;
+		}
+		body > div:nth-child(4) > div.inner > div.list_item_small:NOT(:first-child(2)) {
+			margin-left:30px;
+		}
+		body > div:nth-child(4) > div.inner:not(:first-child) {
+		
+		}
+		div.inner {
+			width: 860px;
+			margin: 0 auto;
+			padding: 27px 0;
+		}
+		a.hashtag {
+			margin: 15px 3px 0 3px;
+		}
+		.fl { float:left; }
+		.fr { folat:right; }
+		
+	</style>
+</head>
+<body>
+	<div>헤더(로고...검색...등등)</div>   <!-- 1번째 div --> <!-- 위에서부터 알아서 읽어내려옴. -->
+	<div>안주가 맛있는...</div>  	<!-- 2번째 div -->
+	<div>  	<!-- 3번째 div -->
+		<div class="list_item">
+			a
+		</div>
+		<div class="list_item">
+			a
+		</div>
+		<div class="list_item">
+		
+		</div>
+		<div class="list_item">
+		
+		</div>
+		<div class="list_item">
+		
+		</div>
+		<div class="list_item">
+		
+		</div>
+		<div class="list_item">
+		
+		</div>
+		<div class="list_item">
+		
+		</div>
+		<div class="list_item">
+		
+		</div>
+		<div class="list_item">
+		
+		</div>
+		<div class="sns_item">
+			<div class="fl">공유하기버튼</div>
+			<div class="fr">SNS버튼5개</div>
+			<div style="clear:both;"></div>
+		</div>	<!-- 3번째 div -->
+		<div class="map_item">
+			<span class="title">리스트 지도</span>
+			<img id="img_map1" src="Images/img_map.png"/>
+		</div>
+		<div>	<!-- 4번째 div -->
+			<div class="inner">
+				<span class="title">리스트의 식당과 비슷한 맛집</span>
+					
+					<div class="list_item_small">
+						a
+					</div>
+					<div class="list_item_small">
+						a
+					</div>
+					<div class="list_item_small">
+						a
+					</div>
+					<div class="list_item_small">
+						a
+					</div>
+				</div>
+			</div>
+		<div style="clear:both;"></div> <!-- clear속성: 사진옆으로 글씨가 따라붙지 않게 만듬 -->
+		<div class="inner">
+			<span class="title">실시간 키워드</span>
+			<a href=""># 해물</a>
+		</div>
+	</div>
+</body>
+</html>

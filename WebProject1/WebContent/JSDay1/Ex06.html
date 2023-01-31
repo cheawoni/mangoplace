@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!-- 
+Ex06. jQuery 연습 (1) - (JavaScript)innerHTML
+버튼 태그 두가지방법:
+	<button id="btn2">입력완료</button>
+	<input type="button" value="입력완료"/>
+(주의) 버튼 태그 - <form>태그 안에서 (ex. 아이디 중복확인):
+<button id="btn2">아이디 중복확인</button> -> NOT Okay.
+	-> [정리] form태그 안에 button태그는 기본적으로 submit버튼으로 봄.
+	-> 그래서, 이런 경우에는 이렇게 써야함:
+		<button id="btn2">아이디 중복확인</button>
+<input type="button" value="아이디 중복확인"/> -> Okay.
+ -->
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+	<style>
+		table {
+			border-collapse: collapse;
+			margin-top: 10px;
+		}
+		td {
+			border: 1px solid grey;
+			padding: 8px;
+			font-size: 16px;
+		}
+	</style>
+	<script>
+		$(function() {
+			$("#btn2").click(function() {	//$(제이쿼리셀렉터) // 테이블을 만듬.
+				var str1 = "";
+				var text1 = $("#a").val();
+				var text2 = $("#b").val();
+				var text3 = $("#c").val();
+				var text4 = $("#d").val();
+				str1 += "<table>";
+				str1 += "<tr>";
+				str1 += "<td>"+text1+"</td>";
+				str1 += "<td>"+text2+"</td>";
+				str1 += "</tr>";
+				str1 += "<tr>";
+				str1 += "<td>"+text3+"</td>";
+				str1 += "<td>"+text4+"</td>";
+				str1 += "</tr>";
+				str1 += "</table>";
+				//alert(str1);
+				document.getElementById("div1").innerHTML = str1;	// 기존에 있던 div태그안에 다른 내용을 담을수 있다. str1의 내용을 담아줌.
+			}); 	
+		});
+	</script>
+</head>
+<body>
+	<input type="text" id="a"/>
+	<input type="text" id="b"/>	<br/>
+	<input type="text" id="c"/>
+	<input type="text" id="d"/>	<br/>
+	<button id="btn2">입력완료</button>
+	<!-- <input type="button" value="입력완료"/>위와 같음  -->
+	<div id="div1">
+		<!-- <table>
+			<tr>
+				<td>1</td>
+				<td>3</td>
+			</tr>
+			<tr>
+				<td>5</td>
+				<td>7</td>
+			</tr>
+		</table> -->
+	</div>
+</body>
+</html>

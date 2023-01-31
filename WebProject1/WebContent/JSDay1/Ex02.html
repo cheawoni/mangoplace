@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<!-- 
+Ex02.html "파라미터", "쿼리스트링(query string)"
+	- 구글링, "자바스크립트 쿼리스트링 파라미터"
+	https://goodteacher.tistory.com/354
+	
+	// let queryString = location.search;
+	function getParamMap() {
+		let splited = location.search.replace("?","").split(/[=?&]/);	
+		let param = {};
+		for(let i=0; i<splited.length; i++) {
+			param[splited[i]] = splited[++i];
+		}
+		return param;
+	}
+	const paramObj = getParamMap();
+	alert(paramObj.num);
+	alert(paramObj.num2);
+ -->
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script>
+		var name = "YG";	// 전역변수 : function이 끝날때 까지 살아있음. 다른 스크립트에서도 살아있음.
+		function getParamMap() { /* 함수를 정의함 */
+			let splited = location.search.replace("?","").split(/[=?&]/);	/* splited, param, i : 지역변수*/
+			let param = {};
+			for(let i=0; i<splited.length; i++) {
+				param[splited[i]] = splited[++i];
+			}
+			//alert("i" + i); // i 는 지역변수니까 for문이 끝나면 없음.
+			return param;
+		}
+		const paramObj = getParamMap(); /* 함수를 실행 */
+		alert(paramObj.num);	// 쿼리스트링			// alert: 일종의 sysout
+		alert(paramObj.num2);	// 파라미터
+		alert(typeof paramObj.num);	// typeof: 타입을 보여줌 num,string 문자열인지 숫자인지 (''="")
+		alert(typeof paramObj.num2);
+		alert(paramObj.num + paramObj.num2);
+	</script>
+</head>
+<body>
+	<script>
+		alert(paramObj.name);
+	</script>
+
+</body>
+</html>

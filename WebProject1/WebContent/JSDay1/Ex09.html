@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script src="https://code.jquery.com/jquery-3.6.2.min.js" integrity="sha256-2krYZKh//PcchRtd+H+VyyQoZ/e3EcrkxhM8ycwASPA=" crossorigin="anonymous"></script>
+	<script>
+		function update_price() {
+			//alert($("#unit_price").text());	// 1000원	// td태그안에 컨텐트의 텍스트만 가져옴. (.html)<b></b>태그까지 가져옴.
+			var unit_price = $("#unit_price").text();	// '1000원'	// 컨텐트의 문자만 뽑음
+			unit_price = Number(unit_price.replace('원',''));	// 1000	// replace '원'->'' old문자열을 new문자열로 대체하겠다.
+			var qty = Number($("#qty").val());	// 1	// 수량
+			var price = unit_price * qty;
+			$("#price").text(price + "원");
+		}
+		
+		$(function() {
+			$("#btn_minus").click(function() {
+				if( Number($("#qty").val())==0 )
+					return;
+				var num = Number($("#qty").val());
+				num--;
+				$("#qty").val(num);
+				update_price();
+			});
+			$("#btn_plus").click(function() {
+				$("#qty").val(Number($("#qty").val())+1);
+				update_price();
+			});
+			update_price();
+		});
+	</script>
+	<style>
+		table {
+			border-collapse: collapse;	/*전체 테두리 한줄 설정*/
+			table-layout: fixed;		/*각각의 td에 대해서 width로 지정하는 크기*/
+		}
+		td {
+			border: 2px solid grey;
+			text-align: center;
+		}
+		td:nth-child(1) { width: 300px; }
+		td:nth-child(2) { width: 120px; }
+		td:nth-child(3) { width: 120px; }
+		td:nth-child(4) { width: 120px; }
+		td > input { width: 50px; }
+		
+	</style>
+</head>
+<body>
+	<table>
+		<tr>
+			<td>품목</td>
+			<td>단가</td>
+			<td>수량</td>
+			<td>가격</td>
+		</tr>
+		<tr>
+			<td><img src="../Images/참깨라면1000.png"/></td><!-- ../상위폴더 -->
+			<td id="unit_price">1000원</td>
+			<td>
+				<button id="btn_minus">-</button>
+				<input type="text" id="qty" value="0"/>
+				<button id="btn_plus">+</button>				
+			</td>
+			<td id="price"></td>
+		</tr>
+	</table>
+</body>
+</html>

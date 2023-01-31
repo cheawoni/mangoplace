@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!-- 
+	jQuery. -> (jQuery CDN)
+	Ex05. html(제이쿼리로)
+ -->
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<!-- 제이쿼리 외부파일을 복사해와야됨. $ is not defined : jQuery 라이브러리를 읽어오지 않았을 때 ERR. -->
+	<script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+	<script><!--jQuery=$-->
+		$(function() { 		// 딸러펑션~	// 제이쿼리안에 함수를 정의. // 딸러펑션: 바디를 다 만들어 내고 나서 실행. 다 그리고 나서 실행. 없으면 바디를 그리지 못함. 바디안에 넣어주면 가능은 함. 가독성이 떨어짐.
+			$("#btn1").click(function() { // 클릭이벤트핸들러를 부착.	// 제이쿼리 셀렉터. id가 btn1인 태그. 다큐먼트.겟엘리먼트 하던거를 이러케 불러줌.
+				var num1 = Number($("#n1").val());	//.value = .val (n1의 value의값을 뽑아냄)
+				var num2 = Number($("#n2").val());	// getter: 파라미터가 없는 값, 파라미터가 없으니까 값을 달라는 getter
+				//alert(num1*num2);
+				$("#result").val(num1*num2);	// setter: 파라미터가 있는 값, 값이 들어가줘야되기 때문에 setter
+			});	
+		}); 
+	</script>
+</head>
+<body>
+	num1 : <input type="text" id="n1"/> <br/>
+	num2 : <input type="text" id="n2"/> <br/>
+	<button id="btn1">곱하기</button> <br/> 
+	result : <input type="text" id="result"/>
+</body>
+</html>

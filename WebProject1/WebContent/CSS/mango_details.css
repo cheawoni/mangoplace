@@ -1,0 +1,1811 @@
+@charset "UTF-8";
+	@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
+	* {
+		font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+		margin: 0;
+		padding: 0;
+	}
+	html {
+   		font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+   		word-wrap: break-word;
+   		border: 0 none;
+	}
+	
+/* ///////////////////////////  헤더 시작   ////////////////////////////////////////////////// */
+      #div_header {   /* 망고 헤더부분 로고,검색기능 등등... */
+         position: fixed;
+         border-bottom: 1px solid #DBDBDB;
+          box-shadow: 0 4px 11px rgb(0 0 0 / 10%);
+          background-color: #FFFFFF;
+         box-sizing: border-box;
+         width: 100%;
+         height: 61px;
+         top: 0;
+         left: 0;
+         /* padding: 14px; */
+         margin-left: 0;
+         z-index: 1000;
+      }
+      #img_logo {      /* (1)헤더 망고플레이트 로고 */
+          margin-left: 23px;
+          margin-top: 13px;
+          width: 100px;
+          height: 33px;
+          cursor: pointer;
+         }
+      #img_search {   /* (2)헤더 서치아이콘 로고 */
+         margin-left: 40px;
+          margin-top: 11px;
+          height: 37px;
+          margin-right: 5px;
+          background-size: auto;
+      }
+      body > #div_header > div.fr {   /* (헤더 오른쪽 기능) fr 클래스에 왼쪽 선 추가*/
+         padding: 0;
+         margin: 0;
+         position: relative;
+         font-size: 16px;
+         color: #888888;
+          height: 100%;
+          border-left: 1px solid #dbdbdb;   /* 왼쪽 선 추가 */
+          cursor: pointer;
+      }
+      body > #div_header > div:nth-child(2) > label {      /* (2)헤더 왼쪽 서치아이콘 */
+         margin-top: -33px;
+         display: block;
+         margin-left: 95px;
+      }
+      body > #div_header > div:nth-child(2) > label > input[type='text'] {   /* 헤더 검색 기능 안에 들어올 text */
+         height: 27px;
+         border-color: transparent;
+         outline: none;
+         font-size: 16px;
+         margin-left: -10px;
+         margin-top: -5px;
+      } 
+      body > #div_header > div:nth-child(2) > label > input[type='text']::placeholder {   /* 헤더 검색 기능 placeholder의 스타일적용 */
+         color: #7f7f7f;
+         font-weight: 400;
+      }
+      body > #div_header > div:nth-child(3) {   /* (3)헤더 오른쪽 유저아이콘 */
+         line-height: 16px;
+         width: 85px;
+            text-align: center;
+      }
+      body > #div_header > div:nth-child(3) > img {   /* 유저아이콘 이미지 */
+         width: 59px;
+         margin-top: 6px;
+      }
+      body > #div_header > div:nth-child(4) { /* (4)헤더 오른쪽 망고스토리 아이콘 */
+         width: 129px;
+         text-align: center;
+      }
+      body > #div_header > div:nth-child(4) > span { /* 망고 스토리 글씨*/
+         display: block;
+         margin-top: 22px;
+         line-height: 16px;
+      }
+      body > #div_header > div:nth-child(5) { /* (5)헤더 오른쪽 맛집 리스트 아이콘 */
+         line-height: 16px;
+         width: 129px;
+         text-align: center;
+      }
+      body > #div_header > div:nth-child(5) > span { /* 맛집 리스트 글씨*/
+         display: block;
+         margin-top: 22px;
+         line-height: 16px;
+      }
+      body > #div_header > div:nth-child(6) { /* (6)헤더 오른쪽 EAT딜 아이콘 */
+         width: 129px;
+         text-align: center;
+      }
+      .header_right_new::after {
+          content: '';
+          position: absolute;
+          top: 11px;
+          right: 32px;
+          display: block;
+          width: 15px;
+          height: 15px;
+          background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/uo3o88vopcmdsket.png);
+          background-size: cover;
+      }
+      body > #div_header > div:nth-child(6) > span { /* 망고 스토리 글씨 */
+         display: block;
+         margin-top: 22px;
+         line-height: 16px;
+      }
+      .fl { 
+            float:left;
+        }
+        .fr { 
+            float:right;
+        }
+        /* 인기검색어 팝업창 시작*/
+        .input_search_keyword_open {
+           display: block;
+        }
+        .input_search_keyword:not(.open) {
+           display: none;
+        }
+        .input_search_backgroundDark {
+           display : block;
+           /* display: none;  input_search_open이 되면 none으로 바뀜.*/
+          position: fixed;
+          top: 0;
+          left: 0;
+          z-index: 890;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0,0,0,0.8);
+        }
+        .input_search_content {
+            position: fixed;
+            top: 61px;
+          left: 214px;
+          z-index: 1100;
+          width: 660px;
+          border: 1px solid #DBDBDB;
+          border-top: 0;
+          border-radius: 0 0 3px 3px;
+          box-sizing: border-box;
+          background-color: #FFFFFF;
+        }
+        .input_search_content_inner {
+           padding: 0 24px;
+        }
+        .input_search_content_list {
+           display: flex;
+          flex-wrap: nowrap;
+          justify-content: space-around;
+          align-items: center;
+           height: 50px;
+            position: relative;
+          width: 100%;
+          border-bottom: 1px solid #DBDBDB;
+           font-size: 16px;
+          color: #7F7F7F;
+        }
+        .input_search_content_keywordList {
+           display: flex;
+          padding: 0px 5px;
+          height: 60px;
+          align-items: center;
+           border-bottom: 1px solid #DBDBDB;
+           cursor: pointer;
+        }
+        .keywordList_item_img {
+             background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/2018022864551sprites_desktop.png);
+             background-position: -974px -747px;
+             width: 30px;
+             height: 25px;
+         }
+        .input_search_keywordList_item {
+           font-size: 14px;
+          color: #7F7F7F;
+          height: 18px;
+        }
+      .keywordListWrap_inner {
+         height: 250px;
+          overflow-y: scroll;
+             width: 100%;
+           padding: 0px 25px 0px 0px;
+      } 
+      .keywordListWrap_inner::-webkit-scrollbar-track {
+         background-color: #fff;
+        }
+        .keywordListWrap_inner::-webkit-scrollbar {
+         width: 7px;
+         background-color: #f5f5f5;
+        }
+        .keywordListWrap_inner::-webkit-scrollbar-thumb {
+         border-radius: 7px;
+         background-color: #808080;
+        }
+      .inputSearchItem_tapButton-selected:after {
+          content: '';
+          position: absolute;
+          bottom: -1px;
+          left: 0;
+          width: 100%;
+          height: 3px;
+          background-color: #ff7100;
+      }
+      .input_search_item_inner {
+          display: flex;
+          justify-content: center;
+          width: 100%;
+          height: 100%;
+             align-items: center;
+      }
+      .input_search_item {
+          display: flex;
+          position: relative;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          height: 100%;
+          cursor: pointer;
+      }
+      .input_search_keywordList_item_none {
+         display: flex;
+          justify-content: center;
+          height: 77px;
+          width: 100%;
+          align-items: center;
+      }
+/* ///////////////////////////  헤더 끝   ////////////////////////////////////////////////// */
+
+	.img_left{
+		width:  375px;
+		height: 340px;
+	    border-left: 6px solid #fff;
+	    margin:60.5px 0 0 0;
+	   	padding:0;
+	   	display: block;
+	   	object-fit: cover;
+	}
+	.hide_text{
+		bottom: 295px;
+   		right: 20px;
+	    width: 186px;
+	    height: 50px;
+	    background: rgba(0,0,0,0.44);
+	    border-radius: 50px;
+	}
+	.txt{
+	    color: white;
+	    font-size: 16px;
+	}
+	.allow-white{
+	    background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/2018022864551sprites_desktop.png);
+   		background-position: -974px -932px;
+   		width: 17px;
+   		height: 12px;
+  		    margin-left: 15px;
+	}
+	#div_img{
+		position:relative;
+		width: 100%;
+    	display: flex;
+	}
+	body > #div_header > div:nth-child(2) > label {
+	    margin-top: -32px;
+	    display: block;
+	    margin-left: 90px;
+	}
+	body > #div_header > div:nth-child(2) > label > input[type='text'] {
+		height: 27px;
+	    border-color: transparent;
+	    outline: none;
+	    font-size: 16px;
+		margin-left: -9px;
+	}
+	body > #div_header > div:nth-child(3) {
+		line-height: 16px;
+		width: 86px;
+		text-align: center;
+	} 
+	body > #div_header > div:nth-child(3) > img {
+		line-height: 16px;
+		width: 45px;
+		height: 43px;
+	}
+	body > #div_header > a:nth-child(4) > div {
+		width: 129px;
+		text-align: center;
+	} 
+	body > #div_header > a:nth-child(4) > div > span {
+		display: block;
+		margin-top:18px;			
+		line-height: 16px;
+		word-break: break-all;
+	}
+	body > #div_header > a:nth-child(5) > div {
+		line-height: 16px;
+		width: 129px;
+		text-align: center;
+		word-break: break-all;
+	} 
+	body > #div_header > a:nth-child(5) > div > span {
+		display: block;
+		margin-top:18px;			
+		line-height: 16px;
+		word-break: break-all;
+	}
+	body > #div_header > a:nth-child(6) > div {
+		width: 129px;
+		text-align: center;
+	} 
+	body > #div_header > a:nth-child(6) > div > span {
+		display: block;
+		margin-top:18px;			
+		line-height: 16px;
+	}
+	body > #div_header > a:nth-child(6) > div > span:after{
+		content: '';
+	    position: absolute;
+	    top: 7px;
+   		right: 31px;
+	    display: block;
+	    width: 15px;
+	    height: 15px;
+	    background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/uo3o88vopcmdsket.png);
+	    background-size: cover;
+	}
+ 	body > #div_img > div:nth-child(6){
+		position: absolute;
+		bottom: 11px;
+   		right: 8px;
+	    display: flex;
+	    align-items: center;
+	    justify-content: center;
+	}
+	#column-contents{
+		display: flex;
+		width: 100%;
+  		background-color: #fff;
+ 		padding-left: 7px;
+	  	margin-top:6px;
+	}
+	.title{
+	    width: 100%;
+	}
+	.restaurant_detail{
+   		font-size: 28.85px;
+   		font-weight: 400;
+   		color: #000000;
+		padding: 25px 0 0;
+		width: 320px;
+		line-height: 46px;
+	}
+
+	h1{
+		font-size: 100%;
+	}
+	.restaurant_name{
+		font-weight: normal;
+		word-break: break-all;
+		color: #000000;
+		
+	}
+	.score {
+		color: #ff792a;
+   		margin-left: 12px;
+   		font-weight: normal;
+	}
+	.branch{
+	    font-size: 18.1px;
+	    color: #888;
+	    line-height: 19.2px;
+	}
+	div.title_header{
+   		background-color: #fff;
+ 	  		/* float: left; */
+		padding: 27px 138px 0;
+		width: 830px;
+   		margin: 0 auto;
+   		/* margin-top: 20px; */
+		/* line-height: 46px; */
+	}
+	div.title_header > div:nth-child(2) {
+		margin-left: 19px;
+		margin-right: 25px;
+	}
+	div.title_header > div:nth-child(2) > img {
+		width: 40px;
+   		height: 40px;
+		margin-top: 31.4px;
+		margin-left: 5px;
+	}
+	div.title_header > div:nth-child(3) > img {
+		width: 43px;
+   		height: 43px;
+		margin-top: 29px;
+	}
+	div.title_header > div:nth-child(2) > span, div.title_header > div:nth-child(3) > span {
+		margin-top: 12px;
+		font-size: 12.6px;
+		font-weight: 400;	
+	    line-height: 1.3;
+	    color: #9B9B9B;
+	}
+	div#map {
+		width: 400px;
+		min-height: 328px;
+	}
+	div.button {
+		width:50px;
+	} 
+	.writer_button {
+		width:40px;
+		height:40px;
+		margin-top:31.4px;
+		margin-bottom: 4.8998px;
+		position:relative;
+	}
+/* 	.writer_button:hover{
+		background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/review_writing_active_icon2.png);
+	} */
+	.writer_button1{
+		width:40px;
+		height:40px;
+		
+	}
+	.writer_button2{
+		width: 29px;
+	    height: 29px;
+	    left: 6.5px;
+	    position: absolute;
+	    top: 5px;
+	    display: none;
+  		}
+	.fr.button:hover .writer_button2{
+		display:block;
+	}
+	.fr.button:hover .writer_button1{
+		display:none;
+	}
+	.fr.button:hover #writer {
+		color: #ff792a;			
+	}
+
+/* 		#writer:hover{
+			
+		} */
+	
+	div#status {
+		margin:30px 0 10px 2px;
+		padding: auto;
+	}
+	div.count {
+		margin-right: 15px;
+		font-size: 12.8px;
+		line-height:16px;
+		color: #9b9b9b;
+		font-weight: 350;
+		
+	}
+	div.count > img {
+		width: 15px;
+		height: 15px;
+	}
+	div.line{
+		border-bottom: 1px solid #e9e9e9;
+		width: 800px;
+   		height: 20px;
+	}
+	table{
+		padding-top: 20px;
+		padding-bottom: 20px;
+	}
+	table,td,th{
+		text-align: left;
+		font-size: 14.4px;
+		line-height: 24.48px;
+	}
+	td,th{
+	 	padding-bottom: 5px;
+	 	vertical-align: top;
+	}
+	th{
+		width: 120px;
+		padding-right: 10px;
+		color: rgba(79,79,79,0.6);
+		font-weight: 400;
+	}
+	td{
+		min-width:180px;
+		padding-bottom: 5px;
+		color: #4f4f4f;
+	}
+	span.jibun_address_icon{
+		border-radius: 2px;
+	    border: solid 1px #e9e9e9;
+	    padding: 0 4px;
+	    margin-right: 2px;
+	    font-size: 12px;
+	    color: #7f7f7f;
+	}
+	span.jibun_address{
+		font-size:14px;
+	}
+	.menu_list{
+		border-bottom: 1px solid #e9e9e9;
+	}
+	.menu{
+		margin-right: 30px;
+	}
+	ul{
+		list-style:none;
+	}
+	.menu_img{
+		width:63px;
+		height:63px;
+		margin-right:8px;
+	}
+	p.update_date{
+		width:800px;
+		color: rgba(79,79,79,0.6);
+		font-size: 12px;
+   		text-align: right;
+   		line-height: 16px;
+   		padding: 4px 0 20px 0;
+	}
+	.review_table{
+		width:800px;
+/* border: 1px solid blue;*/		}
+	.review_list{
+		width:800px;
+		margin-top: 20px;
+		margin-bottom: 14px;
+		height: 23.2px;
+	}
+	.review_title{
+		font-size: 20px;
+   		line-height: 21.6px;
+   		font-weight: 400;
+   		color: #4F4F4F;
+	}
+	.review_count{
+		font-size: 18px;
+   		line-height: 21.6px;
+   		font-weight: 400;
+		color: #7F7F7F;
+	}
+	.review_tasty_like{
+		font-size: 18px;
+   		color: #ff792a;
+   		font-weight: 400;
+   		/* border-right: 1px solid #e9e9e9; */
+	}
+	.review_tasty_like:after{
+		content: '|';
+	    margin: 0 7px;
+	    color: #9b9b9b;
+	}
+	.review_tasty_good{
+		font-size: 18px;
+   		color: #9b9b9b;
+   		font-weight: 400;
+   		/* border-right: 1px solid #e9e9e9; */
+	}
+	.review_tasty_good:after{
+		content: '|';
+	    margin: 0 7px;
+	    color: #9b9b9b;
+	}
+	.review_tasty_notBad{
+		font-size: 18px;
+   		color: #9b9b9b;
+   		font-weight: 400;
+   		/* border-right: 1px solid #e9e9e9; */
+	}
+	.review_tasty_notBad:after{
+		content: '|';
+	    margin: 0 7px;
+	    color: #9b9b9b;
+	}
+	.review_tasty_bad{
+		font-size: 18px;
+   		color: #9b9b9b;
+   		font-weight: 400;
+	}
+	/* .review_content_list{
+	} */
+	.review{
+		padding-top:20px;
+		padding-bottom:52px;
+/* border: 1px solid grey; */
+	}
+	.title_header2 {
+		min-height: 1200px;
+/* border: 1px solid grey; */
+	    padding: 27px 138px 0;
+	    width: 830px;
+	    margin: 0 auto;
+	}
+	.title_header2 .review_user{
+		margin: 15px 35px 0 8px;
+		width: 74px;
+	}
+	.title_header2 .review_content{
+		width: 593px;
+	}
+	.title_header2 .review_score{
+		margin-left:17.3px;
+		width: 60px;
+	}
+	.title_header2 > div > .review_content_list {
+/* margin-top: 15px; */
+		padding: 20px 0 55px 0;
+		position: relative;
+   		border-bottom: 1px solid #DBDBDB;
+		background-color: white;
+		width: 800px;
+	}
+	
+	.title_header2 > div > .review_content_list:hover {
+		background-color: #F3F3F3;
+	}
+	.title_header2 > div > .review_content_list > div {
+		min-height: 124px;		
+	} 
+	.user_img{
+		width: 70px;
+		height: 70px;
+		border-radius: 50%;
+	    margin-left: 4px;
+	}
+	.user_name{
+		margin-bottom: 2px;
+   		line-height: 16.9px;
+   		font-size: 13px;
+   		text-align: center;
+   		color: #555555;
+	    display: flex;
+	    justify-content: center;
+	    align-items: center;
+	}
+	.user_write_img{
+	    background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/2018022864551sprites_desktop.png);
+    	background-position: -996px -600px;
+		margin:0 2px;
+		width:9px;
+		height:8px;
+	}
+	.user_count_wrap{
+	    display: flex;
+	    align-items: center;
+	    justify-content: center;
+	    margin-right: 8px;
+	}
+	.user_write_count{
+	    display: flex;
+	    justify-content: center;
+	    align-items: center;		
+		font-size: 10px;
+   		color: #CBCBCB;
+   		line-height: 16px;
+	}
+	.user_follow_img{
+	    background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/2018022864551sprites_desktop.png);
+    	background-position: -998px -729px;
+		margin:0 2px;
+		width:9px;
+		height:8px;
+	}
+	.user_follow_count{
+	    display: flex;
+	    justify-content: center;
+	    align-items: center;
+		font-size: 10px;
+   		color: #CBCBCB;
+   		line-height: 16px;
+	}
+	.user_level{
+	    margin: 0 18.8px;
+	}
+	.user_level_img{
+		width: 37px;
+	    height: 21px;
+	}
+	.user_review_writedate{
+	    font-size: 14px;
+	    line-height: 16.8px;
+	    color: #9B9B9B;
+	}
+	.user_review{
+		font-size: 15px;
+		font-weight: 380;
+	    line-height: 24.99px;
+	    word-break: break-all;
+	    color: #000000;
+	}
+	.user_review_img_list{
+		margin-top: 17px;
+	}
+	.user_review_img_wrap{
+		position: relative;
+	}
+	.user_review_img{
+		margin-right: 10px;
+		width:120px;
+		height:120px;
+	}
+	.user_review_img_else{
+		position: absolute;
+	    font-size: 21px;
+	    color: #FFFFFF;
+	    right: 133px;
+    	top: 44px;
+	}
+	.icon_tasty_like_good{
+	    background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/2018022864551sprites_desktop.png);
+	    background-position: -716px -869px;
+		width: 39px;
+		height: 39px;
+		margin: 0 8px 10px 10px;
+	}
+	.icon_tasty_like_notbad{
+		background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/2018022864551sprites_desktop.png);
+    	background-position: -566px -868px;
+		width: 39px;
+		height: 39px;
+		margin: 0 8px 10px 10px;
+	}
+	.icon_tasty_like_bad{
+	    background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/2018022864551sprites_desktop.png);
+    	background-position: -516px -868px;
+		width: 39px;
+		height: 39px;
+		margin: 0 8px 10px 10px;
+	}
+	.user_review_like{
+		font-size: 15px;
+   		color: #ff792a;
+   		text-align: center;
+	}
+	#more_list{
+		width: 800px;
+   		height: 72px;
+		display: flex;
+   		align-items: center;
+	}
+	/* .icon_more{
+	
+} */
+		.icon_more1{
+			width: 17px;
+    		height: 14px;
+    		margin-right: 17px;
+			margin-left: 334.775px;
+		}
+		.more{
+			font-size: 19px;
+    		color: #ff792a;
+		}
+		.icon_more2{
+			width: 17px;
+    		height: 14px;
+    		margin-left: 17px;
+			margin-right: 334.775px;
+		}
+		.main_review_img_big{
+			position: fixed;
+		    top: 5%;
+		    left: 5%;
+		    width: 1384px;
+		    height: 84%;
+		    z-index: 1001;
+		    border-radius: 10px;
+		    display: none;
+		}
+		.user_review_img_big{
+			position: fixed;
+		    top: 5%;
+		    left: 5%;
+		    width: 1384px;
+		    height: 84%;
+		    z-index: 1001;
+		    border-radius: 10px;
+		    display: none;
+		}
+		.menu_img_big{
+			position: fixed;
+		    top: 5%;
+		    left: 5%;
+		    width: 1384px;
+		    height: 84%;
+		    z-index: 1001;
+		    border-radius: 10px;
+		    display: none;
+		}
+		.img_area{
+			position:relative;
+			height: 97%;
+   			background-color: rgba(0,0,0,0.8);
+   		 	padding: 30px 0;
+   		 	border-radius: 4px;
+		}
+		.img_area_warp{
+			width: 533.5px;
+		    min-width: 0px;
+		    max-width: 100%;
+z-index: 0;
+position: relative;
+		}
+		.img_area_img{
+		    display: flex;
+    		justify-content: center;
+		    width: 1031px;
+		    height: 510px;
+		}
+		.img_area_img > div {
+			width: 1017px;
+			background-color: rgba(0,0,0,0.8);
+		}
+	.img_area_img > div >img{
+ 			/* position:absolute;
+	    left: 246.5px;
+	    top: 30px; */	
+	    margin: 0 auto;
+		width: 524px;
+	    height: 510px;
+	}		
+	.bx-wrapper {
+		border:0;
+		background:rgba(0,0,0,0.8);
+		box-shadow:none;
+	}
+	.bx-wrapper .bx-controls-direction a:nth-child(1) {
+		background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/2018022864551sprites_desktop.png);
+	    background-position: -935px -281px;
+	    width: 28px;
+	    height: 45px;
+	    opacity: .5;
+	    margin-left: 10px;
+        position: absolute;
+        top: 44%;
+        margin-top: -16px;
+	}
+	.bx-wrapper .bx-controls-direction a:nth-child(1):not(.first):hover{
+		background-position: -935px -281px;
+	    opacity: 1.5;
+	}
+	.bx-wrapper .bx-controls-direction a:nth-child(2) {
+		background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/2018022864551sprites_desktop.png);
+	    background-position: -935px -332px;
+	    width: 28px;
+	    height: 45px;
+	    opacity: .5;
+	    margin-left: 10px;
+        position: absolute;
+        top: 44%;
+        margin-top: -16px;
+	}
+	.bx-wrapper .bx-controls-direction a:nth-child(2):not(.last):hover{
+		background-position: -935px -332px;
+	    opacity: 1.5;
+	}
+	.img_area_user_items{
+		padding: 5px 16px 0;
+	}
+	.user_header_img{
+		width: 40px;
+    	height: 40px;
+    	border-radius: 50%;
+    	background-size:cover;
+	}
+	.user_header_items_wrap{
+		width:206.7px;
+	    padding: 6px 0 0 6px;
+	    display:inline-block;
+	}
+	.user_header_name{
+		vertical-align: top;
+	    font-size: 13.6px;
+	    display: inline-block;
+	    color: black;
+	    font-weight: 400;
+	}
+	.user_header_level{
+		margin-left: 4px;
+	    background: url(https://www.mangoplate.com/assets/holic.svg) no-repeat;
+	    width: 37px;
+	    height: 15px;
+	    background-size: 100%;
+	    display:inline-block;
+	}
+	.user_header_stat{
+	    margin: 0;
+	    width: 70px;
+	    font-size: 10px;
+	    color: #cbcbcb;
+        text-align: left;
+        display: flex;
+	    justify-content: center;
+	    align-items: center;
+        
+	}
+	.review_icon{
+	    background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/2018022864551sprites_desktop.png);
+	    background-position: -996px -600px;
+	    width: 9px;
+	    height: 8px;
+	    display: inline-block;
+	    margin: 0 1px 0 2px;
+	}
+	.follow_icon{
+		background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/2018022864551sprites_desktop.png);
+	    background-position: -998px -729px;
+	    width: 8px;
+	    height: 8px;
+	    display: inline-block;
+	    margin: 0 1px 0 2px;
+	}
+	.user_header_tasty_good{
+		background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/2018022864551sprites_mobile.png);
+	    background-position: -102px -539px;
+	    width: 30px;
+	    height: 30px;
+	}
+	.user_header_tasty_notbad{
+	    background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/restaurant_ok_active_face.svg);
+	    background-size: cover;
+	    width: 30px;
+	    height: 30px;
+	}
+	.user_header_tasty_bad{
+	    background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/restaurant_not_recommend_active_face.svg);
+        background-size: cover;
+	    width: 30px;
+	    height: 30px;
+	}
+	.user_header_review_like{
+	    color: #ff792a;
+	    font-size: 12px;
+	    text-align: center;
+	}
+	.user_count{
+		font-size:10px;
+	}
+	.img_area_button > img:nth-child(1){
+		position:absolute;
+		margin-left:10px;
+		width:28px;
+		height:45px;
+		top: 275px;
+		z-index:2;
+	}
+	.img_area_button > img:nth-child(2){
+		position:absolute;
+		margin-right:10px;
+		width:28px;
+		height:45px;
+		top: 275px;
+   		right: 370px;
+	}
+	.img_area_small{
+  	 		margin-top: -16.9625px;
+  			width:1032.1px;
+		height:68px;
+	}
+	.img_area_small_img{
+		margin:0 auto;
+		display: flex;
+   		justify-content: center;
+	}
+	
+	.img_area_small_img_dark{
+		background-size:cover;
+		background-position:50% 50%;
+		width:65px;
+		height:64px;
+	}
+	.img_area_small_img_dark:not(.on) {
+		filter: brightness(0.5);
+	}
+	.img_area_content{
+		position:absolute;
+		top:0;
+		right:0;
+		width:353px;
+		height: 100%;
+		background-color: white;
+		border-radius: 0 4px 4px 0;
+		color: #777;
+		font-weight:300;
+	}
+	.img_area_content_title{
+		padding: 8px 14px;
+		border-bottom: 1px solid #f2f2f2;
+		font-size:12.8px;
+		line-height:16px;
+	}
+	.img_area_content_content{
+		padding:0 16px;
+		width: 318px;
+		letter-spacing: .2px;
+	}
+	.img_area_content_content > div:nth-child(1){
+		padding-top:21px;
+		font-size:13.6px;
+		line-height:19.2px;
+	}
+	.img_area_content_content > div:nth-child(2){
+		margin-top:20px;
+		font-size:12px;
+		line-height:16px;
+	}
+	.close_button{
+		position:absolute;
+		background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/2018022864551sprites_mobile.png);
+   		background-position: -28px -587px;
+   		width: 21px;
+   		height: 21px;
+   		top: -10px;
+   		right: -31px;
+	}
+	.black_screen{
+	    position: fixed;
+	    top: 0;
+	    left: 0;
+	    width: 100%;
+	    height: 100%;
+	    opacity: .37;
+	    z-index: 1000;
+	    background-color: black;
+		display: none;
+	}
+	#details_background_dark{
+		display: none;
+	    position: fixed;
+	    top: 0;
+	    left: 0;
+	    z-index: 890;
+	    width: 100%;
+	    height: 100%;
+	    background-color: rgba(0,0,0,0.8);
+	}
+	#search_wrap{
+		top: 61px;
+   		left: 214px;
+   		position: fixed;
+	    z-index: 1100;
+	    width: 660px;
+	    border: 1px solid #DBDBDB;
+	    border-top: 0;
+	    border-radius: 0 0 3px 3px;
+	    box-sizing: border-box;
+	    background-color: #FFFFFF;
+	    display:none;
+	}
+	#Keyword_items_wrap{
+	    padding: 0 24px;
+	}
+	.Keyword_items_list{
+		display:flex;
+	    height: 50px;
+	}
+	.Keyword_item{
+		flex:1;
+		display:flex;
+		justify-content: center;
+		align-items:center;
+		position: relative;
+	    width: 100%;
+	    height: 100%;
+	    border-bottom: 1px solid #DBDBDB;
+	    font-size: 16px;
+	    color: #7F7F7F;
+	    cursor: pointer;
+	}
+	.Keyword_item_Active{
+		color: #ff7100;
+	}
+	.Keyword_item_Active:after{
+		content: '';
+	    position: absolute;
+	    bottom: -1px;
+	    left: 0;
+	    width: 100%;
+	    height: 3px;
+	    background-color: #ff7100;
+	}
+	#Keyword_content_wrap{
+		padding: 0px 24px;
+	    max-height: 250px;
+	    min-height: 0;
+	    overflow-y:hidden;
+	}
+	#Keyword_content_wrap::-webkit-scrollbar{
+		width: 7.5px;
+		position: absolute;
+   		right: 2px;
+   		min-height: 10px;	
+	}
+	#Keyword_content_wrap::-webkit-scrollbar-thumb{
+		height: 146px;
+		background: #808080; /* 스크롤바의 색상 */
+		border-radius: 10px;
+	}
+	#Keyword_content_wrap::-webkit-scrollbar-track{
+		background: #FFFFFF;
+	}
+
+	#popular_content_wrap{
+		padding: 0px 24px;
+	    max-height: 250px;
+	    min-height: 0;
+	    overflow-y:hidden;
+	    display:none;
+	}
+	#popular_content_wrap::-webkit-scrollbar{
+		width: 7.5px;
+		position: absolute;
+   		right: 2px;
+   		min-height: 10px;	
+	}
+	#popular_content_wrap::-webkit-scrollbar-thumb{
+		height: 146px;
+		background: #808080; /* 스크롤바의 색상 */
+		border-radius: 10px;
+	}
+	#popular_content_wrap::-webkit-scrollbar-track{
+		background: #FFFFFF;
+	}
+	#lately_content_wrap{
+		padding: 0px 24px;
+	    max-height: 250px;
+	    min-height: 0;
+	    overflow-y:hidden;
+	    display:none;
+	}
+	#lately_content_wrap::-webkit-scrollbar{
+		width: 7.5px;
+		position: absolute;
+   		right: 2px;
+   		min-height: 10px;	
+	}
+	#lately_content_wrap::-webkit-scrollbar-thumb{
+		height: 146px;
+		background: #808080; /* 스크롤바의 색상 */
+		border-radius: 10px;
+	}
+	#lately_content_wrap::-webkit-scrollbar-track{
+		background: #FFFFFF;
+	}
+	
+	.Keyword_content_items{
+			flex: 0 0 60px;
+		box-flex: 0;
+   		border-bottom: 1px solid #DBDBDB;
+	}
+	.Keyword_content_items > a{
+		display: flex;
+		align-items: center;
+		height: 60px;
+	}
+	.search_img{
+		background-image: url(../Images/icon_search.png);
+		background-size: cover;
+	    width: 17px;
+	    height: 17px;
+	    margin: 0 12px 0 7px;
+	}
+	.Keyword_contents{
+		margin-right: 45px;
+	    font-size: 14px;
+	    color: #7F7F7F;
+	    line-height:16px;
+	    height: 18px;
+	}
+	.lately_Keyword_none{
+	    padding: 26px 0;
+	    border-bottom: 1px solid #DBDBDB;
+	    text-align: center;
+	    font-size: 16px;
+	    font-weight: 300;
+	}
+	.on{
+		background-color: rgba(0,0,0,0.2);
+	}
+	.fl { 
+		float:left;
+	}
+	.fr { 
+		float:right;
+	}
+	a{
+		text-decoration: none;
+	}
+
+	.title_header3{
+		width: 800px;
+    	margin: 0 auto;
+    	margin-top: 20px;
+    	padding-top: 33px;
+    	min-height: 1200px;
+    	padding-right: 31px;
+	}
+	div.best_restaurant_title{
+		color: #ff792a;
+		font-size: 23.008px;
+		line-height:27.6096px;
+	}
+	.best_restaurants_list{
+		margin-top:20px;
+		width:800px;
+/* border: 2px solid blue; */
+		min-height: 667px;
+	}
+	.best_restaurant_content1{
+		padding-right:17px;
+		padding-bottom:20px;
+	}
+	.best_restaurant_content2{
+		padding-left:17px;
+		padding-bottom:20px;
+	}
+	img.best_restaurant_img{
+		width:383px;
+		height:255.325px;
+	}
+	div.best_restaurant_name{
+		padding: 9px;
+		line-height: 24.96px;
+	}
+	span.best_name{
+		font-size:19.2px;
+		color: #555;
+	}
+	strong.best_score{
+		color: #ff792a;
+		margin-left:5px;
+		font-size: 21.92px;
+		font-weight:400;
+	}
+	div.best_category{
+		color: #9b9b9b;
+		margin-top:6px;
+		font-size:14.4px;
+		padding-right:10px;
+		line-height: 18.72px;
+	}
+	div#related_top{
+		padding:33px 0;
+		width: 800px;
+		min-height: 418px;
+/* border: 2px solid green; */
+	}
+	div.related_top_title{
+		margin-bottom: 20px;
+		color: #ff792a;
+		font-size:23.008px;
+		font-weight: 400;
+		line-height: 27.6096px;
+	}
+	div.related_top_list{
+		margin-bottom: 32px;
+		position:relative;
+	}
+	.related_top_content1 .dark {
+		background-color: rgba(0,0,0,0.2);
+		position:absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index:2;
+	}
+	.related_top_content1 .image_below_dark {
+		/* background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/keyword_search/meta/pictures/vvqonxcw30hcg5za.png?fit=around|748:748&crop=748:748;*,*&output-format=jpg&output-quality=80); */
+	    background-size: cover;
+	    background-position: 50% 50%;
+	    position:absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%; 
+		z-index: 1;
+	}
+	.related_top_content2 .dark {
+		background-color: rgba(0,0,0,0.2);
+		position:absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index:2;
+	}
+	.related_top_content2 .image_below_dark {
+		/* background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/12280/bulzl0grxjmdcs.jpg?fit=around|748:748&crop=748:748;*,*&output-format=jpg&output-quality=80); */
+	    background-size: cover;
+	    background-position: 50% 50%;
+	    position:absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%; 
+		z-index: 1;
+	}
+	.related_top_content3 .dark {
+		background-color: rgba(0,0,0,0.2);
+		position:absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index:2;
+	}
+	.related_top_content3 .image_below_dark {
+		/* background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/keyword_search/meta/pictures/ygfdodonhkumj86r.png?fit=around|748:748&crop=748:748;*,*&output-format=jpg&output-quality=80); */
+	    background-size: cover;
+	    background-position: 50% 50%;
+	    position:absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%; 
+		z-index: 1;
+	}
+	.related_top_content4 .dark {
+		background-color: rgba(0,0,0,0.2);
+		position:absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index:2;
+	}
+	.related_top_content4 .image_below_dark {
+		/* background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/keyword_search/meta/pictures/1hrjb6ar4x4b5fbd.png?fit=around|748:748&crop=748:748;*,*&output-format=jpg&output-quality=80); */
+	    background-size: cover;
+	    background-position: 50% 50%;
+	    position:absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%; 
+		z-index: 1;
+	}
+	div.related_top_content1{
+		width:380px;
+		height:180px;
+		text-align: center;
+		margin-bottom: 32px;
+		position: relative;
+	}
+	div.related_top_content2{
+		width:380px;
+		height:180px;
+		text-align: center;
+		margin-bottom: 32px;
+		margin-left: 40px;
+		position: relative;
+	}
+	div.related_top_content3{
+		width:380px;
+		height:180px;
+		text-align: center;
+		position: relative;
+	}
+	div.related_top_content4{
+		width:380px;
+		height:180px;
+		text-align: center;
+		margin-left: 40px;
+		position: relative;
+	}
+	div.related_top_content_title{
+		padding-top: 50px;
+		color: #FFFFFF;
+		font-size: 23px;
+    	line-height: 27.6px;
+    	text-shadow: 1px 1px 2px rgb(0 0 0 / 40%);
+    	z-index:3;
+    	position:absolute;
+    	top: 13px;
+		width:100%;
+	}
+	div.related_top_content_content{
+		color: #FFFFFF;
+		padding-top: 7px;
+    	font-size: 17px;
+    	line-height: 20.4px;
+    	text-shadow: 1px 1px 2px rgb(0 0 0 / 40%);
+ 	    z-index:3;
+    	position:absolute;
+    	top: 91px;
+    	width:100%;
+	}
+	div#related_story{
+		padding:33px 0;
+		width: 800px;
+		height: 439px;
+/* border: 2px solid purple; */
+	}
+	div.related_story_title{
+		margin-bottom: 20px;
+		color: #ff792a;
+		font-size:23.008px;
+		font-weight: 400;
+		line-height: 27.6096px;
+	}
+	div.related_story_list{
+		margin-bottom: 32px;
+		position:relative;
+	}
+	.related_story_content1 .dark {
+		background-color: rgba(0,0,0,0.2);
+		position:absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index:2;
+	}
+	.related_story_content1 .image_below_dark {
+		background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/full/svbl5zuhkfgzlo.jpg?fit=around|748:748&crop=748:748;*,*&output-format=jpg&output-quality=80);
+	    background-size: cover;
+	    background-position: 50% 50%;
+	    position:absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%; 
+		z-index: 1;
+	}
+	.related_story_content1 .dark {
+		background-color: rgba(0,0,0,0.2);
+		position:absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index:2;
+	}
+	.related_story_content1 .image_below_dark {
+		background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/full/svbl5zuhkfgzlo.jpg?fit=around|748:748&crop=748:748;*,*&output-format=jpg&output-quality=80);
+	    background-size: cover;
+	    background-position: 50% 50%;
+	    position:absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%; 
+		z-index: 1;
+	}
+	.related_story_content2 .dark {
+		background-color: rgba(0,0,0,0.2);
+		position:absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index:2;
+	}
+	.related_story_content2 .image_below_dark {
+		/* background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/6avhcue7ap-qbw.png?fit=around|748:748&crop=748:748;*,*&output-format=jpg&output-quality=80); */
+	    background-size: cover;
+	    background-position: 50% 50%;
+	    position:absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%; 
+		z-index: 1;
+	}
+	.related_story_content3 .dark {
+		background-color: rgba(0,0,0,0.2);
+		position:absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index:2;
+	}
+	.related_story_content3 .image_below_dark {
+		/* background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/3nwvlyq292roh3.png?fit=around|748:748&crop=748:748;*,*&output-format=jpg&output-quality=80); */
+	    background-size: cover;
+	    background-position: 50% 50%;
+	    position:absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%; 
+		z-index: 1;
+	}
+	.related_story_content4 .dark {
+		background-color: rgba(0,0,0,0.2);
+		position:absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index:2; 
+	}
+	.related_story_content4 .image_below_dark {
+		/* background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/nphj8fvnlxa5it.png?fit=around|748:748&crop=748:748;*,*&output-format=jpg&output-quality=80); */
+	    background-size: cover;
+	    background-position: 50% 50%;
+	    position:absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%; 
+		z-index: 1;
+	}
+	div.related_story_content1{
+		width:392px;
+		height:180px;
+		text-align: center;
+		margin-bottom: 32px;
+		position: relative;
+	}
+	div.related_story_content2{
+		width:392px;
+		height:180px;
+		text-align: center;
+		margin-bottom: 32px;
+		margin-left: 16px;
+		position: relative;
+	}
+	div.related_story_content3{
+		width:392px;
+		height:180px;
+		text-align: center;
+		position: relative;
+	}
+	div.related_story_content4{
+		width:392px;
+		height:180px;
+		text-align: center;
+		margin-left: 16px;
+		position: relative;
+	}
+	div.related_story_content_title{
+		padding-top: 50px;
+		color: #FFFFFF;
+		font-size: 23px;
+    	line-height: 27.6px;
+    	text-shadow: 1px 1px 2px rgb(0 0 0 / 40%);
+    	z-index:3;
+    	position:absolute;
+    	top: 13px;
+		width:100%;
+	}
+	div.related_story_content_content{
+		color: #FFFFFF;
+		padding-top: 7px;
+    	font-size: 17px;
+    	line-height: 20.4px;
+    	text-shadow: 1px 1px 2px rgb(0 0 0 / 40%);
+ 	    z-index:3;
+    	position:absolute;
+    	top: 91px;
+    	width:100%;
+	}
+	div#map2{
+		display:none;
+		min-width: 700px;
+	    top: 50%;
+	    left: 50%;
+	    transform: translate(-50%, -50%);
+		width: 90%;
+	    height: 90%;
+	    position: absolute;
+	    z-index: 1001;
+	}
+	div.side{
+		width:400px;
+		min-height: 5121.5px;
+		background-color:#F6F6F6;
+/* border:2px solid #ff12a1; */
+	}
+	div#side_body{
+		padding: 0 24px;
+		width: 349px;
+		min-height: 1025px;
+/* border:2px solid #0023F5; */
+	}
+	div.near_restaurant{
+		padding-top: 30px;
+		padding-bottom: 33px;
+		width: 352px;
+		height: 579.6px; 
+	}
+	div.near_title{
+		color: #ff792a;
+		font-size:23.008px;
+		line-height:27.6096px;
+	}
+	div.near_items{
+		margin-top:17px;
+/* border: 2px solid red; */
+		width:352px;
+		min-height:535px;
+	}
+	div.near_content{
+		padding: 15px 0;
+		width:352px;
+		height: 102px;
+border-bottom: 1px solid #dbdbdb;
+	}
+	div.near_items > div:nth-child(4).near_content{
+		border-bottom:0px
+	}
+	img.near_img{
+		width:103px;
+		height:103px;
+	}
+	div.near_content_inner{
+		margin-left: 8px;
+		width:241px;
+		height:103px;
+	}
+	div.near_content_inner_box{
+		min-width:241px;
+		min-height:22.850px;
+		margin-top:5px;
+line-height:16px;
+	}
+	div.near_content_inner > div:nth-child(1).near_content_inner_box{
+		margin-top:0;
+	}
+	div.near_name{
+		font-size:18px;
+		color: #555555;
+line-height:22.86px;
+	}
+	div.near_score{
+		color: #ff792a;
+		margin-left: 5px;
+	    font-size: 19px;
+line-height:22px;
+	}
+	div.near_category1{
+		color: #9B9B9B;
+		font-size: 11px;
+	}
+	div.near_category2{
+		color: #555555;
+		font-size: 11px;
+	}
+	div.related_hashtag{
+		padding:33px 0;
+		width:352px;
+		min-height:316.6px;
+	}
+	div.hashtag_title{
+		color: #ff792a;
+		font-size:23.008px;
+		line-height:27.6096px;		
+	}
+	div.hashtag_items{
+		padding-top:14px;
+		width:352px;
+		height:275px;
+	}
+	div.hashtag_box{
+		margin: 15px 3px 0 3px;
+	}
+	div.hashtag{
+    	padding: 0 20px;
+		min-width:49px;
+		height:38px;
+		font-size:15.008px;
+		font-weight:390;
+		line-height:38px;
+    	color: #6a6a6a;
+		border: 1px solid #cbcbcb;
+	    border-radius: 50px;
+	    background-color: #fff;
+	}
+	div.footer{
+		width: 100%;
+		height: 738.6px;
+		background-color:#3E3E3E;		
+	}
+	div.footer_inner{
+		position:relative;
+		max-width:1200px;
+		min-height:430px;
+		padding-top:65px;
+		margin:0 auto;
+	}
+	div.footer_logo{
+		margin-right:168px;
+/* line-height: 16px; */
+		width:137.337px;
+		height:104.312px;
+		position:absolute;
+/* border: 2px solid white; */
+	}
+	img.footer_logo_img{
+		width:147px;
+		height:45px;
+	}
+	
+	div.footer_logo_subtitle:before{
+		content: '';
+		position:absolute;
+	    top:0;
+	    left:0;
+	    height: 1px;
+	    width: 30px;
+	    background-color: #6a6a6a;	
+	}
+	div.footer_logo_subtitle{
+		margin-top: 28px;
+    	padding-top: 15px;
+		font-size:14px;
+		line-height:16px;
+		color: #6a6a6a;
+		position:relative;
+/* 		border-top: 1px solid #6a6a6a; */
+	}
+	div.footer_sns{
+		position: absolute;
+    	top: 62px;
+    	right: 0;
+		width: 153.587px;
+		height:45px;
+ /*margin-bottom: 10px; */
+/* border: 2px solid white; */
+	}
+	img.footer_sns_img{
+		width:45px;
+		height:45px;
+		margin-left: 30px;
+	}
+	div.footer_content{
+		position: absolute;
+		margin-left: 308px;
+		margin-bottom:10px;
+		padding-top:6px;
+		width:614px;
+		height:315px;
+		display: inline-block;		
+/* border: 2px solid white; */
+	}
+	.footer_content_name{
+		width:307px;
+		height:35px;
+		font-size:16px;
+		color: #9b9b9b;
+	}
+	.footer_content > div:nth-child(2) > div:nth-child(4) {
+		font-weight: bolder;
+   		color: #d2d2d2;
+	}
+	div.footer_location{
+		margin-top: 325px;
+		margin-bottom: 30px;
+	    padding-top: 15px;
+	    border-top: 1px solid #6a6a6a;
+	    color: #9b9b9b;
+	    width:1200px;
+	    height:46px;
+	}
+	div.footer_location_item{
+		font-size: 15px;
+		color: #9b9b9b;
+	}
+	div.footer_copyrights{
+		border-top: 1px solid #6a6a6a;
+		padding: 36px 0 42px 0;
+		width:1200px;
+		height:176px;
+		position: relative;
+	}
+	div.footer_copyrights_language{
+		position:absolute;
+		top: 47px;
+    	right: 0;
+	}
+	div.language{
+		color: #ffffff;
+		font-size:16px;
+		font-weight:400;
+		line-height:16px;
+	}
+	.footer_copyrights_language > div:nth-child(2) , .footer_copyrights_language > div:nth-child(3){
+		color: #9b9b9b;
+	}
+	.footer_copyrights_language > div:nth-child(3){
+		font-weight:500;
+	}
+	.footer_copyrights > p {
+		color: #9b9b9b;
+		font-size: 14px;
+		line-height:22px;
+	}
+	a{
+		color: inherit;
+	}
+	.hashtag_box > a{
+		text-decoration: none;
+	}
+		

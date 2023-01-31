@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>망고플레이트 스토리 - 당신을 위해 엄선한 추천 맛집</title>
+	<link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css' rel='stylesheet' type='text/css'><!-- 망고폰트 -->
+	<link rel='stylesheet' type='text/css' href='CSS/Mango_storyList.css'/>
+	<script src="https://code.jquery.com/jquery-3.6.2.js" integrity="sha256-pkn2CUZmheSeyssYw3vMp1+xyub4m+e+QK4sQskvuo4=" crossorigin="anonymous"></script>
+	<script>
+	$(function() {
+		$(".monthly_list_item, #div_monthly").click(function() {	// monthly story에 로케이션 적용
+			location.href = "Mango_storyContent.html" + "?story_id="+Number($(this).attr('storyid'));
+		});
+		
+		/* $("#div_monthly").click(function() {	// monthly story text에 로케이션 적용
+			location.href = "Mango_storyContent.html" + "?story_id="+Number($(this).attr('storyid'));
+		}); */
+		
+		$(".list_item").click(function() { 
+//			alert($(this).attr('storyid'));   // attr() --> attribute(속성) / css() / html() / text()
+//			alert($(this).css('display'))  ;      /// --------> style="display:none;"
+			
+//			alert(   "http://localhost:9090/WebProject1/Mango_storyContent.html?story_id="+Number($(this).attr('storyid'))    );
+			location.href="http://localhost:9090/WebProject1/Mango_storyContent.html?story_id="+Number($(this).attr('storyid'));
+		});
+		
+		$("#div_header > .header_right").eq(3).find("span").click(function() {
+			alert("EAT딜 이동!");
+			location.href = "http://localhost:9090/WebProject1/Mango_eatDeal.html";
+		});
+		
+		$("#div_header > .header_right").eq(2).find("span").click(function() {
+			alert("맛집 리스트 이동!");
+			location.href = "http://localhost:9090/WebProject1/Mango_resturantList.html";
+		});
+		
+		$("#div_header > .header_right").eq(1).find("span").click(function() {
+			alert("망고 스토리 이동!");
+			location.href = "http://localhost:9090/WebProject1/Mango_storyList.html";
+		});
+		
+		$("#img_logo").click(function() {
+			alert("망고플레이트 이동!")
+			location.href = "http://localhost:9090/WebProject1/Mango_home.html"
+		});
+		
+		$("#searchkeyword, #searchsubkeyword").keydown(function(key) {	// 콤마로 구분
+			if( key.keyCode == 13 ){
+				alert("엔터키발생")
+				console.log('Enter');
+				location.href = "http://localhost:9090/WebProject1/Mango_popularSearch.html?searchkeyword="+Number($(this).attr('searchkeyword'));
+				//alert(Number($(this).attr('searchkeyword')));	// 로케이션에 searchkeyword를 받아서 넘어가야됨. 안받고 있음.
+				//alert($(this).text());
+			}
+		}); 
+		
+		/* $("#searchkeyword, #searchsubkeyword").on("keyup",function(key){
+		        if(key.keyCode==13) {
+		            alert("엔터키 이벤트");
+		        }
+	    }); */
+	    
+// 헤더 인기검색 팝업창 시작--------------------------------------------------------------------------------			
+		$(".input_search_backgroundDark").click(function() {
+			$(this).parent().removeClass("open");
+		}); 
+		
+		$("#Input_search").click(function() {
+			$(".input_search_keyword").addClass("open");
+		});
+		
+		$(".input_search_item").click(function() {
+			idx = $(".input_search_item").index($(this));
+			
+			$(".input_search_item").each(function(select_idx,obj) {
+				if(idx==select_idx) {
+					$(this).addClass("select inputSearchItem_tapButton-selected");
+				} else {
+					$(this).removeClass("select inputSearchItem_tapButton-selected");
+				}
+			});
+		});
+		
+		$(".keyword_recommended").click(function() {
+			$(".small_popular_search").css('display','none');
+			$(".small_history_search").css('display','none');
+			$(".small_recommended_search").css('display','block');
+		});
+		
+		$(".keyword_popular").click(function() {
+			$(".small_recommended_search").css('display','none');
+			$(".small_history_search").css('display','none');
+			$(".small_popular_search").css('display','block');
+		});
+		
+		$(".keyword_history").click(function() {
+			$(".small_recommended_search").css('display','none');
+			$(".small_popular_search").css('display','none');
+			$(".small_history_search").css('display','block');
+		});
+		
+		// 스크롤
+		$(".keywordListWrap_inner").mouseenter(function() {
+			$(this).css('overflow','auto');
+		});
+		
+		$(".keywordListWrap_inner").mouseleave(function() {
+			$(this).css('overflow','hidden');
+		});
+		
+		$(".input_search_content_keywordList").mouseenter(function() {
+			$(this).css('background','#f7f7f7');
+		});
+		
+		$(".input_search_content_keywordList").mouseleave(function() {
+			$(this).css('background','#fff');
+		});
+		
+		$(".small_popular_search").css('display','none');
+		$(".small_history_search").css('display','none');
+		$(".small_recommended_search").css('display','block');
+		
+		// 엔터키이벤트 엔터를 누르면 발생
+		$("#Input_search").keypress(function(e) { 
+		    if (e.keyCode == 13){	
+		        //alert($("#Input_search").val());
+		        location.href = "Mango_popularSearch2.jsp?keyword="+$("#Input_search").val().replace(" ","_");
+		    }    
+		});
+//헤더 인기검색어 팝업창 끝--------------------------------------------------------------------------------------
+	});
+	</script>
+</head>
+<body>
+	<!-- ///////////////////////////  헤더 시작   ////////////////////////////////////////////////// -->
+	<!-- nth child(1) 헤더(로고..검색..등등) -->
+	<div id="div_header">
+		<div class="fl"><!-- (1)헤더 왼쪽 망고플레이트 로고 -->
+			<img id="img_logo" src="Images/mangoplace_logo.png"/>
+		</div>
+		<div class="fl"><!-- (2)헤더 왼쪽 서치아이콘 -->
+			<img id="img_search" src="Images/img_searchicon.png"/>
+			<label for="Input_search">
+				<input type="text" id="Input_search" placeholder="지역, 식당 또는 음식"/>
+			</label>
+		</div>
+		<div class="fr header_right"><!-- (3)헤더 오른쪽 유저아이콘 -->
+			<img class="UserProfileButton_PersonIcon" src="Images/icon_user.png"/>
+		</div>
+		<div class="fr header_right"><!-- (4)헤더 오른쪽 망고스토리 아이콘 -->
+			<span>망고 스토리</span>
+		</div>
+		<div class="fr header_right"><!-- (5)헤더 오른쪽 맛집 리스트 아이콘 -->
+			<span>맛집 리스트</span>
+		</div>
+		<div class="fr header_right"><!-- (6)헤더 오른쪽 EAT딜 아이콘 -->
+			<span class="header_right_new">EAT딜</span>
+		</div>
+		<div style="clear:both;"></div>
+	</div>
+	<div class="input_search_keyword">	<!-- 검색어 클릭 이벤트 발생시 나오는 창 -->
+		<div class="input_search_backgroundDark"></div>		<!-- $("#input").css({display:"none"}); -->
+		<div class="input_search_content">
+			<div class="input_search_content_inner">
+				<div class="input_search_content_list">
+					<div class="input_search_item_inner">
+						<div class="input_search_item select inputSearchItem_tapButton-selected keyword_recommended">추천 검색어</div>
+					</div>
+					<div class="input_search_item_inner keyword_popular">
+						<div class="input_search_item">인기 검색어</div>
+					</div>
+					<div class="input_search_item_inner keyword_history">
+						<div class="input_search_item">최근 검색어</div>
+					</div>
+				</div>
+				<div class="keywordListWrap_inner">
+					<div class="input_search_content_keywordListWrap">
+						<div class="small_recommended_search">
+							<div class="input_search_content_keywordList">
+								<span class="keywordList_item_img"></span>
+								<span class="input_search_keywordList_item">강남역</span>
+							</div>
+							<div class="input_search_content_keywordList">
+								<span class="keywordList_item_img"></span>
+								<span class="input_search_keywordList_item">용리단길</span>
+							</div>
+							<div class="input_search_content_keywordList">
+								<span class="keywordList_item_img"></span>
+								<span class="input_search_keywordList_item">유튜버추천</span>
+							</div>
+							<div class="input_search_content_keywordList">
+								<span class="keywordList_item_img"></span>
+								<span class="input_search_keywordList_item">신촌</span>
+							</div>
+							<div class="input_search_content_keywordList">
+								<span class="keywordList_item_img"></span>
+								<span class="input_search_keywordList_item">참치</span>
+							</div>
+							<div class="input_search_content_keywordList">
+								<span class="keywordList_item_img"></span>
+								<span class="input_search_keywordList_item">성수</span>
+							</div>
+							<div class="input_search_content_keywordList">
+								<span class="keywordList_item_img"></span>
+								<span class="input_search_keywordList_item">와인</span>
+							</div>
+						</div>
+						<div class="small_popular_search">
+							<div class="input_search_content_keywordList">
+								<span class="keywordList_item_img"></span>
+								<span class="input_search_keywordList_item">홍대</span>
+							</div>
+							<div class="input_search_content_keywordList">
+								<span class="keywordList_item_img"></span>
+								<span class="input_search_keywordList_item">이태원</span>
+							</div>
+							<div class="input_search_content_keywordList">
+								<span class="keywordList_item_img"></span>
+								<span class="input_search_keywordList_item">신촌</span>
+							</div>
+							<div class="input_search_content_keywordList">
+								<span class="keywordList_item_img"></span>
+								<span class="input_search_keywordList_item">강남역</span>
+							</div>
+							<div class="input_search_content_keywordList">
+								<span class="keywordList_item_img"></span>
+								<span class="input_search_keywordList_item">가로수길</span>
+							</div>
+							<div class="input_search_content_keywordList">
+								<span class="keywordList_item_img"></span>
+								<span class="input_search_keywordList_item">평택시</span>
+							</div>
+							<div class="input_search_content_keywordList">
+								<span class="keywordList_item_img"></span>
+								<span class="input_search_keywordList_item">방배</span>
+							</div>
+						</div>
+						<div class="small_history_search">
+							<span class="input_search_keywordList_item_none">최근 검색어가 없습니다.</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- ///////////////////////////  헤더 끝   ////////////////////////////////////////////////// -->
+	
+	<!-- nth child(2) 상단 메인 스토리 -->
+	<div><!-- 링크값 설정 --><!-- YG QQQQQQQQQQQQ!!!!!!!!  href="https://www.mangoplate.com/mango_picks/2579"  -->
+		<div class="monthly_list_item" storyid="15"></div>
+	</div>
+	<!--   onclick="location.href='https://www.mangoplate.com/mango_picks/2579';"   -->
+	<div class="div_monthly" storyid="15"><!-- nth child(3) Monthly 글씨 적용, story_id="15" -->											<!-- YGYGYGYG -->
+		<strong class="monthly_title">[11월 월간망고] 망고걸이 대신 가본 ＜보보식당＞</strong>
+		<p class="monthly_subtitle">압구정에서 경험하는 수준급의 모던 중식!</p>
+	</div>
+	<div class="storyList_title"><!-- nth child(4) h1 리스트 타이틀 제목 -->
+		<h1>에디터 입맛별 맛집 매거진</h1>
+	</div>
+	<div class="storyList_wrap"> <!-- nth child(5) 에디터 입맛별 맛집 매거진 리스트 -->
+		<div class="list_item" storyid="146">
+			<img src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/full/ewhmnlgbknwmnv.png?fit=around|585:345&crop=585:345;*,*&output-format=jpg&output-quality=80"/>
+			<strong class="title">에디터의 인생 마라 요리 6곳</strong>
+			<p class="subtitle">6년차 망고 에디터의 인생 맛집 공개!</p>
+			<span class="badge"></span>
+			<div class="profile">
+				<img src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/fmsvfia71h84uy.jpg?fit=around|89:89&crop=89:89;*,*&output-format=jpg&output-quality=80"/>
+			</div>
+			<div class="profilename">망고소녀</div>
+			<span class="comment_img"></span>
+			<p class="comment">
+				망고 에디터 6년차의 지극히 개인적인 입맛으로 선정한 저의 인생 마라 맛집을 소개합니다.
+			</p>
+			<p class="comment_name"><b>망고소녀</b></p>
+		</div>
+		<div class="list_item" storyid="147">
+			<img src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/full/lhaluzpwyhl9dt.png?fit=around|585:345&crop=585:345;*,*&output-format=jpg&output-quality=80"/>
+			<strong class="title">연말 모임 장소 추천 7곳</strong>
+			<p class="subtitle">와인 마시기 좋은 곳 위주로!</p>
+			<span class="badge"></span>
+			<div class="profile">
+				<img src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/fmsvfia71h84uy.jpg?fit=around|89:89&crop=89:89;*,*&output-format=jpg&output-quality=80"/>
+			</div>
+			<div class="profilename">망고소녀</div>
+			<span class="comment_img"></span>
+			<p class="comment">
+				연말 모임 예약 슬슬 하셔야죠?! 오늘은 와인 마시기 좋은 모임 장소 7곳을 추천할게요!
+			</p>
+			<p class="comment_name"><b>망고소녀</b></p>
+		</div>
+		<div class="list_item" storyid="148">
+			<img src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/full/q4rlqsszaioyd3.png?fit=around|585:345&crop=585:345;*,*&output-format=jpg&output-quality=80"/>
+			<strong class="title">현지인 추천 울산 맛집 8곳</strong>
+			<p class="subtitle">울산 맛집 투어는 이것만 보세요!</p>
+			<span class="badge"></span>
+			<div class="profile">
+				<img src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/fmsvfia71h84uy.jpg?fit=around|89:89&crop=89:89;*,*&output-format=jpg&output-quality=80"/>
+			</div>
+			<div class="profilename">망고소녀</div>
+			<span class="comment_img"></span>
+			<p class="comment">
+				오늘은 울산의 맛집 8곳을 소개합니다.
+			</p>
+			<p class="comment_name"><b>망고소녀</b></p>
+		</div>
+		<div class="list_item" storyid="152">
+			<img src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/full/iiwjnl_y0l2dbb.png?fit=around|585:345&crop=585:345;*,*&output-format=jpg&output-quality=80"/>
+			<strong class="title">성시경 먹을텐데 국밥/탕 맛집 10곳</strong>
+			<p class="subtitle">웨이팅은 감수할게요!</p>
+			<span class="badge"></span>
+			<div class="profile">
+				<img src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/fmsvfia71h84uy.jpg?fit=around|89:89&crop=89:89;*,*&output-format=jpg&output-quality=80"/>
+			</div>
+			<div class="profilename">망고소녀</div>
+			<span class="comment_img"></span>
+			<p class="comment">
+				요즘 미식 콘텐츠 중 가장 강력한 영향력을 가진 셀럽이 있다면 바로 성시경님! 성시경의 먹을텐데 콘텐츠에 소개된 탕, 국밥 맛집을 소개합니다.
+			</p>
+			<p class="comment_name"><b>망고소녀</b></p>
+		</div>
+		<div class="list_item" storyid="149">
+			<img src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/full/bbyms9qkskmgpw.png?fit=around|585:345&crop=585:345;*,*&output-format=jpg&output-quality=80"/>
+			<strong class="title">현지인 추천 강원도 원주 맛집 10곳</strong>
+			<p class="subtitle">그 유명한 곳부터 숨은 찐맛집까지!</p>
+			<span class="badge"></span>
+			<div class="profile">
+				<img src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/fmsvfia71h84uy.jpg?fit=around|89:89&crop=89:89;*,*&output-format=jpg&output-quality=80"/>
+			</div>
+			<div class="profilename">망고소녀</div>
+			<span class="comment_img"></span>
+			<p class="comment">
+				현지인들도 인정하는 강원도 원주 맛집 10곳을 소개합니다.
+			</p>
+			<p class="comment_name"><b>망고소녀</b></p>
+		</div>
+		<div class="list_item" storyid="150">
+			<img src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/full/qhsvbvcuhdgfwe.png?fit=around|585:345&crop=585:345;*,*&output-format=jpg&output-quality=80"/>
+			<strong class="title">조식 맛집 호텔 뷔페 7곳</strong>
+			<p class="subtitle">호텔 뷔페 클라스!</p>
+			<span class="badge"></span>
+			<div class="profile">
+				<img src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/fmsvfia71h84uy.jpg?fit=around|89:89&crop=89:89;*,*&output-format=jpg&output-quality=80"/>
+			</div>
+			<div class="profilename">망고소녀</div>
+			<span class="comment_img"></span>
+			<p class="comment">
+				✅ 대구 호텔 인터불고 '더 뷔페 앳 인터불고'
+				금호강뷰와 호텔 야외 산책 코스가 좋은 대구의 가성비 최고 호텔에서 가성비 최상의 뷔페를 즐겨보세요. 
+				대인 기준 1인 7만9천원이면 중식, 석식, 주말, 평일 상관 없이 배터지게 즐길 수 있답니다. 
+				음식 종류가 아주 다양한 편으로 그릴부터 회, 스시 코너가 특히 유명합니다. 
+				한식류에서는 내장이 가득 들어간 전복죽이 인기!
+			</p>
+			<p class="comment_name"><b>망고소녀</b></p>
+		</div>
+		<div class="list_item" storyid="149">
+			<img src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/full/bbyms9qkskmgpw.png?fit=around|585:345&crop=585:345;*,*&output-format=jpg&output-quality=80"/>
+			<strong class="title">현지인 추천 강원도 원주 맛집 10곳</strong>
+			<p class="subtitle">그 유명한 곳부터 숨은 찐맛집까지!</p>
+			<span class="badge"></span>
+			<div class="profile">
+				<img src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/fmsvfia71h84uy.jpg?fit=around|89:89&crop=89:89;*,*&output-format=jpg&output-quality=80"/>
+			</div>
+			<div class="profilename">망고소녀</div>
+			<span class="comment_img"></span>
+			<p class="comment">
+				현지인들도 인정하는 강원도 원주 맛집 10곳을 소개합니다.
+			</p>
+			<p class="comment_name"><b>망고소녀</b></p>
+		</div>
+		<div class="list_item" storyid="149">
+			<img src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/full/bbyms9qkskmgpw.png?fit=around|585:345&crop=585:345;*,*&output-format=jpg&output-quality=80"/>
+			<strong class="title">현지인 추천 강원도 원주 맛집 10곳</strong>
+			<p class="subtitle">그 유명한 곳부터 숨은 찐맛집까지!</p>
+			<span class="badge"></span>
+			<div class="profile">
+				<img src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/fmsvfia71h84uy.jpg?fit=around|89:89&crop=89:89;*,*&output-format=jpg&output-quality=80"/>
+			</div>
+			<div class="profilename">망고소녀</div>
+			<span class="comment_img"></span>
+			<p class="comment">
+				현지인들도 인정하는 강원도 원주 맛집 10곳을 소개합니다.
+			</p>
+			<p class="comment_name"><b>망고소녀</b></p>
+		</div>
+		<div class="list_item" storyid="149">
+			<img src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/full/bbyms9qkskmgpw.png?fit=around|585:345&crop=585:345;*,*&output-format=jpg&output-quality=80"/>
+			<strong class="title">현지인 추천 강원도 원주 맛집 10곳</strong>
+			<p class="subtitle">그 유명한 곳부터 숨은 찐맛집까지!</p>
+			<span class="badge"></span>
+			<div class="profile">
+				<img src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/fmsvfia71h84uy.jpg?fit=around|89:89&crop=89:89;*,*&output-format=jpg&output-quality=80"/>
+			</div>
+			<div class="profilename">망고소녀</div>
+			<span class="comment_img"></span>
+			<p class="comment">
+				현지인들도 인정하는 강원도 원주 맛집 10곳을 소개합니다.
+			</p>
+			<p class="comment_name"><b>망고소녀</b></p>
+		</div>
+		<div class="list_item" storyid="149">
+			<img src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/full/bbyms9qkskmgpw.png?fit=around|585:345&crop=585:345;*,*&output-format=jpg&output-quality=80"/>
+			<strong class="title">현지인 추천 강원도 원주 맛집 10곳</strong>
+			<p class="subtitle">그 유명한 곳부터 숨은 찐맛집까지!</p>
+			<span class="badge"></span>
+			<div class="profile">
+				<img src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/fmsvfia71h84uy.jpg?fit=around|89:89&crop=89:89;*,*&output-format=jpg&output-quality=80"/>
+			</div>
+			<div class="profilename">망고소녀</div>
+			<span class="comment_img"></span>
+			<p class="comment">
+				현지인들도 인정하는 강원도 원주 맛집 10곳을 소개합니다.
+			</p>
+			<p class="comment_name"><b>망고소녀</b></p>
+		</div>
+		<div class="list_item" storyid="149">
+			<img src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/full/bbyms9qkskmgpw.png?fit=around|585:345&crop=585:345;*,*&output-format=jpg&output-quality=80"/>
+			<strong class="title">현지인 추천 강원도 원주 맛집 10곳</strong>
+			<p class="subtitle">그 유명한 곳부터 숨은 찐맛집까지!</p>
+			<span class="badge"></span>
+			<div class="profile">
+				<img src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/fmsvfia71h84uy.jpg?fit=around|89:89&crop=89:89;*,*&output-format=jpg&output-quality=80"/>
+			</div>
+			<div class="profilename">망고소녀</div>
+			<span class="comment_img"></span>
+			<p class="comment">
+				현지인들도 인정하는 강원도 원주 맛집 10곳을 소개합니다.
+			</p>
+			<p class="comment_name"><b>망고소녀</b></p>
+		</div>
+		<div class="list_item" storyid="149">
+			<img src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/full/bbyms9qkskmgpw.png?fit=around|585:345&crop=585:345;*,*&output-format=jpg&output-quality=80"/>
+			<strong class="title">현지인 추천 강원도 원주 맛집 10곳</strong>
+			<p class="subtitle">그 유명한 곳부터 숨은 찐맛집까지!</p>
+			<span class="badge"></span>
+			<div class="profile">
+				<img src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/fmsvfia71h84uy.jpg?fit=around|89:89&crop=89:89;*,*&output-format=jpg&output-quality=80"/>
+			</div>
+			<div class="profilename">망고소녀</div>
+			<span class="comment_img"></span>
+			<p class="comment">
+				현지인들도 인정하는 강원도 원주 맛집 10곳을 소개합니다.
+			</p>
+			<p class="comment_name"><b>망고소녀</b></p>
+		</div>
+		<div class="list_item" storyid="149">
+			<img src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/full/bbyms9qkskmgpw.png?fit=around|585:345&crop=585:345;*,*&output-format=jpg&output-quality=80"/>
+			<strong class="title">현지인 추천 강원도 원주 맛집 10곳</strong>
+			<p class="subtitle">그 유명한 곳부터 숨은 찐맛집까지!</p>
+			<span class="badge"></span>
+			<div class="profile">
+				<img src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/fmsvfia71h84uy.jpg?fit=around|89:89&crop=89:89;*,*&output-format=jpg&output-quality=80"/>
+			</div>
+			<div class="profilename">망고소녀</div>
+			<span class="comment_img"></span>
+			<p class="comment">
+				현지인들도 인정하는 강원도 원주 맛집 10곳을 소개합니다.
+			</p>
+			<p class="comment_name"><b>망고소녀</b></p>
+		</div>
+		<div class="list_item" storyid="149">
+			<img src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/full/bbyms9qkskmgpw.png?fit=around|585:345&crop=585:345;*,*&output-format=jpg&output-quality=80"/>
+			<strong class="title">현지인 추천 강원도 원주 맛집 10곳</strong>
+			<p class="subtitle">그 유명한 곳부터 숨은 찐맛집까지!</p>
+			<span class="badge"></span>
+			<div class="profile">
+				<img src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/fmsvfia71h84uy.jpg?fit=around|89:89&crop=89:89;*,*&output-format=jpg&output-quality=80"/>
+			</div>
+			<div class="profilename">망고소녀</div>
+			<span class="comment_img"></span>
+			<p class="comment">
+				현지인들도 인정하는 강원도 원주 맛집 10곳을 소개합니다.
+			</p>
+			<p class="comment_name"><b>망고소녀</b></p>
+		</div>
+		<div class="list_item" storyid="149">
+			<img src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/full/bbyms9qkskmgpw.png?fit=around|585:345&crop=585:345;*,*&output-format=jpg&output-quality=80"/>
+			<strong class="title">현지인 추천 강원도 원주 맛집 10곳</strong>
+			<p class="subtitle">그 유명한 곳부터 숨은 찐맛집까지!</p>
+			<span class="badge"></span>
+			<div class="profile">
+				<img src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/fmsvfia71h84uy.jpg?fit=around|89:89&crop=89:89;*,*&output-format=jpg&output-quality=80"/>
+			</div>
+			<div class="profilename">망고소녀</div>
+			<span class="comment_img"></span>
+			<p class="comment">
+				현지인들도 인정하는 강원도 원주 맛집 10곳을 소개합니다.
+			</p>
+			<p class="comment_name"><b>망고소녀</b></p>
+		</div>
+		<div class="list_item" storyid="149">
+			<img src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/full/bbyms9qkskmgpw.png?fit=around|585:345&crop=585:345;*,*&output-format=jpg&output-quality=80"/>
+			<strong class="title">현지인 추천 강원도 원주 맛집 10곳</strong>
+			<p class="subtitle">그 유명한 곳부터 숨은 찐맛집까지!</p>
+			<span class="badge"></span>
+			<div class="profile">
+				<img src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/fmsvfia71h84uy.jpg?fit=around|89:89&crop=89:89;*,*&output-format=jpg&output-quality=80"/>
+			</div>
+			<div class="profilename">망고소녀</div>
+			<span class="comment_img"></span>
+			<p class="comment">
+				현지인들도 인정하는 강원도 원주 맛집 10곳을 소개합니다.
+			</p>
+			<p class="comment_name"><b>망고소녀</b></p>
+		</div>
+		<div class="list_item" storyid="149">
+			<img src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/full/bbyms9qkskmgpw.png?fit=around|585:345&crop=585:345;*,*&output-format=jpg&output-quality=80"/>
+			<strong class="title">현지인 추천 강원도 원주 맛집 10곳</strong>
+			<p class="subtitle">그 유명한 곳부터 숨은 찐맛집까지!</p>
+			<span class="badge"></span>
+			<div class="profile">
+				<img src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/fmsvfia71h84uy.jpg?fit=around|89:89&crop=89:89;*,*&output-format=jpg&output-quality=80"/>
+			</div>
+			<div class="profilename">망고소녀</div>
+			<span class="comment_img"></span>
+			<p class="comment">
+				현지인들도 인정하는 강원도 원주 맛집 10곳을 소개합니다.
+			</p>
+			<p class="comment_name"><b>망고소녀</b></p>
+		</div>
+		<div class="list_item" storyid="149">
+			<img src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/full/bbyms9qkskmgpw.png?fit=around|585:345&crop=585:345;*,*&output-format=jpg&output-quality=80"/>
+			<strong class="title">현지인 추천 강원도 원주 맛집 10곳</strong>
+			<p class="subtitle">그 유명한 곳부터 숨은 찐맛집까지!</p>
+			<span class="badge"></span>
+			<div class="profile">
+				<img src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/fmsvfia71h84uy.jpg?fit=around|89:89&crop=89:89;*,*&output-format=jpg&output-quality=80"/>
+			</div>
+			<div class="profilename">망고소녀</div>
+			<span class="comment_img"></span>
+			<p class="comment">
+				현지인들도 인정하는 강원도 원주 맛집 10곳을 소개합니다.
+			</p>
+			<p class="comment_name"><b>망고소녀</b></p>
+		</div>
+		<div class="list_item" storyid="149">
+			<img src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/full/bbyms9qkskmgpw.png?fit=around|585:345&crop=585:345;*,*&output-format=jpg&output-quality=80"/>
+			<strong class="title">현지인 추천 강원도 원주 맛집 10곳</strong>
+			<p class="subtitle">그 유명한 곳부터 숨은 찐맛집까지!</p>
+			<span class="badge"></span>
+			<div class="profile">
+				<img src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/fmsvfia71h84uy.jpg?fit=around|89:89&crop=89:89;*,*&output-format=jpg&output-quality=80"/>
+			</div>
+			<div class="profilename">망고소녀</div>
+			<span class="comment_img"></span>
+			<p class="comment">
+				현지인들도 인정하는 강원도 원주 맛집 10곳을 소개합니다.
+			</p>
+			<p class="comment_name"><b>망고소녀</b></p>
+		</div>
+		<div class="list_item" storyid="149">
+			<img src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/full/bbyms9qkskmgpw.png?fit=around|585:345&crop=585:345;*,*&output-format=jpg&output-quality=80"/>
+			<strong class="title">현지인 추천 강원도 원주 맛집 10곳</strong>
+			<p class="subtitle">그 유명한 곳부터 숨은 찐맛집까지!</p>
+			<span class="badge"></span>
+			<div class="profile">
+				<img src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/fmsvfia71h84uy.jpg?fit=around|89:89&crop=89:89;*,*&output-format=jpg&output-quality=80"/>
+			</div>
+			<div class="profilename">망고소녀</div>
+			<span class="comment_img"></span>
+			<p class="comment">
+				현지인들도 인정하는 강원도 원주 맛집 10곳을 소개합니다.
+			</p>
+			<p class="comment_name"><b>망고소녀</b></p>
+		</div>
+		<div style="clear:both;"></div>
+	</div>
+	
+	<div class="storyList_more"> <!-- (6)더보기 아이콘 -->
+		<img src="Images/icon_moreview.png"/>
+		<p>더보기(무한스크롤 적용)</p>
+		<img src="Images/icon_moreview.png"/>
+	</div>
+</body>
+</html>

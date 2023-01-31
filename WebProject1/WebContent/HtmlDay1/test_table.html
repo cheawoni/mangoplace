@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>time table</title>
+		<style>
+			table, th, td {
+				border: 1px solid grey;
+			}
+			table {
+				border-collapse: collapse;
+				margin: 0 auto;
+				width: 500px;
+				height: 200px;
+			}
+			th, td {
+				vertical-align: top;
+			}
+			th {
+				font-size: 20px;
+				color: rgb(192, 192, 192);
+				width : 200px;
+			}
+			.color {
+				color: rgb(192, 192, 192);
+			}
+			td {
+				padding-bottom: 20px;
+				align: left;
+				vertical-align: top;
+				color: rgb(255, 255, 255);
+			}
+			.영화의이해 {
+				background-color: rgb(236, 195, 105);	/* 백그라운드 글씨 */
+				font-weight: bold;	/* 글씨크기 */
+				font-size: 15px;	/* 폰트사이즈 */
+			}
+			.한국문화유산의이해 {
+				background-color: rgb(122, 165, 233);
+				font-weight: bold;
+				font-size: 15px;
+			}
+			.미시경제원론 {
+				background-color: rgb(240, 134, 118);
+				font-weight: bold;
+				font-size: 15px;
+			}
+			.공학기초설계 {
+				background-color: rgb(252, 170, 103);
+				font-weight: bold;
+				font-size: 15px;
+			}
+			.사진예술의이해 {
+				background-color: rgb(167, 201, 112);
+				font-weight: bold;
+				font-size: 15px;
+			}
+			.동아시아신화기행 {
+				background-color: rgb(158, 134, 225);
+				font-weight: bold;
+				font-size: 15px;
+			}
+			.과외 {
+				background-color: rgb(124, 209, 193);
+				font-weight: bold;
+				font-size: 15px;
+			}
+			.동아리총회 {
+				background-color: rgb(119, 202, 136);
+				font-weight: bold;
+				font-size: 15px;
+			}
+			.number {
+				text-align: right;
+			}
+			
+		</style>
+</head>
+<body>
+	<table>
+		<caption>
+		<div style="float:left; color: #EEC1BC;">2020년 1학기</div><br/>
+		<storng><div style="float:left; font-size:30px;">시간표 1</div></storng>
+		</caption>
+		<tr>
+			<th style="width:15px"></th>
+			<th>월</th>
+			<th>화</th>
+			<th>수</th>
+			<th>목</th>
+			<th>금</th>
+		</tr>
+		<tr> <!-- style="color: rgb(192, 192, 192);" -->
+			<td style="text-align:right"><span class="color">9</span></td>
+			<td></td>
+			<td></td>
+			<td class="영화의이해">영화의이해<br/>과111</td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td style="text-align:right"><span class="color">10</span></td>
+			<td></td>
+			<td rowspan="2" class="영화의이해">영화의이해<br/>과111</td>
+			<td></td>
+			<td></td>
+			<td rowspan="2" class="한국문화유산의이해">한국문화유산의이해<br/>교404</td>
+		</tr>
+		<tr>
+			<td style="text-align:right"><span class="color">11</span></td>
+			<td rowspan="2" class="미시경제원론">미시경제원론<br/>상본110</td>
+			<td class="한국문화유산의이해">한국문화유산의이해<br/>교404</td>
+			<td rowspan="3" class="공학기초설계">공학기초설계<br/>진D114</td>
+		</tr>
+		<tr>
+			<td style="text-align:right"><span class="color">12</span></td>
+			<td></td>
+			<td class="미시경제원론">미시경제원론<br/>상본110</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td style="text-align:right"><span class="color">1</span></td>
+			<td></td>
+			<td rowspan="2" class="사진예술의이해">사진예술의이해<br/>교101</td>
+			<td class="동아시아신화기행">동아시아신화기행<br/>교303</td>
+			<td rowspan="2" class="동아시아신화기행">동아시아신화기행<br/>교303</td>
+			
+		</tr>
+		<tr>
+			<td style="text-align:right"><span class="color">2</span></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td rowspan="2" style="text-align:right"><span class="color">3</span></td>
+			<td rowspan="2"></td>
+			<td></td>
+			<td rowspan="2"></td>
+			<td></td>
+			<td rowspan="2"></td>
+		</tr>
+		<tr>
+			<td rowspan="2" class="과외">과외</td>
+			<td rowspan="2" class="과외">과외</td>
+		</tr>
+		<tr>
+			<td rowspan="2" style="text-align:right"><span class="color">4</span></td>
+			<td rowspan="2"></td>
+			<td rowspan="2"></td>
+			<td rowspan="2" class="동아리총회">동아리총회</td>
+		</tr>
+	</table>
+</body>
+</html>

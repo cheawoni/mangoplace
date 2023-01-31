@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!-- 
+	- 자바스크립트 영역 선언 : <script> ~ </script>
+	- 외부파일로 뺄수 있음
+	- 주석. (1) // (2) /* ~ */
+	-  ★변수선언. (var/let/const) var = let			const:상수							// jobkorea -> github -> .pdf(ppt)
+		1) var a;	// 변수의 선언
+			a = 10;	// 변수의 초기화
+		2) var a = 10;	// 변수의 선언과 동시에 초기화
+		3) a = 10;		// (변수의 선언과 동시에 초기화) -> var 생략 가능.
+	- 전역변수, 지역변수
+	- 데이터타입 : 숫자형(정수형, 실수형), 문자열, 논리형(true, false)
+	- 연산자 : ===, !==, -,+,*,/,%,==,!=
+	- 반복문 : for(int i=1; i<=3; i++) { alert(i); } x
+	 		for(var i=1; i<=3; i++) { alert(i); } o
+	- forEach: 각각의 요소에 대해서 실행.
+	- 객체 : 1) 내장객체 2) BOM객체 3) DOM객체
+			1) 내장객체 : Array, Date, Math 등...
+					배열 -> new Array...
+					현재 날짜 -> "new Date()"
+			2) BOM(Browser Object Model) : location, window, history, ...
+					location.href = "~~~~~~";
+			3) DOM(Document Object Model) : <html>, ...
+	- 자료구조 : "tree구조" -> 자식 -> 형제(sibling)
+	- DOM객체에서 탐색 : next sibling 다음 형제에게 간다.
+	- 메서드와 함수 : 
+	객체에소속   객체와별개로사용 
+		(1) function func() {...} -> 호출 : func();
+			파라미터 -> 자바와 동일 (데이터타입은 명시 x)
+			리턴 -> 자바와 동일 (리턴타입이 없음)
+			"return 값;" : 1) 종료. 2) 되돌려. 해당 메서드의 값을 돌려줌과 동시에 종료 
+			"return;" : 1) 종료.		
+			자바스크립트에서는 자료형을 입력하지 않음. (구글링 - 자바스크립트 함수 파라미터)
+			function func(n1,n2) {
+			
+			} o
+			function func(int n1, int n2) {
+			
+			} x
+		(2) ref_var = function() {...} -> ref_var();	// 익명 함수 : 이름이 없는 함수. 다른이름으로 사용할수 있음.
+			ref_var = function() {,,,}
+	- "이벤트" (구글링 - TCPschool : 얕게 공부할수 있음) : 마우스 커서가 올라감 -> click "이벤트" 발생! <li>객체에 대한 이벤트 발생 -> 뭘할지 : click event handler
+		tag에 click이 되면 event handler를 부착함. 그 tag위에서 어떤 이벤트가 발생됬을때 우리가 미리 정해준 이벤트 핸들러가 발생됨. -> 클릭이되면 event handler가 실행됨.
+ -->
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script src="Ex03p2.js"></script><!-- 이동을 해서 한줄한줄 실행하고 돌아와서 그 밑에줄을 한줄한줄 실행 -->
+	<script>
+		const paramObj = getParamMap(); // function을 호출 한 결과를 paramObj에 담겠다.// const: 상수, paramObj: 참조변수 (변수의 참조값이 바뀔일없다-> const로 선언, 그외는 let으로 선언)
+		alert("ID는 " + paramObj.id);
+		alert("PWsms " + paramObj.pw);
+	</script>
+</head>
+<body>
+	로그인 되었습니다.
+</body>
+</html>

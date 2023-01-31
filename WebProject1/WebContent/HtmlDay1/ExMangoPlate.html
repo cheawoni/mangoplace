@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Example: 망고플레이트 (맛집리스트 목록페이지)</title>
+	<link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css' rel='stylesheet' type='text/css'>
+	<style>
+		body { 
+			margin:0; 
+			font-family: "SpoqaHanSans", "Noto Sans SC", "APPLE SD Gothic NEO", "sans-serif";	
+		}
+		
+		#img_logo {
+			width: 100px;
+			height: 32px;
+			padding: 14px;
+			margin-left: 12px;
+		}
+		
+		body > div {
+			border: 1px solid #cfcfcf;
+		}
+		body > div:nth-child(1) { height:61px; }
+		body > div:nth-child(2) { 
+			height:236px;
+			padding-top: 61px;
+			background-color: #f7f7f7; 
+		}
+		body > div:nth-child(3) > div.inner > div {
+			width: 774px;
+		    margin: 0 auto;
+		}
+		
+		body > div:nth-child(3) > div.inner > div.list_item {
+			height: 238px;
+			padding: 28px 0;
+		}
+		body > div:nth-child(3) > div.inner > div.list_item:NOT(:first-child) {
+			border-top: 1px solid #dbdbdb;
+		}
+		body > div:nth-child(3) > div.sns_item {
+			height: 50px;
+			padding: 27px 0;
+		}
+		body > div:nth-child(3) > div.sns_item > div:nth-child(1) {
+			height: 100%;
+			width: 380px;
+		}
+		body > div:nth-child(3) > div.sns_item > div:nth-child(2) {
+			height: 100%;
+			width: 270px;
+		}
+		span.title {
+			display:block;
+			color: #ff792a;
+			font-size: 23px;
+	    	line-height: 27.6px;
+ 			margin-bottom: 23px;
+		}
+		body > div:nth-child(3) > div.map_item > #img_map1 {
+			width: 100%;
+		}
+		body > div:nth-child(4) > div.inner > div.list_item_small {
+			width: 190px;
+			height: 186px;
+		}
+		body > div:nth-child(4) > div.inner > div.list_item_small > img {
+			display: block;
+			width: 100%;
+			height: 128px;
+			object-fit: cover;
+		}
+		body > div:nth-child(4) > div.inner > div.list_item_small:not(:nth-child(2)) {
+			margin-left: 30px;
+		}
+		body > div:nth-child(4) > div.inner:not(:first-child) {
+			border-top: 1px solid #dbdbdb;
+		}
+		div.inner {
+			width: 860px;
+			margin: 0 auto;
+			padding: 27px 0;
+		}
+		div.inner:first-child {
+			padding: 0 0 27px;
+		}
+		a.hashtag {
+		    margin: 15px 3px 0 3px;
+		    padding: 0 20px;
+		    font-size: 0.938rem;
+		    line-height: 38px;
+		    letter-spacing: 0em;
+		    display: inline-block;
+		    color: #6a6a6a;
+		    letter-spacing: -0.1em;
+		    border: 1px solid #cbcbcb;
+		    border-radius: 50px;
+		    background-color: #fff;
+		    text-decoration: none;
+		}
+		body > div:nth-child(4) > div.inner > div.list_item_small > div.name {
+		    overflow: hidden;
+		    max-width: 64%;
+		    font-size: 19px;
+		    color: #555;
+		    line-height: 24.7px;
+		    vertical-align: middle;
+		    text-overflow: ellipsis;
+		    white-space: nowrap;
+		}
+		body > div:nth-child(4) > div.inner > div.list_item_small > div.score {
+			color: #ff792a;
+			line-height: 26px;
+			font-size: 26px;
+			vertical-align: middle;
+		}
+		body > div:nth-child(4) > div.inner > div.list_item_small > div.category {
+			font-size: 14px;
+    		line-height: 18px;			
+			margin-top: 6px;
+			color: #9b9b9b;
+		    overflow: hidden;
+		    text-overflow: ellipsis;
+    		white-space: nowrap;
+		}
+		
+		.list_item > div:nth-child(1) {
+		width: 240px;
+		height: 240px;
+		}
+		.list_item > div:nth-child(1) > img {
+			width: 100%;
+			height: 100%;
+		}
+		.list_item > div:nth-child(2) {
+			width: 520px;
+			height: 240px;
+		}
+		.list_item > div:nth-child(2) > div {
+			padding-left: 18px;
+		}
+		.list_item > div:nth-child(2) > div:nth-child(1) { height: 85px; }
+		.list_item > div:nth-child(2) > div:nth-child(2) { height: 110px; }
+		.list_item > div:nth-child(2) > div:nth-child(1) > div.fl {
+			width: 445px;
+		}
+		.list_item > div:nth-child(2) > div:nth-child(1) > div.fl > .name {
+		    font-weight: normal;
+	        line-height: 50px;
+	        color: rgb(85,85,85);
+	        font-size: 28.8px;
+		}
+		.list_item > div:nth-child(2) > div:nth-child(1) > div.fl > .score {
+		    line-height: 1em;
+		    color: #ff792a;
+		    font-size: 28.8px;
+		    font-weight: 400;
+		}
+		.list_item > div:nth-child(2) > div:nth-child(1) > div.fl > .address {
+			font-size: 17px;
+			margin-top: 6px;
+			color: #9b9b9b;
+	    	line-height: 22px;
+	    	overflow: hidden;
+		    text-overflow: ellipsis;
+		    white-space: nowrap;
+		}
+		.list_item > div:nth-child(2) > div:nth-child(1) > div.fr {
+			width: 50px;
+		}
+		.list_item > div:nth-child(2) > div:nth-child(1) > div.fr > img {
+			width: 32px;
+			height: 32px;
+		    display: block;
+	    	margin: 0 auto;
+		}
+		.list_item > div:nth-child(2) > div:nth-child(1) > div.fr > p {
+			font-size: 11.2px;
+		    color: #9b9b9b;
+		    margin-top: 6px;
+		    text-align: center;
+		}
+		.list_item > div:nth-child(2) > div:nth-child(2) > div.fl > img {
+			width: 35px;
+			height: 35px;
+			border-radius: 18px;
+		}
+		.list_item > div:nth-child(2) > div:nth-child(2) > div.fr {
+			width: 454px;
+			font-size: 16px;
+			line-height: 25px;
+			
+		}	
+		.list_item > div:nth-child(2) > div:nth-child(2) > div.fr > span:nth-child(1) {
+		    font-size: 16px;
+		    font-weight: bold;
+		    color: #000;
+		    line-height: 18px;
+		}
+		.list_item > div:nth-child(2) > div:nth-child(2) > div.fr > span:nth-child(3) {
+		    color: #ff792a;
+		    cursor: pointer;
+	    }
+		.list_item > div:nth-child(2) > div:nth-child(3) > div.fr {
+		    overflow: hidden;
+		    text-overflow: ellipsis;
+		    white-space: nowrap;
+		    word-wrap: normal;
+	        font-weight: normal;
+	    	color: #888;
+		}
+	
+		body > div > p {
+			text-align: center;
+		}
+		body > div > p:nth-child(1) {
+			margin-top: 60px;
+			font-size: 14px;
+			color: #9b9b9b;
+    		line-height: 16.8px;	
+		}
+		body > div > p:nth-child(2) {
+			margin-top: 18px;
+	    	font-size: 41px;
+	        color: #000000;
+	    	line-height: 49px;
+		}
+		body > div > p:nth-child(3) {
+			font-size: 19px;
+    		margin: 20px auto 30px;
+    		color: #9b9b9b;
+    		line-height: 23px;
+		}
+		#div_header {
+			position: fixed;
+			border-bottom: 1px solid #DBDBDB;
+		    box-shadow: 0 4px 11px rgb(0 0 0 / 10%);
+		    background-color: #FFFFFF;
+		    width: 100%;
+		}
+		.fl { float:left; }
+		.fr { float:right; }
+	</style>
+</head>
+<body>
+	<div id="div_header">
+		<div class="fl"><img id="img_logo" src="Images/img_logo.png"/></div>
+	</div>
+	<div>
+		<p>14,208 클릭 | 2022-11-24</p>
+		<p>안주가 맛있는 종로 주점 베스트 10곳</p>
+		<p>“주당들이 안주빨 세운다는 그 곳!”</p>
+	</div>
+	<div>
+		<div class="inner">
+			<div class="list_item">
+				<div class="fl"><img src="https://mp-seoul-image-production-s3.mangoplate.com/47875_1662860127452137.jpg?fit=around|738:738&crop=738:738;*,*&output-format=jpg&output-quality=80"/></div>
+				<div class="fr">
+					<div>
+						<div class="fl">
+							<span class="name">1. 독도16도</span>
+							<span class="score">4.4</span><br/>
+							<span class="address">서울특별시 종로구 자하문로33길 10 1F</span>
+						</div>
+						<div class="fr">
+							<img src="Images/icon_star.png"/>
+							<p>가고싶다</p>
+						</div>
+						<div style="clear:both;"></div>
+					</div>
+					<div>
+						<div class="fl"><img src="https://mp-seoul-image-production-s3.mangoplate.com/47875_1501571288025?fit=around|56:56&crop=56:56;*,*&output-format=jpg&output-quality=80"/></div>
+						<div class="fr">
+							<span>준영</span> 
+							<span>개인적으로는 처음에 나왔던 주안상이 가장 인상 깊었어요. 순두부가 정말 진한 크림치즈 먹는 것 같았고 명란젓을 올린 모두부도 너무 고소하고 맛있...</span>
+                      		<span>더보기</span>
+						</div>
+						<div style="clear:both;"></div>
+					</div>
+					<div>
+						<div class="fr">더보기 &gt;</div>
+						<div class="fr">독도16도</div>
+						<div style="clear:both;"></div>
+					</div>
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+			<div class="list_item">
+				<div class="fl"><img src="https://mp-seoul-image-production-s3.mangoplate.com/47875_1662860127452137.jpg?fit=around|738:738&crop=738:738;*,*&output-format=jpg&output-quality=80"/></div>
+				<div class="fr">
+					<div>
+						<div class="fl">
+							<span class="name">1. 독도16도</span>
+							<span class="score">4.4</span><br/>
+							<span class="address">서울특별시 종로구 자하문로33길 10 1F</span>
+						</div>
+						<div class="fr">
+							<img src="Images/icon_star.png"/>
+							<p>가고싶다</p>
+						</div>
+						<div style="clear:both;"></div>
+					</div>
+					<div>
+						<div class="fl"><img src="https://mp-seoul-image-production-s3.mangoplate.com/47875_1501571288025?fit=around|56:56&crop=56:56;*,*&output-format=jpg&output-quality=80"/></div>
+						<div class="fr">
+							<span>준영</span> 
+							<span>개인적으로는 처음에 나왔던 주안상이 가장 인상 깊었어요. 순두부가 정말 진한 크림치즈 먹는 것 같았고 명란젓을 올린 모두부도 너무 고소하고 맛있...</span>
+                      		<span>더보기</span>
+						</div>
+						<div style="clear:both;"></div>
+					</div>
+					<div>
+						<div class="fr">더보기 &gt;</div>
+						<div class="fr">독도16도</div>
+						<div style="clear:both;"></div>
+					</div>
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+			<div class="list_item">
+				<div class="fl"><img src="https://mp-seoul-image-production-s3.mangoplate.com/47875_1662860127452137.jpg?fit=around|738:738&crop=738:738;*,*&output-format=jpg&output-quality=80"/></div>
+				<div class="fr">
+					<div>
+						<div class="fl">
+							<span class="name">2. 독도16도</span>
+							<span class="score">4.4</span><br/>
+							<span class="address">서울특별시 종로구 자하문로33길 10 1F</span>
+						</div>
+						<div class="fr">
+							<img src="Images/icon_star.png"/>
+							<p>가고싶다</p>
+						</div>
+						<div style="clear:both;"></div>
+					</div>
+					<div>
+						<div class="fl"><img src="https://mp-seoul-image-production-s3.mangoplate.com/47875_1501571288025?fit=around|56:56&crop=56:56;*,*&output-format=jpg&output-quality=80"/></div>
+						<div class="fr">
+							<span>준영</span> 
+							<span>개인적으로는 처음에 나왔던 주안상이 가장 인상 깊었어요. 순두부가 정말 진한 크림치즈 먹는 것 같았고 명란젓을 올린 모두부도 너무 고소하고 맛있...</span>
+                      		<span>더보기</span>
+						</div>
+						<div style="clear:both;"></div>
+					</div>
+					<div>
+						<div class="fr">더보기 &gt;</div>
+						<div class="fr">독도16도</div>
+						<div style="clear:both;"></div>
+					</div>
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+			<div class="list_item">
+				<div class="fl"><img src="https://mp-seoul-image-production-s3.mangoplate.com/47875_1662860127452137.jpg?fit=around|738:738&crop=738:738;*,*&output-format=jpg&output-quality=80"/></div>
+				<div class="fr">
+					<div>
+						<div class="fl">
+							<span class="name">3. 독도16도</span>
+							<span class="score">4.4</span><br/>
+							<span class="address">서울특별시 종로구 자하문로33길 10 1F</span>
+						</div>
+						<div class="fr">
+							<img src="Images/icon_star.png"/>
+							<p>가고싶다</p>
+						</div>
+						<div style="clear:both;"></div>
+					</div>
+					<div>
+						<div class="fl"><img src="https://mp-seoul-image-production-s3.mangoplate.com/47875_1501571288025?fit=around|56:56&crop=56:56;*,*&output-format=jpg&output-quality=80"/></div>
+						<div class="fr">
+							<span>준영</span> 
+							<span>개인적으로는 처음에 나왔던 주안상이 가장 인상 깊었어요. 순두부가 정말 진한 크림치즈 먹는 것 같았고 명란젓을 올린 모두부도 너무 고소하고 맛있...</span>
+                      		<span>더보기</span>
+						</div>
+						<div style="clear:both;"></div>
+					</div>
+					<div>
+						<div class="fr">더보기 &gt;</div>
+						<div class="fr">독도16도</div>
+						<div style="clear:both;"></div>
+					</div>
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+			<div class="list_item">
+				<div class="fl"><img src="https://mp-seoul-image-production-s3.mangoplate.com/47875_1662860127452137.jpg?fit=around|738:738&crop=738:738;*,*&output-format=jpg&output-quality=80"/></div>
+				<div class="fr">
+					<div>
+						<div class="fl">
+							<span class="name">5. 독도16도</span>
+							<span class="score">4.4</span><br/>
+							<span class="address">서울특별시 종로구 자하문로33길 10 1F</span>
+						</div>
+						<div class="fr">
+							<img src="Images/icon_star.png"/>
+							<p>가고싶다</p>
+						</div>
+						<div style="clear:both;"></div>
+					</div>
+					<div>
+						<div class="fl"><img src="https://mp-seoul-image-production-s3.mangoplate.com/47875_1501571288025?fit=around|56:56&crop=56:56;*,*&output-format=jpg&output-quality=80"/></div>
+						<div class="fr">
+							<span>준영</span> 
+							<span>개인적으로는 처음에 나왔던 주안상이 가장 인상 깊었어요. 순두부가 정말 진한 크림치즈 먹는 것 같았고 명란젓을 올린 모두부도 너무 고소하고 맛있...</span>
+                      		<span>더보기</span>
+						</div>
+						<div style="clear:both;"></div>
+					</div>
+					<div>
+						<div class="fr">더보기 &gt;</div>
+						<div class="fr">독도16도</div>
+						<div style="clear:both;"></div>
+					</div>
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+			<div class="list_item">
+				<div class="fl"><img src="https://mp-seoul-image-production-s3.mangoplate.com/47875_1662860127452137.jpg?fit=around|738:738&crop=738:738;*,*&output-format=jpg&output-quality=80"/></div>
+				<div class="fr">
+					<div>
+						<div class="fl">
+							<span class="name">6. 독도16도</span>
+							<span class="score">4.4</span><br/>
+							<span class="address">서울특별시 종로구 자하문로33길 10 1F</span>
+						</div>
+						<div class="fr">
+							<img src="Images/icon_star.png"/>
+							<p>가고싶다</p>
+						</div>
+						<div style="clear:both;"></div>
+					</div>
+					<div>
+						<div class="fl"><img src="https://mp-seoul-image-production-s3.mangoplate.com/47875_1501571288025?fit=around|56:56&crop=56:56;*,*&output-format=jpg&output-quality=80"/></div>
+						<div class="fr">
+							<span>준영</span> 
+							<span>개인적으로는 처음에 나왔던 주안상이 가장 인상 깊었어요. 순두부가 정말 진한 크림치즈 먹는 것 같았고 명란젓을 올린 모두부도 너무 고소하고 맛있...</span>
+                      		<span>더보기</span>
+						</div>
+						<div style="clear:both;"></div>
+					</div>
+					<div>
+						<div class="fr">더보기 &gt;</div>
+						<div class="fr">독도16도</div>
+						<div style="clear:both;"></div>
+					</div>
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+			<div class="list_item">
+				<div class="fl"><img src="https://mp-seoul-image-production-s3.mangoplate.com/47875_1662860127452137.jpg?fit=around|738:738&crop=738:738;*,*&output-format=jpg&output-quality=80"/></div>
+				<div class="fr">
+					<div>
+						<div class="fl">
+							<span class="name">7. 독도16도</span>
+							<span class="score">4.4</span><br/>
+							<span class="address">서울특별시 종로구 자하문로33길 10 1F</span>
+						</div>
+						<div class="fr">
+							<img src="Images/icon_star.png"/>
+							<p>가고싶다</p>
+						</div>
+						<div style="clear:both;"></div>
+					</div>
+					<div>
+						<div class="fl"><img src="https://mp-seoul-image-production-s3.mangoplate.com/47875_1501571288025?fit=around|56:56&crop=56:56;*,*&output-format=jpg&output-quality=80"/></div>
+						<div class="fr">
+							<span>준영</span> 
+							<span>개인적으로는 처음에 나왔던 주안상이 가장 인상 깊었어요. 순두부가 정말 진한 크림치즈 먹는 것 같았고 명란젓을 올린 모두부도 너무 고소하고 맛있...</span>
+                      		<span>더보기</span>
+						</div>
+						<div style="clear:both;"></div>
+					</div>
+					<div>
+						<div class="fr">더보기 &gt;</div>
+						<div class="fr">독도16도</div>
+						<div style="clear:both;"></div>
+					</div>
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+			<div class="list_item">
+				<div class="fl"><img src="https://mp-seoul-image-production-s3.mangoplate.com/47875_1662860127452137.jpg?fit=around|738:738&crop=738:738;*,*&output-format=jpg&output-quality=80"/></div>
+				<div class="fr">
+					<div>
+						<div class="fl">
+							<span class="name">8. 독도16도</span>
+							<span class="score">4.4</span><br/>
+							<span class="address">서울특별시 종로구 자하문로33길 10 1F</span>
+						</div>
+						<div class="fr">
+							<img src="Images/icon_star.png"/>
+							<p>가고싶다</p>
+						</div>
+						<div style="clear:both;"></div>
+					</div>
+					<div>
+						<div class="fl"><img src="https://mp-seoul-image-production-s3.mangoplate.com/47875_1501571288025?fit=around|56:56&crop=56:56;*,*&output-format=jpg&output-quality=80"/></div>
+						<div class="fr">
+							<span>준영</span> 
+							<span>개인적으로는 처음에 나왔던 주안상이 가장 인상 깊었어요. 순두부가 정말 진한 크림치즈 먹는 것 같았고 명란젓을 올린 모두부도 너무 고소하고 맛있...</span>
+                      		<span>더보기</span>
+						</div>
+						<div style="clear:both;"></div>
+					</div>
+					<div>
+						<div class="fr">더보기 &gt;</div>
+						<div class="fr">독도16도</div>
+						<div style="clear:both;"></div>
+					</div>
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+			<div class="list_item">
+				<div class="fl"><img src="https://mp-seoul-image-production-s3.mangoplate.com/47875_1662860127452137.jpg?fit=around|738:738&crop=738:738;*,*&output-format=jpg&output-quality=80"/></div>
+				<div class="fr">
+					<div>
+						<div class="fl">
+							<span class="name">9. 독도16도</span>
+							<span class="score">4.4</span><br/>
+							<span class="address">서울특별시 종로구 자하문로33길 10 1F</span>
+						</div>
+						<div class="fr">
+							<img src="Images/icon_star.png"/>
+							<p>가고싶다</p>
+						</div>
+						<div style="clear:both;"></div>
+					</div>
+					<div>
+						<div class="fl"><img src="https://mp-seoul-image-production-s3.mangoplate.com/47875_1501571288025?fit=around|56:56&crop=56:56;*,*&output-format=jpg&output-quality=80"/></div>
+						<div class="fr">
+							<span>준영</span> 
+							<span>개인적으로는 처음에 나왔던 주안상이 가장 인상 깊었어요. 순두부가 정말 진한 크림치즈 먹는 것 같았고 명란젓을 올린 모두부도 너무 고소하고 맛있...</span>
+                      		<span>더보기</span>
+						</div>
+						<div style="clear:both;"></div>
+					</div>
+					<div>
+						<div class="fr">더보기 &gt;</div>
+						<div class="fr">독도16도</div>
+						<div style="clear:both;"></div>
+					</div>
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+			<div class="list_item">
+				<div class="fl"><img src="https://mp-seoul-image-production-s3.mangoplate.com/47875_1662860127452137.jpg?fit=around|738:738&crop=738:738;*,*&output-format=jpg&output-quality=80"/></div>
+				<div class="fr">
+					<div>
+						<div class="fl">
+							<span class="name">10. 독도16도</span>
+							<span class="score">4.4</span><br/>
+							<span class="address">서울특별시 종로구 자하문로33길 10 1F</span>
+						</div>
+						<div class="fr">
+							<img src="Images/icon_star.png"/>
+							<p>가고싶다</p>
+						</div>
+						<div style="clear:both;"></div>
+					</div>
+					<div>
+						<div class="fl"><img src="https://mp-seoul-image-production-s3.mangoplate.com/47875_1501571288025?fit=around|56:56&crop=56:56;*,*&output-format=jpg&output-quality=80"/></div>
+						<div class="fr">
+							<span>준영</span> 
+							<span>개인적으로는 처음에 나왔던 주안상이 가장 인상 깊었어요. 순두부가 정말 진한 크림치즈 먹는 것 같았고 명란젓을 올린 모두부도 너무 고소하고 맛있...</span>
+                      		<span>더보기</span>
+						</div>
+						<div style="clear:both;"></div>
+					</div>
+					<div>
+						<div class="fr">더보기 &gt;</div>
+						<div class="fr">독도16도</div>
+						<div style="clear:both;"></div>
+					</div>
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+		</div>
+		<div class="inner sns_item">
+			<div class="fl">공유하기버튼</div>
+			<div class="fr">SNS버튼5개</div>
+			<div style="clear:both;"></div>
+		</div>
+		<div class="inner map_item">
+			<span class="title">리스트 지도</span>
+			<img id="img_map1" src="Images/img_sample_map.png"/>
+		</div>
+	</div>
+	<div> <!--  4th div -->
+		<div class="inner">
+			<span class="title">리스트의 식당과 비슷한 맛집</span>
+			<div class="list_item_small fl">
+				<img src="https://mp-seoul-image-production-s3.mangoplate.com/277348/230933_1488756429665_230933_1488756381020_230933_1488730720722_52963?fit=around|362:362&crop=362:362;*,*&output-format=jpg&output-quality=80"/>
+				<div class="name fl">삼해집</div>
+				<div class="score fr">3.8</div>
+				<div style="clear:both;"></div>
+				<div class="category">종로 - 해산물 요리</div>
+			</div>
+			<div class="list_item_small fl">
+				<img src="https://mp-seoul-image-production-s3.mangoplate.com/277348/230933_1488756429665_230933_1488756381020_230933_1488730720722_52963?fit=around|362:362&crop=362:362;*,*&output-format=jpg&output-quality=80"/>
+				<div class="name fl">삼해집</div>
+				<div class="score fr">3.8</div>
+				<div style="clear:both;"></div>
+				<div class="category">종로 - 해산물 요리</div>
+			</div>
+			<div class="list_item_small fl">
+				<img src="https://mp-seoul-image-production-s3.mangoplate.com/277348/230933_1488756429665_230933_1488756381020_230933_1488730720722_52963?fit=around|362:362&crop=362:362;*,*&output-format=jpg&output-quality=80"/>
+				<div class="name fl">삼해집</div>
+				<div class="score fr">3.8</div>
+				<div style="clear:both;"></div>
+				<div class="category">종로 - 해산물 요리</div>
+			</div>
+			<div class="list_item_small fl">
+				<img src="https://mp-seoul-image-production-s3.mangoplate.com/277348/230933_1488756429665_230933_1488756381020_230933_1488730720722_52963?fit=around|362:362&crop=362:362;*,*&output-format=jpg&output-quality=80"/>
+				<div class="name fl">삼해집</div>
+				<div class="score fr">3.8</div>
+				<div style="clear:both;"></div>
+				<div class="category">종로 - 해산물 요리</div>
+			</div>
+			<div style="clear:both;"></div>
+		</div>
+		
+		<div class="inner">
+			<span class="title">실시간 키워드</span>
+			<a href="" class="hashtag"># 해물</a>
+			<a href="" class="hashtag"># 해물</a>
+			<a href="" class="hashtag"># 해물</a>
+			<a href="" class="hashtag"># 해물</a>
+			<a href="" class="hashtag"># 해물</a>
+			<a href="" class="hashtag"># 해물</a>
+			<a href="" class="hashtag"># 해물</a>
+			<a href="" class="hashtag"># 해물</a>
+			<a href="" class="hashtag"># 해물</a>
+			<a href="" class="hashtag"># 해물</a>
+			<a href="" class="hashtag"># 해물</a>
+			<a href="" class="hashtag"># 해물</a>
+			<a href="" class="hashtag"># 해물</a>
+			<a href="" class="hashtag"># 해물</a>
+			<a href="" class="hashtag"># 해물</a>
+			<a href="" class="hashtag"># 해물</a>
+			<a href="" class="hashtag"># 해물</a>
+		</div>
+	</div>
+	
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<!-- "CSS 셀렉터(Selector) #:id (id값은 문서를 통틀어서 하나만), .:class, 아무것도 안붙음:태그이름-->
+<!-- (주의) id는 해당 문서에 같은 이름이 중복되면 안됨!
+ 	- <style> 부터 </style> 까지 : CSS언어 (이 태그 자체는 HTML)
+ 	- <script> 부터 </script> 까지 : JavaScript언어  (이 태그 자체는 HTML)
+ 	- <script> 또는 <script type="text/javaScript">-->
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>JavaScript 소개</title>
+	<style> /* CSS언어 시작 */
+		#accent {
+			font-size: 20px;
+			color: red;
+			font-weight: bold;
+		}
+	</style>
+</head>
+<body>
+	<p><!-- p : 문단 -->
+		<span>화면단</span> 시작 /
+		<span id="accent">출석률</span>에 
+		<script> /*자바 스크립트 시작*/
+			//alert("자바스크립트 영역!"); // alert == sysout
+			str = "신경 좀 쓰세요";
+			document.write(str);
+		</script>
+	</p>
+</body>
+</html>

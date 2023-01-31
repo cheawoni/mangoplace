@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!-- -CSS
+	 1) <style> 태그 안에 작성.
+	 2) style 속성의 값으로 작성.
+
+	 -주석
+	 1) HTML : <!--부터 -->
+<!-- 2) CSS : /* 부터 */ 까지. -->
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>오늘은</title>
+	<style>
+		.redtxt {
+			color : red;	/* color : 글씨 색상*/
+			font-weight: bold;	/* font-weight : 글씨 굵기 */
+			font-size: 24px;	/* font-size : 글씨 크기 px(픽셀) pt(포인트) */
+		}
+	</style>
+</head>
+<body>
+	<p>13주 1일차</p>	<!-- p : paragraph(문단) -->
+	
+	<!-- OLD한 방식 -->			<!-- b : bold -->
+	<p><b><font size="5" color="red">화면단</font></b> 시작 / 
+	<b><font size="5" color="red">출석률</font></b>에 신경쓰세요.</p>
+	
+	<!-- ★요즘 방식 (1) -->
+			<!-- HTML에서의 class : '분류' -->
+	<p><span class="redtxt">화면단</span> 시작 /	<!-- 엔터키가 아니라 한칸 띄어 쓰겠다. -->
+	<span class="redtxt">출석률</span>에 신경쓰세요.</p>
+	
+	<!-- 요즘 방식(2) -->
+	<p><span style="color : red; font-weight: bold; font-size: 24px;">화면단</span> 시작 /	
+	<span style="color : red; font-weight: bold; font-size: 24px;">출석률</span>에 신경쓰세요.</p>
+	
+</body>
+</html>

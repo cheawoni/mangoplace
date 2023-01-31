@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>망고스토리 디테일 - 전국 24시간 영업 맛집 10곳</title>
+	<link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css' rel='stylesheet' type='text/css'><!-- 망고폰트 -->
+	<link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css' rel='stylesheet' type='text/css'><!-- 망고폰트 -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-applesdgothicneo@1.0/all.min.css"><!-- APPLE SD Gothic NEO -->
+	<link rel='stylesheet' type='text/css' href='CSS/Mango_storyContent.css'/>
+	<script src="https://code.jquery.com/jquery-3.6.2.js" integrity="sha256-pkn2CUZmheSeyssYw3vMp1+xyub4m+e+QK4sQskvuo4=" crossorigin="anonymous"></script>
+	<script>
+		$(function() {
+			$(".contentName").click(function() {	// 컨텐트 식당 이름
+				//alert(   "http://localhost:9090/WebProject1/Mango_resturantDetail.html?plate_id="+Number($(this).attr('plateid'))    );
+				location.href = "http://localhost:9090/WebProject1/Mango_resturantDetail.html?plate_id="+Number($(this).attr('plateid'));
+			});
+			
+			$(".content_moreView_item").click(function() {	// 다른 스토리 더보기
+				//alert(   "http://localhost:9090/WebProject1/Mango_storyContent.html?story_id="+Number($(this).attr('plateid'))    );
+				location.href = "http://localhost:9090/WebProject1/Mango_storyContent.html?plate_id="+Number($(this).attr('storyid'));
+			});
+			
+			$(".content_inStory_content_fl").click(function() { // 스토리 속 식당
+				location.href = "http://localhost:9090/WebProject1/Mango_resturantDetail.html?plate_id="+Number($(this).attr('plateid'));
+			});
+			
+			$(".content_inStory_wannago").click( function(){	// 스토리 속 식당 > 가고싶다 별
+			
+	            idx = $(".content_inStory_wannago").index($(this));
+	            
+	            $(".content_inStory_wannago").each(function(wannago_idx,obj) {
+	               if(idx==wannago_idx) {
+	                  $(this).toggleClass('wannago_on');	// toggle : waanago_on이 없으면 추가해줌.
+	               }/*  else {
+	                 // $(this).removeClass('wannago_on');
+	               } */
+	            });
+	         });
+			
+			$("#bookmark").click(function() {
+				alert("가고싶다!")
+			});
+			
+			$("#shareicon").click(function() {
+				alert("공유아이콘!")
+			});
+			
+			$("#div_header > .header_right").eq(3).find("span").click(function() {
+				alert("EAT딜 이동!");
+				location.href = "http://localhost:9090/WebProject1/Mango_eatDeal.html";
+			});
+			
+			$("#div_header > .header_right").eq(2).find("span").click(function() {
+				alert("맛집 리스트 이동!");
+				location.href = "http://localhost:9090/WebProject1/Mango_resturantList.html";
+			});
+			
+			$("#div_header > .header_right").eq(1).find("span").click(function() {
+				alert("망고 스토리 이동!");
+				location.href = "http://localhost:9090/WebProject1/Mango_storyList.html";
+			});
+			
+			$("#img_logo").click(function() {
+				alert("망고플레이트 이동!")
+				location.href = "http://localhost:9090/WebProject1/Mango_home.html"
+			});
+			
+			
+		});
+	</script>
+</head>
+<body>
+	<!-- ///////////////////////////  헤더 시작   ////////////////////////////////////////////////// -->
+	<!-- nth child(1) 헤더(로고..검색..등등) -->
+	<div id="div_header">
+		<div class="fl"><!-- (1)헤더 왼쪽 망고플레이트 로고 -->
+			<img id="img_logo" src="Images/img_logo.png"/>
+		</div>
+		<div class="fl"><!-- (2)헤더 왼쪽 서치아이콘 -->
+			<img id="img_search" src="Images/img_searchicon.png"/>
+			<label for="input_search">
+				<input type="text" id="Input_search" placeholder="지역, 식당 또는 음식"/>
+			</label>
+		</div>
+		<div class="fr header_right"><!-- (3)헤더 오른쪽 유저아이콘 -->
+			<img class="UserProfileButton_PersonIcon" src="Images/icon_user.png"/>
+		</div>
+		<div class="fr header_right"><!-- (4)헤더 오른쪽 망고스토리 아이콘 -->
+			<span>망고 스토리</span>
+		</div>
+		<div class="fr header_right"><!-- (5)헤더 오른쪽 맛집 리스트 아이콘 -->
+			<span>맛집 리스트</span>
+		</div>
+		<div class="fr header_right"><!-- (6)헤더 오른쪽 EAT딜 아이콘 -->
+			<span class="header_right_new">EAT딜</span>
+		</div>
+		<div style="clear:both;"></div>
+	</div>
+	<!-- <div class="input_search_open">	검색어 클릭 이벤트 발생시 나오는 창
+		<div class="input_search_backgroundDark"></div>		$("#input").css({display:"none"});
+		<div class="input_search_content">
+			<div class="input_search_content_list">
+				<div class="input_search_item">추천검색어</div>
+				<div class="input_search_item">인기검색어</div>
+				<div class="input_search_item">최근검색어</div>
+			</div>
+			<div class="input_search_content_keywordList">
+				<div class="input_search_keywordList_item">강남역</div>
+				<div class="input_search_keywordList_item">용리단길</div>
+				<div class="input_search_keywordList_item">유튜버추천</div>
+				<div class="input_search_keywordList_item">신촌</div>
+				<div class="input_search_keywordList_item">참치</div>
+				<div class="input_search_keywordList_item">성수</div>
+				<div class="input_search_keywordList_item">와인</div>
+			</div>
+		</div>
+	</div> -->
+	<!-- ///////////////////////////  헤더 끝   ////////////////////////////////////////////////// -->
+	<div id="div_container" class="flex">
+		<div><!-- nth child(2) 디테일 메인창(메인이미지,에디터이름,타이틀,서브타이틀,작성일,조회수) -->
+			<div class="detail_left">
+				<div class="detail_mainImg">
+					<img src="Images/detail/Open24hoursInKorea_main.jpg"/>
+					<span class="main_source">소스가 없을 경우 출력 안되게 YG</span><!-- 메인 이미지 소스 (&nbsp;) -->
+				</div>
+				<div class="detail_header">
+					<div>
+						<img src="Images/img_editor.png"/><span>망고소녀</span>
+						<img id="bookmark" src="Images/img_bookmark.svg"/>
+						<img id="shareicon" src="Images/img_shareicon.svg"/>
+					</div>
+	 				<h1 class="title">전국 24시간 영업 맛집 10곳</h1>
+					<p class="subtitle">24시간이 모자라!</p>
+					<div class="DateAndView">
+						<span class="write_date">2022-10-22</span>
+						<img src="Images/img_hitcounticon.svg"/>
+						<span class="hitcount">3,752</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div><!-- nth-child(3) 컨텐츠창(디테일 메인: gif이미지1,gif내용1, 디테일 컨텐츠: 식당지역,식당이름,컨텐트이미지1-2,이미지소스1-2,컨텐트텍스트1-2, 디테일 메인: gif이미지2,gif내용2)-->
+			<div class="detail_right">
+				<div class="gif">
+					<img src="Images/detail/Open24hoursInKorea_main.gif"/>
+					<p>먹는 데에는 24시간이 모자르죠! 오늘은 시간에 상관 없이 원하면 언제든 방문할 수 있는 전국의 24시간 영업 맛집을 소개합니다.</p>
+					<img id="dotdotdot" src="Images/img_dotdotdot.svg"/>
+					<span class="gif1_source">giphy.com</span><!-- gif1 소스 (&nbsp;) -->
+				</div>
+				<div class="content">
+					<div class="contentName" plateid="244">
+						<span class="content_area">청담동</span>
+						<p class="content_name">새벽집</p>
+						<img id="InfoButton" src="Images/Content_RestaurantInfoButtonIcon.svg"/>
+					</div>
+					<div class="content_img">
+						<img class="content_img1" src="Images/detail/Open24hoursInKorea/CheongdamDong_DawnHouse_story1.jpg"/>
+						<span class="content_img1_source">MangoPlate @Wandering Consultant</span><!-- content_img1 소스 없을경우(MangoPlate) -->
+					</div>
+					<p class="content_text1">청담동에 위치한 소고기, 육회비빔밥 맛집 '새벽집'입니다. 24시간 운영해 늦게까지 놀다가 새벽에 해장하러 오는 사람부터 연예인도 자주 출몰하는 곳인데요.
+					수요미식회에 소개되기도 했죠.<br><br>1994년 개업 이래로 지금까지 새벽집의 별미라고 한다면 여러 메뉴가 있지만, 한우 육회 비빔밥이 인기입니다. 해외 톱스타가 내한하여 들렀을 정도! 
+					가격대가 높은 편이라 고기를 먹기 부담스럽다면 육회비빔밥으로도 충분해요. 함께 나오는 선지 해장국과의 조합이 일품이랍니다.</p>
+					<div class="content_img">
+						<img class="content_img2" src="Images/detail/Open24hoursInKorea/CheongdamDong_DawnHouse_story2.jpg"/>
+						<span class="content_img2_source">MangoPlate @형석</span><!-- content_img1 소스 -->
+					</div>
+					<p class="content_text2"><망고플레이트 '형석'님의 리뷰 중!><br><br>우리나라에서 가장 비싼 고기를 파는 곳 중 하나인 곳. 그러고보니 이곳도 수요미식회 1회에 등장했던.. 
+					24시간 영업과 청담동이라는 지역 특성, 꾸준한 품질관리로 오랜시간 명성을 이어오고 있는 집이다.<br><br>주로 육회비빔밥 먹으로 오는 집이긴 한데 3-4년에 한번정도? 고기도 먹으러 옴. 
+					근데 여기는 꽃등심만 먹는걸로. 너무 비싸서 자주 올 수는 없으나 가-끔 기분내면서 좋은 고기 먹고 싶을 때 괜찮은 선택지 중 하나다.</p>
+					<img id="dotdotdot" src="Images/img_dotdotdot.svg"/>
+				</div>
+				<div class="content">
+					<div class="contentName" plateid="236">
+						<span class="content_area">왕십리/성동</span>
+						<p class="content_name">소문난성수감자탕</p>
+						<img id="InfoButton" src="Images/Content_RestaurantInfoButtonIcon.svg"/>
+					</div>
+					<div class="content_img">
+						<img class="content_img1" src="Images/detail/Open24hoursInKorea/WangsimniSeongdong_FamousSeongsuGamjatang_story1.jpg"/>
+						<span class="content_img1_source">MangoPlate @패터슨</span><!-- content_img1 소스 없을경우(MangoPlate) -->
+					</div>
+					<p class="content_text1">핫플 성수에서도 가장 유명한 맛집은 이곳이 아닐까요? '소문난 성수 감자탕'입니다. 백종원의 삼대천왕, 
+					최근에는 성시경의 먹을텐데에 소개되며 더 많은 사람들이 방문하고 있어요. 이름처럼 소문난 곳이라 언제가도 웨이팅 줄이 어마어마한데요. 
+					하지만 24시간 운영이니까 새벽에 가면 줄 없이도 즐길 수 있어요.<br><br>즉석에서 바로 떠주시는 수제비 사리에 얼큰한 감자탕 국물은 맛이 없을 수가 없죠. 
+					자극적이지 않고 담백한 편이고 고기를 찍어 먹는 간장 양념장이 포인트! 볶음밥으로 마무리 하는 것도 잊지 마세요.</p>
+					<div class="content_img">
+						<img class="content_img2" src="Images/detail/Open24hoursInKorea/WangsimniSeongdong_FamousSeongsuGamjatang_story2.jpg"/>
+						<span class="content_img2_source">MangoPlate @Juan</span><!-- content_img1 소스 -->
+					</div>
+					<p class="content_text2"><망고플레이트 'Luscious.K'님의 리뷰 중!><br><br>감자탕 소짜를 주문하고 우거지를 추가했다. 
+					평범한 비주얼의 감자탕인데 맛은 슴슴하고 개운하다.점차 간이 맞아가는 감자탕은 아주 맛있다. 어찌 보면 특별할 거 없는 맛일 수도 있지만 짜지도 않고 맵지도 않고 감칠맛이 과한 MSG탕도 아니다. 
+					정확하게 감자탕 맛이다. 이런 감자탕은 요즘 드물다. 끝까지 너무나 맛있게 먹을 수 있는 오랜 내공의 감자탕!<br><br>이집의 하이라이트는 바로 떼어주시는 <수제비><br>
+					쫀득하게 글루텐 잘 살린 수제비는 이모님들의 솜씨로 얇고 넓게, 그리고 균등감 없는 식감으로 제대로다. 
+					글루텐을 얼마나 잘 살리셨는지 얇게 떼어도 꽤 오래 끓여도 퍼지지 않는다. 시판 수제비 쫌 넣어주는 집들은 반성해야할 정도로 필수 추가 요소다.</p>
+					<img id="dotdotdot" src="Images/img_dotdotdot.svg"/>
+				</div>
+				<div class="content">
+					<div class="contentName" plateid="307">
+						<span class="content_area">성남시</span>
+						<p class="content_name">솔밭삼겹살해장국</p>
+						<img id="InfoButton" src="Images/Content_RestaurantInfoButtonIcon.svg"/>
+					</div>
+					<div class="content_img">
+						<img class="content_img1" src="Images/detail/Open24hoursInKorea/SeongnamCity_SalbatSamgyeopsalHaejangguk_story1.jpg"/>
+						<span class="content_img1_source">MangoPlate @현지</span><!-- content_img1 소스 없을경우(MangoPlate) -->
+					</div>
+					<p class="content_text1">분당 정자역 인근에 위치한 24시간 삼겹살 전문점 '솔밭삼겹살해장국'입니다. 인기 메뉴는 돌판에 구워 먹는 생삼겹살입니다. 맛있고 질 좋은 돼지고기를 가장 클래식한 방법으로 즐길 수 있어요. 
+					트렌디한 공간도 맛도 아니지만 기름기도 적당하고 두께도 적당하고 모든 것이 딱 알맞은 옛 스타일의 삼겹살 구이입니다. <br><br>
+					선지해장국, 설렁탕, 도가니탕, 소고기국밥 같은 해장국도 있으니 사이드로 추가해 드셔보시길! 정자에서 오랫동안 꾸준하게 사랑 받고 있는 이유가 있어요.</p>
+					<div class="content_img">
+						<img class="content_img2" src="Images/detail/Open24hoursInKorea/SeongnamCity_SalbatSamgyeopsalHaejangguk_story2.jpg"/>
+						<span class="content_img2_source">MangoPlate @맛뜨</span><!-- content_img1 소스 -->
+					</div>
+					<p class="content_text2"><망고플레이트 '솜솜'님의 리뷰 중!><br><br>넘 허름하기도 해서 고깃집 진짜 많은데 저기 사람들 왜 이렇게 많아 했는데... 맛있네!!<br><br>
+					두툼 삼겹살 이런 건 아니지만 옛날 감성의 적당한 두께의 삼겹살 + 무채 반찬이랑 볶아주는 볶음밥이 정말 유명 하더니만 진짜 맛있다... 
+					감칠맛 어디서 오는 걸까! 삼겹살 기름인가~! 선짓국도 맛있음. 맛집 인정 인정. 계속 계속 생각나는 마성의 곳이었다. 어서 코로나 이별하고 24시간 즐기고 싶다.</p>
+					<img id="dotdotdot" src="Images/img_dotdotdot.svg"/>
+				</div>
+				<div class="content">
+					<div class="contentName" plateid="244">
+						<span class="content_area">청담동</span>
+						<p class="content_name">새벽집</p>
+						<img id="InfoButton" src="Images/Content_RestaurantInfoButtonIcon.svg"/>
+					</div>
+					<div class="content_img">
+						<img class="content_img1" src="Images/detail/Open24hoursInKorea/CheongdamDong_DawnHouse_story1.jpg"/>
+						<span class="content_img1_source">MangoPlate @Wandering Consultant</span><!-- content_img1 소스 없을경우(MangoPlate) -->
+					</div>
+					<p class="content_text1">청담동에 위치한 소고기, 육회비빔밥 맛집 '새벽집'입니다. 24시간 운영해 늦게까지 놀다가 새벽에 해장하러 오는 사람부터 연예인도 자주 출몰하는 곳인데요.
+					수요미식회에 소개되기도 했죠.<br><br>1994년 개업 이래로 지금까지 새벽집의 별미라고 한다면 여러 메뉴가 있지만, 한우 육회 비빔밥이 인기입니다. 해외 톱스타가 내한하여 들렀을 정도! 
+					가격대가 높은 편이라 고기를 먹기 부담스럽다면 육회비빔밥으로도 충분해요. 함께 나오는 선지 해장국과의 조합이 일품이랍니다.</p>
+					<div class="content_img">
+						<img class="content_img2" src="Images/detail/Open24hoursInKorea/CheongdamDong_DawnHouse_story2.jpg"/>
+						<span class="content_img2_source">MangoPlate @형석</span><!-- content_img1 소스 -->
+					</div>
+					<p class="content_text2"><망고플레이트 '형석'님의 리뷰 중!><br><br>우리나라에서 가장 비싼 고기를 파는 곳 중 하나인 곳. 그러고보니 이곳도 수요미식회 1회에 등장했던.. 
+					24시간 영업과 청담동이라는 지역 특성, 꾸준한 품질관리로 오랜시간 명성을 이어오고 있는 집이다.<br><br>주로 육회비빔밥 먹으로 오는 집이긴 한데 3-4년에 한번정도? 고기도 먹으러 옴. 
+					근데 여기는 꽃등심만 먹는걸로. 너무 비싸서 자주 올 수는 없으나 가-끔 기분내면서 좋은 고기 먹고 싶을 때 괜찮은 선택지 중 하나다.</p>
+					<img id="dotdotdot" src="Images/img_dotdotdot.svg"/>
+				</div>
+				<div class="content">
+					<div class="contentName">
+						<span class="content_area">왕십리/성동</span>
+						<p class="content_name">소문난성수감자탕</p>
+						<img id="InfoButton" src="Images/Content_RestaurantInfoButtonIcon.svg"/>
+					</div>
+					<div class="content_img">
+						<img class="content_img1" src="Images/detail/Open24hoursInKorea/WangsimniSeongdong_FamousSeongsuGamjatang_story1.jpg"/>
+						<span class="content_img1_source">MangoPlate @패터슨</span><!-- content_img1 소스 없을경우(MangoPlate) -->
+					</div>
+					<p class="content_text1">핫플 성수에서도 가장 유명한 맛집은 이곳이 아닐까요? '소문난 성수 감자탕'입니다. 백종원의 삼대천왕, 
+					최근에는 성시경의 먹을텐데에 소개되며 더 많은 사람들이 방문하고 있어요. 이름처럼 소문난 곳이라 언제가도 웨이팅 줄이 어마어마한데요. 
+					하지만 24시간 운영이니까 새벽에 가면 줄 없이도 즐길 수 있어요.<br><br>즉석에서 바로 떠주시는 수제비 사리에 얼큰한 감자탕 국물은 맛이 없을 수가 없죠. 
+					자극적이지 않고 담백한 편이고 고기를 찍어 먹는 간장 양념장이 포인트! 볶음밥으로 마무리 하는 것도 잊지 마세요.</p>
+					<div class="content_img">
+						<img class="content_img2" src="Images/detail/Open24hoursInKorea/WangsimniSeongdong_FamousSeongsuGamjatang_story2.jpg"/>
+						<span class="content_img2_source">MangoPlate @Juan</span><!-- content_img1 소스 -->
+					</div>
+					<p class="content_text2"><망고플레이트 'Luscious.K'님의 리뷰 중!><br><br>감자탕 소짜를 주문하고 우거지를 추가했다. 
+					평범한 비주얼의 감자탕인데 맛은 슴슴하고 개운하다.점차 간이 맞아가는 감자탕은 아주 맛있다. 어찌 보면 특별할 거 없는 맛일 수도 있지만 짜지도 않고 맵지도 않고 감칠맛이 과한 MSG탕도 아니다. 
+					정확하게 감자탕 맛이다. 이런 감자탕은 요즘 드물다. 끝까지 너무나 맛있게 먹을 수 있는 오랜 내공의 감자탕!<br><br>이집의 하이라이트는 바로 떼어주시는 <수제비><br>
+					쫀득하게 글루텐 잘 살린 수제비는 이모님들의 솜씨로 얇고 넓게, 그리고 균등감 없는 식감으로 제대로다. 
+					글루텐을 얼마나 잘 살리셨는지 얇게 떼어도 꽤 오래 끓여도 퍼지지 않는다. 시판 수제비 쫌 넣어주는 집들은 반성해야할 정도로 필수 추가 요소다.</p>
+					<img id="dotdotdot" src="Images/img_dotdotdot.svg"/>
+				</div>
+				<div class="content">
+					<div class="contentName">
+						<span class="content_area">성남시</span>
+						<p class="content_name">솔밭삼겹살해장국</p>
+						<img id="InfoButton" src="Images/Content_RestaurantInfoButtonIcon.svg"/>
+					</div>
+					<div class="content_img">
+						<img class="content_img1" src="Images/detail/Open24hoursInKorea/SeongnamCity_SalbatSamgyeopsalHaejangguk_story1.jpg"/>
+						<span class="content_img1_source">MangoPlate @현지</span><!-- content_img1 소스 없을경우(MangoPlate) -->
+					</div>
+					<p class="content_text1">분당 정자역 인근에 위치한 24시간 삼겹살 전문점 '솔밭삼겹살해장국'입니다. 인기 메뉴는 돌판에 구워 먹는 생삼겹살입니다. 맛있고 질 좋은 돼지고기를 가장 클래식한 방법으로 즐길 수 있어요. 
+					트렌디한 공간도 맛도 아니지만 기름기도 적당하고 두께도 적당하고 모든 것이 딱 알맞은 옛 스타일의 삼겹살 구이입니다. <br><br>
+					선지해장국, 설렁탕, 도가니탕, 소고기국밥 같은 해장국도 있으니 사이드로 추가해 드셔보시길! 정자에서 오랫동안 꾸준하게 사랑 받고 있는 이유가 있어요.</p>
+					<div class="content_img">
+						<img class="content_img2" src="Images/detail/Open24hoursInKorea/SeongnamCity_SalbatSamgyeopsalHaejangguk_story2.jpg"/>
+						<span class="content_img2_source">MangoPlate @맛뜨</span><!-- content_img1 소스 -->
+					</div>
+					<p class="content_text2"><망고플레이트 '솜솜'님의 리뷰 중!><br><br>넘 허름하기도 해서 고깃집 진짜 많은데 저기 사람들 왜 이렇게 많아 했는데... 맛있네!!<br><br>
+					두툼 삼겹살 이런 건 아니지만 옛날 감성의 적당한 두께의 삼겹살 + 무채 반찬이랑 볶아주는 볶음밥이 정말 유명 하더니만 진짜 맛있다... 
+					감칠맛 어디서 오는 걸까! 삼겹살 기름인가~! 선짓국도 맛있음. 맛집 인정 인정. 계속 계속 생각나는 마성의 곳이었다. 어서 코로나 이별하고 24시간 즐기고 싶다.</p>
+					<img id="dotdotdot" src="Images/img_dotdotdot.svg"/>
+				</div><div class="content">
+					<div class="contentName">
+						<span class="content_area">청담동</span>
+						<p class="content_name">새벽집</p>
+						<img id="InfoButton" src="Images/Content_RestaurantInfoButtonIcon.svg"/>
+					</div>
+					<div class="content_img">
+						<img class="content_img1" src="Images/detail/Open24hoursInKorea/CheongdamDong_DawnHouse_story1.jpg"/>
+						<span class="content_img1_source">MangoPlate @Wandering Consultant</span><!-- content_img1 소스 없을경우(MangoPlate) -->
+					</div>
+					<p class="content_text1">청담동에 위치한 소고기, 육회비빔밥 맛집 '새벽집'입니다. 24시간 운영해 늦게까지 놀다가 새벽에 해장하러 오는 사람부터 연예인도 자주 출몰하는 곳인데요.
+					수요미식회에 소개되기도 했죠.<br><br>1994년 개업 이래로 지금까지 새벽집의 별미라고 한다면 여러 메뉴가 있지만, 한우 육회 비빔밥이 인기입니다. 해외 톱스타가 내한하여 들렀을 정도! 
+					가격대가 높은 편이라 고기를 먹기 부담스럽다면 육회비빔밥으로도 충분해요. 함께 나오는 선지 해장국과의 조합이 일품이랍니다.</p>
+					<div class="content_img">
+						<img class="content_img2" src="Images/detail/Open24hoursInKorea/CheongdamDong_DawnHouse_story2.jpg"/>
+						<span class="content_img2_source">MangoPlate @형석</span><!-- content_img1 소스 -->
+					</div>
+					<p class="content_text2"><망고플레이트 '형석'님의 리뷰 중!><br><br>우리나라에서 가장 비싼 고기를 파는 곳 중 하나인 곳. 그러고보니 이곳도 수요미식회 1회에 등장했던.. 
+					24시간 영업과 청담동이라는 지역 특성, 꾸준한 품질관리로 오랜시간 명성을 이어오고 있는 집이다.<br><br>주로 육회비빔밥 먹으로 오는 집이긴 한데 3-4년에 한번정도? 고기도 먹으러 옴. 
+					근데 여기는 꽃등심만 먹는걸로. 너무 비싸서 자주 올 수는 없으나 가-끔 기분내면서 좋은 고기 먹고 싶을 때 괜찮은 선택지 중 하나다.</p>
+					<img id="dotdotdot" src="Images/img_dotdotdot.svg"/>
+				</div>
+				<div class="content">
+					<div class="contentName">
+						<span class="content_area">왕십리/성동</span>
+						<p class="content_name">소문난성수감자탕</p>
+						<img id="InfoButton" src="Images/Content_RestaurantInfoButtonIcon.svg"/>
+					</div>
+					<div class="content_img">
+						<img class="content_img1" src="Images/detail/Open24hoursInKorea/WangsimniSeongdong_FamousSeongsuGamjatang_story1.jpg"/>
+						<span class="content_img1_source">MangoPlate @패터슨</span><!-- content_img1 소스 없을경우(MangoPlate) -->
+					</div>
+					<p class="content_text1">핫플 성수에서도 가장 유명한 맛집은 이곳이 아닐까요? '소문난 성수 감자탕'입니다. 백종원의 삼대천왕, 
+					최근에는 성시경의 먹을텐데에 소개되며 더 많은 사람들이 방문하고 있어요. 이름처럼 소문난 곳이라 언제가도 웨이팅 줄이 어마어마한데요. 
+					하지만 24시간 운영이니까 새벽에 가면 줄 없이도 즐길 수 있어요.<br><br>즉석에서 바로 떠주시는 수제비 사리에 얼큰한 감자탕 국물은 맛이 없을 수가 없죠. 
+					자극적이지 않고 담백한 편이고 고기를 찍어 먹는 간장 양념장이 포인트! 볶음밥으로 마무리 하는 것도 잊지 마세요.</p>
+					<div class="content_img">
+						<img class="content_img2" src="Images/detail/Open24hoursInKorea/WangsimniSeongdong_FamousSeongsuGamjatang_story2.jpg"/>
+						<span class="content_img2_source">MangoPlate @Juan</span><!-- content_img1 소스 -->
+					</div>
+					<p class="content_text2"><망고플레이트 'Luscious.K'님의 리뷰 중!><br><br>감자탕 소짜를 주문하고 우거지를 추가했다. 
+					평범한 비주얼의 감자탕인데 맛은 슴슴하고 개운하다.점차 간이 맞아가는 감자탕은 아주 맛있다. 어찌 보면 특별할 거 없는 맛일 수도 있지만 짜지도 않고 맵지도 않고 감칠맛이 과한 MSG탕도 아니다. 
+					정확하게 감자탕 맛이다. 이런 감자탕은 요즘 드물다. 끝까지 너무나 맛있게 먹을 수 있는 오랜 내공의 감자탕!<br><br>이집의 하이라이트는 바로 떼어주시는 <수제비><br>
+					쫀득하게 글루텐 잘 살린 수제비는 이모님들의 솜씨로 얇고 넓게, 그리고 균등감 없는 식감으로 제대로다. 
+					글루텐을 얼마나 잘 살리셨는지 얇게 떼어도 꽤 오래 끓여도 퍼지지 않는다. 시판 수제비 쫌 넣어주는 집들은 반성해야할 정도로 필수 추가 요소다.</p>
+					<img id="dotdotdot" src="Images/img_dotdotdot.svg"/>
+				</div>
+				<div class="content">
+					<div class="contentName">
+						<span class="content_area">성남시</span>
+						<p class="content_name">솔밭삼겹살해장국</p>
+						<img id="InfoButton" src="Images/Content_RestaurantInfoButtonIcon.svg"/>
+					</div>
+					<div class="content_img">
+						<img class="content_img1" src="Images/detail/Open24hoursInKorea/SeongnamCity_SalbatSamgyeopsalHaejangguk_story1.jpg"/>
+						<span class="content_img1_source">MangoPlate @현지</span><!-- content_img1 소스 없을경우(MangoPlate) -->
+					</div>
+					<p class="content_text1">분당 정자역 인근에 위치한 24시간 삼겹살 전문점 '솔밭삼겹살해장국'입니다. 인기 메뉴는 돌판에 구워 먹는 생삼겹살입니다. 맛있고 질 좋은 돼지고기를 가장 클래식한 방법으로 즐길 수 있어요. 
+					트렌디한 공간도 맛도 아니지만 기름기도 적당하고 두께도 적당하고 모든 것이 딱 알맞은 옛 스타일의 삼겹살 구이입니다. <br><br>
+					선지해장국, 설렁탕, 도가니탕, 소고기국밥 같은 해장국도 있으니 사이드로 추가해 드셔보시길! 정자에서 오랫동안 꾸준하게 사랑 받고 있는 이유가 있어요.</p>
+					<div class="content_img">
+						<img class="content_img2" src="Images/detail/Open24hoursInKorea/SeongnamCity_SalbatSamgyeopsalHaejangguk_story2.jpg"/>
+						<span class="content_img2_source">MangoPlate @맛뜨</span><!-- content_img1 소스 -->
+					</div>
+					<p class="content_text2"><망고플레이트 '솜솜'님의 리뷰 중!><br><br>넘 허름하기도 해서 고깃집 진짜 많은데 저기 사람들 왜 이렇게 많아 했는데... 맛있네!!<br><br>
+					두툼 삼겹살 이런 건 아니지만 옛날 감성의 적당한 두께의 삼겹살 + 무채 반찬이랑 볶아주는 볶음밥이 정말 유명 하더니만 진짜 맛있다... 
+					감칠맛 어디서 오는 걸까! 삼겹살 기름인가~! 선짓국도 맛있음. 맛집 인정 인정. 계속 계속 생각나는 마성의 곳이었다. 어서 코로나 이별하고 24시간 즐기고 싶다.</p>
+					<img id="dotdotdot" src="Images/img_dotdotdot.svg"/>
+				</div>
+				<div class="content">
+					<div class="contentName">
+						<span class="content_area">성남시</span>
+						<p class="content_name">솔밭삼겹살해장국</p>
+						<img id="InfoButton" src="Images/Content_RestaurantInfoButtonIcon.svg"/>
+					</div>
+					<div class="content_img">
+						<img class="content_img1" src="Images/detail/Open24hoursInKorea/SeongnamCity_SalbatSamgyeopsalHaejangguk_story1.jpg"/>
+						<span class="content_img1_source">MangoPlate @현지</span><!-- content_img1 소스 없을경우(MangoPlate) -->
+					</div>
+					<p class="content_text1">분당 정자역 인근에 위치한 24시간 삼겹살 전문점 '솔밭삼겹살해장국'입니다. 인기 메뉴는 돌판에 구워 먹는 생삼겹살입니다. 맛있고 질 좋은 돼지고기를 가장 클래식한 방법으로 즐길 수 있어요. 
+					트렌디한 공간도 맛도 아니지만 기름기도 적당하고 두께도 적당하고 모든 것이 딱 알맞은 옛 스타일의 삼겹살 구이입니다. <br><br>
+					선지해장국, 설렁탕, 도가니탕, 소고기국밥 같은 해장국도 있으니 사이드로 추가해 드셔보시길! 정자에서 오랫동안 꾸준하게 사랑 받고 있는 이유가 있어요.</p>
+					<div class="content_img">
+						<img class="content_img2" src="Images/detail/Open24hoursInKorea/SeongnamCity_SalbatSamgyeopsalHaejangguk_story2.jpg"/>
+						<span class="content_img2_source">MangoPlate @맛뜨</span><!-- content_img1 소스 -->
+					</div>
+					<p class="content_text2"><망고플레이트 '솜솜'님의 리뷰 중!><br><br>넘 허름하기도 해서 고깃집 진짜 많은데 저기 사람들 왜 이렇게 많아 했는데... 맛있네!!<br><br>
+					두툼 삼겹살 이런 건 아니지만 옛날 감성의 적당한 두께의 삼겹살 + 무채 반찬이랑 볶아주는 볶음밥이 정말 유명 하더니만 진짜 맛있다... 
+					감칠맛 어디서 오는 걸까! 삼겹살 기름인가~! 선짓국도 맛있음. 맛집 인정 인정. 계속 계속 생각나는 마성의 곳이었다. 어서 코로나 이별하고 24시간 즐기고 싶다.</p>
+					<!-- 맨마지막 컨텐츠는 dotdotdot이 없음! -->
+				</div>
+				<div class="gif">
+					<img id="gif2" src="Images/detail/Open24hoursInKorea_main2.gif"/>
+					<p>오늘은 24시간 영업하는 맛집 10곳을 소개해드렸어요. 줄 서서 먹는 그곳을 새벽이라면 줄 없이도 맛볼 수 있음!</p>
+					<span class="gif_source2">giphy.com</span><!-- gif1 소스 (&nbsp;) -->
+				</div>
+				<div class="content_inStory">
+					<h2 id="content_inStory_title">스토리 속 식당</h2>
+					<div class="content_inStory_content">
+						<div class="content_inStory_content_fl">
+							<div class="content_inStory_img" plateid="244">
+								<!-- 식당디테일페이지의 첫번째 사진 -->
+								<img src="https://mp-seoul-image-production-s3.mangoplate.com/added_restaurants/1427_1455074541268.jpg?fit=around|*:*&crop=*:*;*,*&output-format=jpg&output-quality=80"/>
+							</div>
+							<div class="content_inStory_areaAndName" plateid="244">
+								<p id="content_inStory_area">청담동</p>
+								<p id="content_inStory_Name">새벽집</p>
+							</div>
+						</div>
+						<div class="content_inStory_content_fr">
+							<div class="content_inStory_wannago">
+								<img src="Images/img_WannagoIcon.svg"/>
+							</div>
+						</div>
+					</div>
+					<div class="content_inStory_content">
+						<div class="content_inStory_content_fl">
+							<div class="content_inStory_img" plateid="236">
+								<img src="https://mp-seoul-image-production-s3.mangoplate.com/49369/652152_1632005714255_16233?fit=around|*:*&crop=*:*;*,*&output-format=jpg&output-quality=80"/>
+							</div>
+							<div class="content_inStory_areaAndName" plateid="236">
+								<p id="content_inStory_area">왕십리/성동</p>
+								<p id="content_inStory_Name">소문난성수감자탕</p>
+							</div>
+						</div>
+						<div class="content_inStory_content_fr">
+							<div class="content_inStory_wannago">
+								<img src="Images/img_WannagoIcon.svg"/>
+							</div>
+						</div>
+					</div>
+					<div class="content_inStory_content">
+						<div class="content_inStory_content_fl">
+							<div class="content_inStory_img" plateid="307">
+								<img src="https://mp-seoul-image-production-s3.mangoplate.com/1848521_1607416850525787.jpg?fit=around|*:*&crop=*:*;*,*&output-format=jpg&output-quality=80"/>
+							</div>
+							<div class="content_inStory_areaAndName" plateid="307">
+								<p id="content_inStory_area">성남시</p>
+								<p id="content_inStory_Name">솔밭삼겹살해장국</p>
+							</div>
+						</div>
+						<div class="content_inStory_content_fr">
+							<div class="content_inStory_wannago">
+								<img src="Images/img_WannagoIcon.svg"/>
+							</div>
+						</div>
+					</div>
+					<div class="content_inStory_content">
+						<div class="content_inStory_content_fl">
+							<div class="content_inStory_img" plateid="244">
+								<!-- 식당디테일페이지의 첫번째 사진 -->
+								<img src="https://mp-seoul-image-production-s3.mangoplate.com/added_restaurants/1427_1455074541268.jpg?fit=around|*:*&crop=*:*;*,*&output-format=jpg&output-quality=80"/>
+							</div>
+							<div class="content_inStory_areaAndName" plateid="244">
+								<p id="content_inStory_area">청담동</p>
+								<p id="content_inStory_Name">새벽집</p>
+							</div>
+						</div>
+						<div class="content_inStory_content_fr">
+							<div class="content_inStory_wannago">
+								<img src="Images/img_WannagoIcon.svg"/>
+							</div>
+						</div>
+					</div>
+					<div class="content_inStory_content">
+						<div class="content_inStory_content_fl">
+							<div class="content_inStory_img" plateid="236">
+								<img src="https://mp-seoul-image-production-s3.mangoplate.com/49369/652152_1632005714255_16233?fit=around|*:*&crop=*:*;*,*&output-format=jpg&output-quality=80"/>
+							</div>
+							<div class="content_inStory_areaAndName" plateid="236">
+								<p id="content_inStory_area">왕십리/성동</p>
+								<p id="content_inStory_Name">소문난성수감자탕</p>
+							</div>
+						</div>
+						<div class="content_inStory_content_fr">
+							<div class="content_inStory_wannago">
+								<img src="Images/img_WannagoIcon.svg"/>
+							</div>
+						</div>
+					</div>
+					<div class="content_inStory_content">
+						<div class="content_inStory_content_fl">
+							<div class="content_inStory_img" plateid="307">
+								<img src="https://mp-seoul-image-production-s3.mangoplate.com/1848521_1607416850525787.jpg?fit=around|*:*&crop=*:*;*,*&output-format=jpg&output-quality=80"/>
+							</div>
+							<div class="content_inStory_areaAndName" plateid="307">
+								<p id="content_inStory_area">성남시</p>
+								<p id="content_inStory_Name">솔밭삼겹살해장국</p>
+							</div>
+						</div>
+						<div class="content_inStory_content_fr">
+							<div class="content_inStory_wannago">
+								<img src="Images/img_WannagoIcon.svg"/>
+							</div>
+						</div>
+					</div>
+					<div class="content_inStory_content">
+						<div class="content_inStory_content_fl">
+							<div class="content_inStory_img" plateid="244">
+								<!-- 식당디테일페이지의 첫번째 사진 -->
+								<img src="https://mp-seoul-image-production-s3.mangoplate.com/added_restaurants/1427_1455074541268.jpg?fit=around|*:*&crop=*:*;*,*&output-format=jpg&output-quality=80"/>
+							</div>
+							<div class="content_inStory_areaAndName" plateid="244">
+								<p id="content_inStory_area">청담동</p>
+								<p id="content_inStory_Name">새벽집</p>
+							</div>
+						</div>
+						<div class="content_inStory_content_fr">
+							<div class="content_inStory_wannago">
+								<img src="Images/img_WannagoIcon.svg"/>
+							</div>
+						</div>
+					</div>
+					<div class="content_inStory_content">
+						<div class="content_inStory_content_fl">
+							<div class="content_inStory_img" plateid="236">
+								<img src="https://mp-seoul-image-production-s3.mangoplate.com/49369/652152_1632005714255_16233?fit=around|*:*&crop=*:*;*,*&output-format=jpg&output-quality=80"/>
+							</div>
+							<div class="content_inStory_areaAndName" plateid="236">
+								<p id="content_inStory_area">왕십리/성동</p>
+								<p id="content_inStory_Name">소문난성수감자탕</p>
+							</div>
+						</div>
+						<div class="content_inStory_content_fr">
+							<div class="content_inStory_wannago">
+								<img src="Images/img_WannagoIcon.svg"/>
+							</div>
+						</div>
+					</div>
+					<div class="content_inStory_content">
+						<div class="content_inStory_content_fl">
+							<div class="content_inStory_img" plateid="307">
+								<img src="https://mp-seoul-image-production-s3.mangoplate.com/1848521_1607416850525787.jpg?fit=around|*:*&crop=*:*;*,*&output-format=jpg&output-quality=80"/>
+							</div>
+							<div class="content_inStory_areaAndName" plateid="307">
+								<p id="content_inStory_area">성남시</p>
+								<p id="content_inStory_Name">솔밭삼겹살해장국</p>
+							</div>
+						</div>
+						<div class="content_inStory_content_fr">
+							<div class="content_inStory_wannago">
+								<img src="Images/img_WannagoIcon.svg"/>
+							</div>
+						</div>
+					</div>
+					<div class="content_inStory_content">
+						<div class="content_inStory_content_fl">
+							<div class="content_inStory_img" plateid="307">
+								<img src="https://mp-seoul-image-production-s3.mangoplate.com/1848521_1607416850525787.jpg?fit=around|*:*&crop=*:*;*,*&output-format=jpg&output-quality=80"/>
+							</div>
+							<div class="content_inStory_areaAndName" plateid="307">
+								<p id="content_inStory_area">성남시</p>
+								<p id="content_inStory_Name">솔밭삼겹살해장국</p>
+							</div>
+						</div>
+						<div class="content_inStory_content_fr">
+							<div class="content_inStory_wannago">
+								<img src="Images/img_WannagoIcon.svg"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="content_moreView">
+					<h3>다른 스토리 더 보기</h3>
+					<div class="content_moreView_item" storyid="153">
+						<div> <!-- style="float:left;" -->
+							<div class="content_moreView_item_img" style="background-image:url(https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/full/o_q5otjup1ixpv.png?fit=around|412:216&crop=412:216;*,*&output-format=jpg&output-quality=80)">
+								<!-- <img src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/full/o_q5otjup1ixpv.png?fit=around|412:216&crop=412:216;*,*&output-format=jpg&output-quality=80"/> -->
+							 </div>
+							 <div class="content_moreView_item_title">
+								<span>크리스마스 데이트 맛집 6곳</span>
+							 </div>
+						 </div>
+					</div>
+					<div class="content_moreView_item" storyid="154">
+						<div>
+							<div class="content_moreView_item_img" style="background-image:url(https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/full/y26_h4xesgckf7.png?fit=around|412:216&crop=412:216;*,*&output-format=jpg&output-quality=80)">
+							 </div>
+							 <div class="content_moreView_item_title">
+								<span>뜨끈한 국물 요리 맛집 추천 8곳</span>
+							 </div>
+						 </div>
+					</div>
+					<div class="content_moreView_item" storyid="146">
+						<div>
+							<div class="content_moreView_item_img" style="background-image:url(https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/full/ewhmnlgbknwmnv.png?fit=around|412:216&crop=412:216;*,*&output-format=jpg&output-quality=80)">
+							</div>
+							<div class="content_moreView_item_title">
+								<span>에디터의 인생 마라 요리 6곳</span>
+							</div>
+						 </div>
+					</div>
+					<div class="content_moreView_item" storyid="147">
+						<div>
+							<div class="content_moreView_item_img" style="background-image:url(https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/full/lhaluzpwyhl9dt.png?fit=around|412:216&crop=412:216;*,*&output-format=jpg&output-quality=80)">
+							</div>
+							<div class="content_moreView_item_title">
+								<span>연말 모임 장소 추천 7곳</span>
+							</div>
+						 </div>
+					</div>
+					<div class="content_moreView_item" storyid="148">
+						<div>
+							<div class="content_moreView_item_img" style="background-image:url(https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/full/q4rlqsszaioyd3.png?fit=around|412:216&crop=412:216;*,*&output-format=jpg&output-quality=80)">
+							</div>
+							<div class="content_moreView_item_title">
+								<span>현지인 추천 울산 맛집 8곳</span>
+							</div>
+						 </div>
+					</div>
+					<div class="content_moreView_item" storyid="152">
+						<div>
+							<div class="content_moreView_item_img" style="background-image:url(https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/full/iiwjnl_y0l2dbb.png?fit=around|412:216&crop=412:216;*,*&output-format=jpg&output-quality=80)">
+							</div>
+							<div class="content_moreView_item_title">
+								<span>성시경 먹을텐데 국밥/탕 맛집 10곳</span>
+							</div>
+						 </div>
+					</div>
+					<div style="clear:both;"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- //////////////////////////푸터 시작/////////////////////////////////////////////////////////////////////////////// -->
+	<div id="div_footer"><!-- footer: 하단 영역 (회사소개 등등) -->
+		<div class="footer_inner">
+			<div class="footer_mango_logo fl"><!-- footer_inner > div.nth-child(1) > div.nth-child(1) -->
+				<img src="Images/white_mango_logo.svg"/>
+				<p class="footer_mango_logo_subtitle">Eat, Share, Be Happy.</p>
+			</div>
+			<div class="fl"><!-- footer_inner > div.nth-child(1) > div.nth-child(2) -->
+				<a>회사소개</a>
+				<a>망고플레이트 채용</a>
+				<a>투자 정보</a>
+				<a>브랜드 가이드라인</a>
+				<a>망고플레이트 비즈니스</a>
+				<a>광고 문의</a>			
+			</div>
+			<div class="fl"><!-- footer_inner > div.nth-child(1) > div.nth-child(3) -->
+				<a>공지사항</a>
+				<a>이용약관</a>
+				<a>비회원 이용자 이용정책</a>
+				<a class="footer_bold">개인정보처리방침</a>
+				<a>위치기반서비스 이용약관</a>
+				<a>커뮤니티 가이드라인</a>
+				<a>청소년보호정책</a>
+				<a>홀릭 소개</a>
+				<a>문의하기</a>
+			</div>
+			<div class="fr"><!-- footer_inner > div.nth-child(1) > div.nth-child(4) -->
+				<img src="Images/facebook.png"/>
+				<img src="Images/instagram.png"/>			
+			</div>
+			<div style="clear:both;"></div>
+		</div>
+		<div class="footer_inner"><!-- footer_inner > div.nth-child(2) -->
+			인기지역 : 
+			<a>이태원</a> | <a>홍대</a> | <a>강남역</a> | <a>가로수길</a> | <a>신촌</a> | <a>명동</a> | <a>대학로</a> | <a>연남동</a> 
+		  	| <a>부산</a> | <a>합정</a> | <a>대구</a> | <a>여의도</a> | <a>건대</a> | <a>광화문</a> | <a>일산</a> | <a>제주</a> 
+		  	| <a>경리단길</a> | <a>한남동</a> | <a>삼청동</a> | <a>대전</a> | <a>종로</a> | <a>서촌</a> | <a>잠실</a> | <a>사당역</a> 
+		  	| <a>인천</a> | <a>코엑스</a> | <a>상수</a> | <a>서래마을</a> | <a>송도</a> | <a>왕십리</a> | <a>분당</a> | <a>혜화</a> | <a>고속터미널</a>
+		</div>
+		<div class="footer_inner"><!-- footer_inner > div.nth-child(3) -->
+			<div class="fl">
+				<p>㈜ 여기어때컴퍼니<br>서울특별시 강남구 봉은사로 479, 479타워 11층<br>대표이사: 정명훈<br>사업자 등록번호: 742-86-00224 
+				<a class="footer_bold_small">[사업자정보확인]</a>
+				<br>통신판매업 신고번호: 2017-서울강남-01779<br>고객센터: 02-565-5988<br><br>
+	          	<span class="copyrights">© 2022 MangoPlate Co., Ltd. All rights reserved.</span>
+        		</p>
+          	</div>
+          	<div class="fr">
+          		<a id="footer_selected">한국어</a>  <a>English</a>  <a>简体中文</a>
+          	</div>
+		</div>
+	</div>
+	<!-- //////////////////////////푸터 끝/////////////////////////////////////////////////////////////////////////////// -->
+</body>
+</html>

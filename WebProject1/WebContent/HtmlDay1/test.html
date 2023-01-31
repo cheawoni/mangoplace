@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="kr"> <!-- 돌아가는 언어가 무엇인지 알려줌 -->
+<head>
+	<link 
+	rel="shorucut icon" 
+	href="https://nomadcoders.co/m.png"
+	/>
+	<meta charset="UTF-8">
+	<meta name="description" content="This is my website"/>
+	<title>Home - My  first Website.</title>
+	<style>
+		* {
+		border: 1px solid black;
+		}
+		h1 {
+			color: blue;
+			font-size:20px;
+		}
+		h2 {
+			color: yellowgreen;
+			text-decoration: underline;
+			font-weight: 1200;
+			font-style: italic;
+			font-size:15px;
+		}
+		address {
+			text-aline: center;
+			color: tomato;
+		}
+		html {
+			background-color: tomato;
+		}
+		body {
+			height:100vh; /*아이폰,맥,또는 그것보다 큰 화면에서 모두 크기가 다르다*/
+			margin: 0;
+			padding: 20px 10px;
+			background-color: thistle;
+			/*display: flex // 너비를 최대로 맞춰줌;
+			justify-content: space-between; //주축
+			flex-dirextion: column; //주축과 교차축을 바꿔줌.
+			align-items: center; // 교차축 
+			flex-wrap: nowrap; // 한줄에 들어갈수 있도록 조정해줌*/
+		}
+		div {/*div는 box다 box의 특징 3가지:magin,padding,border*/
+			/*display: inline; /*inline은 높이와 너비가 없다.*/
+			padding: 10px;
+			height:150px;
+			width:150;
+			background-color: whitesmoke;
+			position: relative; /*absolute의 부모 relative로 지정해줄수 있음.*/
+		}
+		
+		span {/*inline은 box가 아님*/
+			display: block; /*--inline->block으로 바꿔줌*/
+			background-color: turquoise;
+		}
+		div > #first {
+			background-color: whitesmoke;
+		}
+		#second {
+			background-color: teal;
+		}
+		#third {
+			background-color: wheat;
+		}
+		#fourth{
+			background-color: blanchedalmond;
+		}
+		span {
+			border-style: dotted;
+			background-color: teal;
+			padding: 20px;
+		}
+		.tomato{
+			background-color: tomato;
+			color: white;
+			padding: 5px 10px;
+			border-radius: 10px;
+		}
+		#different {
+			top: 5px;
+			left: 200px;
+			position: fixed;	/*고정시킴*/
+			background-color: wheat;
+			width:350px;
+		}
+		#green {
+			opacity:0.2;/*투명하게 만들어줌*/
+		}
+		.hello {
+			background-color: yellow;
+			height:100px;
+			width: 100px;
+			/*position: relative; /*자리를 아주 조금 옮기고 싶을때*/
+			position: absolute; /*가장 가까운 relative 부모를 기준으로 이동시켜준다. .hello의 상대적인 부모는 body*/
+			top: -10px; /*처음 위치한 곳 기준*/
+			left:-10px;
+		}
+		span:nth-child(even) { /*span에 들어있는 nth-child()괄호 안에 값을 넣어줌. even:짝수, 2n:짝수, 2n+1:홀수개, 3n+1:3개씩*/
+			background-color: teal;
+		}
+		div > span { /*div > span : div 바로 밑에 자식중 span에만 적용*/
+			text-decoration: underline;
+		}
+		p + span { /*p + span: p안에 있는 span이 아니라 p다음으로 오는 span을 찾음(형제)*/
+			text-decoration: underline;
+		}
+		p ~ span { /*p ~ span: p의 형제인데 바로 뒤에 오지 않을 때 쓸 수 있는게 ~ 이다.*/
+			text-decoration: underline;
+		}
+		input {	/* 모든 input에 적용*/
+			border: 1px solid wheat;
+		}
+		input:required {	/*input에 required가 있다면 */
+			border-color: tomato;
+		}
+		input[placeholder~="name"] { /*대괄호로 바로 넣어줄수도 있음. ~=: placeholder에 "name"이라는 단어를 포함한 모든 input이 배경색을 가지게 만들어봐라.*/
+			background-color: thistle;
+		}
+		input[placeholder$=".org"] { /* $=: placeholder에 ".org"이라는 단어로 끝나면 input이 배경색을 가지게 만들어봐라. 여러가지 selector를 지정할수 있음.*/
+			background-color: brown;
+		}
+		button:active{ /* 검사->스타일스->:hov 에서 볼수있음. 클릭시 바탕색을 보여줌*/
+			background-color: tomato;
+		}
+		button:hover{ /* 클릭전 마우스를 올리면 배경색을 보여줌*/
+			background-color: tomato;
+		}
+		button:focus{ /* 키보드로 선택시 배경색을 보여줌*/
+			background-color: tomato;
+		}
+		a:visited{ /* 링크를 클릭했을 경우 배경색을 보여줌*/
+			color: red;
+		}
+		form { /*focus-within은 focused인 자식을 가진 부모 엘리먼트에 적용된다.*/
+			border: 1px solid salmon;
+			display: flex;
+			flex-direction: column;
+			padding: 20px;
+		}
+		form:focus-within { /*within:안쪽, form 엘리먼트 안에 input들 중 하나가 focused가 되면 form의 모습을 바꾼다.*/
+			border-color: seagreen;
+		}
+		form:hover input {	/*form이 hover가 되어있고 그 안에 input이 있을 때 적용될거야*/
+			background-color: sienna;		
+		}
+		form:hover input:focus {	/*input:focus 그리고 input에 focus이면 적용*/
+			background-color: sienna;		
+		}
+		input::placeholder{ /*placeholder안에 들어가는 스타일을 꾸며줄때 ::*/
+			color:yellowgreen;
+		}
+		p::selection { /*글씨를 드래그 했을 경우 바탕색을 바꿔줌.*/
+			color: white;
+			background-color: yellowgreen;
+		}
+		p::first-letter { /*첫번째 글자만 바꿔줌.*/
+			color: white;
+			background-color: yellowgreen;
+		}
+		:root{ /*뿌리가 되는 변수를 선언, 어떤 사이트에서 적용되는지 보고싶으면 css custom properties 구글링(인터넷익스플로러에서는 안됨.)*/
+			--main-color: #fcce00; /*메인 컬러를 지정. 하나씩 안써도 됨.*/
+			--default-border: 1px solid var(--main-color);
+		}
+		p {	/*컬러에 root에 지정해둔 메인컬러를 바로 불러올수 있음.*/
+			background-color: var(--main-color); /*var:베리어블*/
+		}
+		a {
+			color: var(--main-color);
+			border: var(--default-border);
+		}
+	</style>
+</head> 
+<body>
+	<p>
+		Lorem ipsum dolor sit amet consectetur dslakjflaskjflskaj
+	</p>
+	<form>
+	<input type="text" name="" id=""/>
+	<input type="text" name="" id=""/>
+	<input type="text" name="" id=""/>
+	</form>
+	<a href="http://apple.com">Go to apple</a>
+	<span class="tomato" id="green">hello</span>
+	<span>hello</span>
+	<span class="tomato hello honey potato">hello</span> <!-- class를 여러개 가질수도 있음 -->
+	<span>hello</span>
+	<span class="tomato" id="different">hello</span>
+	<span>hello</span>
+	<div>a</div><!-- 한줄전체를 차지 -->
+	<div id="first">
+		<div id="second">
+			<div id="third">
+				<div id="tourth">
+				<span>hello</span>
+				<span>hello</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div></div>
+	<span>hello</span><!-- content까지만 차지 -->
+	<span>hello</span>
+	<span>hello</span>
+	<a href="#">link</a>
+	<span>hello</span>
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.Modi, aliquid. Placeat dsakljflskajfklasdjlfkjsafl</p>
+	<span>hello</span>
+	<img src="Images/img_logo.png"/>
+	<span>hello</span>
+	<ol>
+		<li>beer</li>
+		<li>김치</li>
+		<li>meat</li>
+		<li>milk</li>
+	</ol>
+	<a href="http://www.google.com" target="_blank">Go to google.com</a>
+	<img src="https://img.wkorea.com/w/2022/05/style_628aed0a312af-768x768.jpg"
+	/>
+	<img src="Images/img_logo.png" />
+	<p>My name is <abbr title="Jang Chae Won">JCW</abbr></p>
+	<cite>Hello!</cite>
+	<p>I like to live in <mark>South Korea</mark></p>
+	<p>2<sup>5</sup></p>
+	<form>
+		<header><!-- div를 대체, website의 머릿글-->
+			<h1>Chae Won</h1>
+			<h2>jang</h2>
+		</header>
+		<main><!-- 메인글 -->
+			<p></p><!-- p: 문단 text -->
+			<span>hello!</span>		<!-- span: 짧은 text -->
+			<address>123 rode mapo</address>
+		</main>
+		<footer><!-- 꼬릿글 -->
+			&copy; 2022 C.W
+		</footer>
+		<div><!-- 분할,구분,경계선 아무런 값도 없는 박스 밑으로 전개 -->
+			<label for="profile">Profile Photo</label>
+			<input id="profile" type="file" accept="image/*,.pdf"/> <!-- 파일을 올릴수있음 .png:png파일만 image/*모든이미지다올림 ,.pdf한개이상씩도 설정가능 -->
+		</div>
+		<div>
+			<label for="first-name">First Name</label> <!-- First Name글자를 클릭하면 해당 id값이 자동으로 연결됨 -->
+			<input id="first-name" required placeholder="Name" type="text" /> <!-- required:반드시 입력해야된다는 창을 띄워줌 다입력해야 넘어감 -->
+			<input placeholder="Last Name" disabled type="text" /> <!-- disabled: 클릭할수 없게 만듬 -->
+		</div>
+		<div>									<!-- 여러가지 type으로 바꿀수있음 -->
+			<input required placeholder="Username" type="text" />
+			<input required placeholder="password" minlength="10" type="password" /> <!-- minlength:10글자이상이 되야됨 -->
+			<input type="submit" value="Create Account" /><!-- submit:새로고침창 어딘가로 창이 이동하는 버튼, value:이름을 바꿔줌 -->
+		</div>
+	</form>
+</body>
+</html>

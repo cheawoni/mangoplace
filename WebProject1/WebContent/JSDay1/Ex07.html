@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!-- (JS) "유효성체크" // 아이디는 8글자 이상~, ... (구글링-정규표현식) -> 로그인 버튼 :submit, 바로 넘어가지 않고 유효성을 체크해줌.
+	Ex07.html
+	응답코드 500 : 무조건 니잘못.(ex.예외처리안했다던지..)
+	응답코드 404 : url not found.
+	응답코드 200 : 성공. 정상.
+-->
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+	<script>
+		function check() {
+			// 유효성체크(가정): (1) 아이디는 8글자 이상일 것.
+			//				 (2) 패스워드는 영문자로 시작할 것.
+			// 만약에 무슨 문제가 있으면, return false;
+			var str_id = $("#id").val();
+			var str_pw = $("pw").val();
+			var ch = str_pw.charAt(0)
+			//alert("아이디 문자열 길이 : " + str_id.length);
+			if(str_id.length < 8) {
+				alert('아이디는 8글자 이상 입력하세요.')
+				return false;	// 값을 return 시켜주고 메서드 실행 종료.
+			}
+			/* if(str_pw.charAt(0)>='A' && str_pw.charAt(0)<='Z') ||		
+			if(str_pw.charAt(0)>='a' && str_pw.charAt(0)<='z') ) {		// 대문자이거나 소문자
+				
+			}		 */
+			if( !((ch>='A' && ch<='Z') || (ch>='A' && ch<='Z')) ) {		// 짧게 바꿔줌.
+				alert("패스워드는 영문자로 시작해야 합니다!");
+				return false;
+			}	
+			return true;	// 그 함수를 호출한 실행문을 리턴값으로 바꾼다.
+		}
+	</script>
+</head>
+<body>
+	<form action="Ex07p2.html"> <!-- HTTP 상태 404 – 찾을 수 없음: response(응답) 응답코드 404 -> url이 잘못됨.(not found)그 경로에 파일이 없음. -->
+		ID : <input type="text" name="id" id="id"/> <br/> <!-- name이 하는 일: "파라미터 이름"으로 submit으로 넘어감. .html?id=yg&pw=1234 name으로 적어줘야 맞음-->
+		PW : <input type="text" name="pw" id="pw"/> <br/> <!-- id가 하는 일: id라는건 암묵적으로 바디태그 안에서 딱 하나만 존재해야되기 때문에 id로 쓰지 않음 -->
+		<input type="submit" value="로그인" onclick="return check();"/><!-- submit버튼한테 onclick으로 return false를 줘서 넘어가지 않음. -->
+	</form>
+</body>
+</html>

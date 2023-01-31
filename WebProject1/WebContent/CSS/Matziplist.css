@@ -1,0 +1,667 @@
+		* { font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', 'Sans-serif'; }
+		
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		/* body > header {
+			width: 1903px;
+			height: 61px;
+			z-index: 900;
+			position: relative;
+		}
+		body > header > .header {
+			position: fixed;
+			width: 100%;
+			height: 61px;
+			border-bottom: 1px solid #dbdbdb;
+			box-sizing: border-box;
+			box-shadow: 0 4px 11px rgb(0 0 0 / 10%);
+			background-color: #FFFFFF;
+			z-index: 900;
+		}
+		body > header > .header > .fl > #logo {
+			margin: 13px 25px 10px;
+			cursor: pointer;
+		}
+		body > header > .header > .fl > #search {
+			margin: -20px 8px 7px 16px;
+		}
+		body > header > .header > .searchinput {
+			width: 1213px;
+			height: 27px;
+			font-weight: 300;
+			margin: 18px 0 0;
+		}
+		body > header > .header > .fr > .right {
+			width: 86px;
+			height: 60px;
+			border-left: 1px solid #dbdbdb;
+		}
+		body > header > .header > .fr > .right > #profile {
+			width: 34px;
+			height: 34px;
+			border-radius: 34px;
+			margin: 13px 26px;
+			cursor: pointer;
+		}
+		body > header > .header > .fr > .eatdeal,
+		body > header > .header > .fr > .matziplist,
+		body > header > .header > .fr > .mangostory {
+			width: 128px;
+			border-left: 1px solid #dbdbdb;
+			height: 40px;
+			text-align: center;
+			vertical-align: center;
+			padding-top: 20px;
+			color: #888;
+			cursor: pointer;
+		}
+		body > header > .header > .fr > .eatdeal > span:after {
+			content: '';
+			position: absolute;
+			top: -8px;
+			right: -11px;
+			display: block;
+			width: 15px;
+			height: 15px;
+			background-image: url( https://mp-seoul-image-production-s3.mangoplate.com/web/resources/uo3o88vopcmdsket.png);
+			background-size: cover;
+		}
+		body > header > .header > .fl > .searchinput {
+			height: 27px;
+			font-size: 16px;
+			width: 658px;
+			border: none;
+			outline: none;
+			padding: 16px 0 0 0;
+		}
+		body > .keywordsuggester {
+			display: none;
+		}
+		body > .keywordsuggester > .keywordsuggester_black {
+			display: none;
+			position: fixed;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			z-index: 890;
+			background-color: rgba(0, 0, 0, 0.8);
+		}
+		body > .keywordsuggester > .keywordsuggester_container {
+			top: 61px;
+			left: 214px;
+			position: fixed;
+			z-index: 1100;
+			width: 660px;
+			border: 3px solid #fff;
+			border-top: 0;
+			border-radius: 0 0 3px 3px;
+			box-sizing: border-box;
+			background-color: #fff;
+			display: flex;
+		}
+		body > .keywordsuggester > .keywordsuggester_container > .keywordsuggester_navigation {
+			padding: 0 24px;
+			width: 100%;
+			display: block;
+		}
+		body > .keywordsuggester > .keywordsuggester_container > .keywordsuggester_navigation > .keywordsuggester_list {
+			width: 100%;
+			height: 50px;
+			display: flex;
+			list-style: none;
+			border-bottom: 1px solid #dbdbdb;
+		}
+		body > .keywordsuggester > .keywordsuggester_container > .keywordsuggester_navigation > .keywordsuggester_list > .list_item {
+			display: flex;
+			line-height: 100%;
+			width: 100%;
+			height: 100%;
+		}
+		body > .keywordsuggester > .keywordsuggester_container > .keywordsuggester_navigation > .keywordsuggester_list > .list_item > .keywordsuggester_button {
+			display: flex;
+			position: relative;
+			width: 100%;
+			height: 100%;
+			line-height: 100%;
+			color: #7f7f7f;
+			cursor: pointer;
+			justify-content: center;
+			align-items: center;
+		}
+		body > .keywordsuggester > .keywordsuggester_container > .keywordsuggester_navigation > .keywordsuggester_list > .list_item > .keywordsuggester_button_selected {
+			color: #ff7100;
+		}
+		body > .keywordsuggester > .keywordsuggester_container > .keywordsuggester_navigation > .keywordsuggester_list > .list_item > .keywordsuggester_button_selected:after {
+			content: '';
+			position: absolute;
+			bottom: -1px;
+			left: 0;
+			width: 100%;
+			height: 3px;
+			background-color: #ff7100;
+		}
+		body > .keywordsuggester > .keywordsuggester_container > .keywordsuggester_navigation > .suggestkeywordlist {
+			display: flex;
+			min-height: 0;
+			padding: 0 24px;
+			max-height: 250px;
+			width: 100%;
+			margin-left: -24px;
+			overflow: hidden;
+		}
+		.suggestkeywordlist::-webkit-scrollbar-track {
+			-webkit-box-shadow: inset 0 0 7px rgba(0,0,0,0.0);
+			border-radius: 10px;
+			background-color: #fff;
+		}
+		.suggestkeywordlist::-webkit-scrollbar {
+			width: 7px;
+			background-color: #f5f5f5;
+		}
+		.suggestkeywordlist::-webkit-scrollbar-thumb {
+			-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+			border-radius: 7px;
+			background-color: #808080;
+		}
+		body > .keywordsuggester > .keywordsuggester_container > .keywordsuggester_navigation > .suggestkeywordlist > .recommended_search {
+			list-style: none;
+			color: #7f7f7f;
+			width: 100%;
+		}
+		body > .keywordsuggester > .keywordsuggester_container > .keywordsuggester_navigation > .suggestkeywordlist > .recommended_search > li {
+			padding: 20px 0;
+			border-bottom: 1px solid #dbdbdb;
+			font-size: 14px;
+			cursor: pointer;
+		}
+		body > .keywordsuggester > .keywordsuggester_container > .keywordsuggester_navigation > .suggestkeywordlist > .recommended_search > li > .little_search_icon {
+			background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/2018022864551sprites_desktop.png);
+			background-position: -974px -752px;
+			width: 17px;
+			height: 17px;
+			margin: 0 12px 0 7px;
+			display: inline-block;
+			vertical-align: middle;
+		}
+		body > .keywordsuggester > .keywordsuggester_container > .keywordsuggester_navigation > .suggestkeywordlist > .popular_search {
+			display: none;
+			list-style: none;
+			color: #7f7f7f;
+			width: 100%;
+		}
+		body > .keywordsuggester > .keywordsuggester_container > .keywordsuggester_navigation > .suggestkeywordlist > .popular_search > li {
+			padding: 20px 0;
+			border-bottom: 1px solid #dbdbdb;
+			font-size: 14px;
+			cursor: pointer;
+		}
+		body > .keywordsuggester > .keywordsuggester_container > .keywordsuggester_navigation > .suggestkeywordlist > .popular_search > li > .little_search_icon {
+			background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/2018022864551sprites_desktop.png);
+			background-position: -974px -752px;
+			width: 17px;
+			height: 17px;
+			margin: 0 12px 0 7px;
+			display: inline-block;
+			vertical-align: middle;
+		} */
+		
+		
+		#div_header {   /* 망고 헤더부분 로고,검색기능 등등... */
+         position: fixed;
+         border-bottom: 1px solid #DBDBDB;
+         box-shadow: 0 4px 11px rgb(0 0 0 / 10%);
+         background-color: #FFFFFF;
+         box-sizing: border-box;
+         width: 100%;
+         height: 61px;
+         top: 0;
+         left: 0;
+         /* padding: 14px; */
+         margin-left: 0;
+         z-index: 1000;
+	      }
+	      #img_logo {      /* (1)헤더 망고플레이트 로고 */
+	         margin-left: 23px;
+	         margin-top: 13px;
+	         width: 100px;
+	         height: 33px;
+	         cursor: pointer;
+	      }
+	      #img_search {   /* (2)헤더 서치아이콘 로고 */
+	         margin-left: 40px;
+	         margin-top: 11px;
+	         height: 37px;
+	         margin-right: 5px;
+	         background-size: auto;
+	      }
+	      body > #div_header > div.fr {   /* (헤더 오른쪽 기능) fr 클래스에 왼쪽 선 추가*/
+	         padding: 0;
+	         margin: 0;
+	         position: relative;
+	         font-size: 16px;
+	         color: #888888;
+	         height: 100%;
+	         border-left: 1px solid #dbdbdb;   /* 왼쪽 선 추가 */
+	         cursor: pointer;
+	      }
+	      body > #div_header > div:nth-child(2) > label {      /* (2)헤더 왼쪽 서치아이콘 */
+	         margin-top: -35px;
+	         display: block;
+	         margin-left: 95px;
+	      }
+	      body > #div_header > div:nth-child(2) > label > input[type='text'] {   /* 헤더 검색 기능 안에 들어올 text */
+	         height: 27px;
+	         border-color: transparent;
+	         outline: none;
+	         font-size: 16px;
+	         margin-left: -10px;
+	         margin-top: -5px;
+	      } 
+	      body > #div_header > div:nth-child(2) > label > input[type='text']::placeholder {   /* 헤더 검색 기능 placeholder의 스타일적용 */
+	         color: #7f7f7f;
+	         font-weight: 400;
+	      }
+	      body > #div_header > div:nth-child(3) {   /* (3)헤더 오른쪽 유저아이콘 */
+	         line-height: 16px;
+	         width: 85px;
+	         text-align: center;
+	      }
+	      body > #div_header > div:nth-child(3) > img {   /* 유저아이콘 이미지 */
+	         width: 59px;
+	         margin-top: 6px;
+	      }
+	      body > #div_header > div:nth-child(4) { /* (4)헤더 오른쪽 망고스토리 아이콘 */
+	         width: 129px;
+	         text-align: center;
+	      }
+	      body > #div_header > div:nth-child(4) > span { /* 망고 스토리 글씨*/
+	         display: block;
+	         margin-top: 22px;
+	         line-height: 16px;
+	      }
+	      body > #div_header > div:nth-child(5) { /* (5)헤더 오른쪽 맛집 리스트 아이콘 */
+	         line-height: 16px;
+	         width: 129px;
+	         text-align: center;
+	      }
+	      body > #div_header > div:nth-child(5) > span { /* 맛집 리스트 글씨*/
+	         display: block;
+	         margin-top: 22px;
+	         line-height: 16px;
+	      }
+	      body > #div_header > div:nth-child(6) { /* (6)헤더 오른쪽 EAT딜 아이콘 */
+	         width: 129px;
+	         text-align: center;
+	      }
+	      .header_right_new::after {
+	         content: '';
+	         position: absolute;
+	         top: 11px;
+	         right: 32px;
+	         display: block;
+	         width: 15px;
+	         height: 15px;
+	         background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/uo3o88vopcmdsket.png);
+	         background-size: cover;
+	      }
+	      body > #div_header > div:nth-child(6) > span { /* 망고 스토리 글씨 */
+	         display: block;
+	         margin-top: 22px;
+	         line-height: 16px;
+	      }
+	      .fl { 
+	         float:left;
+	      }
+	      .fr { 
+	         float:right;
+	      }
+	      /* 인기검색어 팝업창 시작*/
+	      .input_search_keyword_open {
+	        display: block;
+	      }
+	      .input_search_keyword:not(.open) {
+	        display: none;
+	      }
+	      .input_search_backgroundDark {
+	        display : block;
+	        /* display: none;  input_search_open이 되면 none으로 바뀜.*/
+	        position: fixed;
+	        top: 0;
+	        left: 0;
+	        z-index: 890;
+	        width: 100%;
+	        height: 100%;
+	        background-color: rgba(0,0,0,0.8);
+	      }
+	      .input_search_content {
+	        position: fixed;
+	        top: 61px;
+	        left: 214px;
+	        z-index: 1100;
+	        width: 660px;
+	        border: 1px solid #DBDBDB;
+	        border-top: 0;
+	        border-radius: 0 0 3px 3px;
+	        box-sizing: border-box;
+	        background-color: #FFFFFF;
+	      }
+	      .input_search_content_inner {
+	        padding: 0 24px;
+	      }
+	      .input_search_content_list {
+	        display: flex;
+	        flex-wrap: nowrap;
+	        justify-content: space-around;
+	        align-items: center;
+	        height: 50px;
+	        position: relative;
+	        width: 100%;
+	        border-bottom: 1px solid #DBDBDB;
+	        font-size: 16px;
+	        color: #7F7F7F;
+	      }
+	      .input_search_content_keywordList {
+	         display: flex;
+	        padding: 0px 5px;
+	        height: 60px;
+	        align-items: center;
+	         border-bottom: 1px solid #DBDBDB;
+	         cursor: pointer;
+	      }
+	      .keywordList_item_img {
+	           background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/2018022864551sprites_desktop.png);
+	           background-position: -974px -747px;
+		       width: 30px;
+		       height: 25px;
+	      }
+	      .input_search_keywordList_item {
+	           font-size: 14px;
+	           color: #7F7F7F;
+	           height: 18px;
+	      }
+	      .keywordListWrap_inner {
+	        height: 250px;
+	        overflow: hidden;
+	        width: 100%;
+	        padding: 0px 25px 0px 0px;
+	      } 
+	      .keywordListWrap_inner::-webkit-scrollbar-track {
+	         background-color: #fff;
+	      }
+	      .keywordListWrap_inner::-webkit-scrollbar {
+	         width: 7px;
+	         background-color: #f5f5f5;
+	      }
+	      .keywordListWrap_inner::-webkit-scrollbar-thumb {
+	         border-radius: 7px;
+	         background-color: #808080;
+	      }
+	      .inputSearchItem_tapButton-selected:after {
+	          content: '';
+	          position: absolute;
+	          bottom: -1px;
+	          left: 0;
+	          width: 100%;
+	          height: 3px;
+	          background-color: #ff7100;
+	      }
+	      .input_search_item_inner {
+	          display: flex;
+	          justify-content: center;
+	          width: 100%;
+	          height: 100%;
+	             align-items: center;
+	      }
+	      .input_search_item {
+	          display: flex;
+	          position: relative;
+	          justify-content: center;
+	          align-items: center;
+	          width: 100%;
+	          height: 100%;
+	          cursor: pointer;
+	      }
+	      .input_search_keywordList_item_none {
+	         display: flex;
+	          justify-content: center;
+	          height: 77px;
+	          width: 100%;
+	          align-items: center;
+	      }
+		
+		
+		
+		body > .main {
+			/* width: 1903px; */
+			min-height: 3153.640px;
+			padding: 100px 0 40px 0;
+			background-color: #f7f7f7;
+			margin: 0 auto;
+		}
+		body > .main > .inner {
+			width: 1200px;
+			min-height: 3153.640px;
+			margin: 0 auto;
+			line-height: 100%;
+		}
+		body > .main > .inner > h1 {
+			color: #ff792a;
+			line-height: 27.6096px;
+			font-size: 23.008px;
+			font-weight: 400;
+			margin: 0;
+		}
+		body > .main > .inner > a {
+			text-decoration: none;
+			margin: 15px 3px 0 3px;
+			padding: 0 20px;
+			font-size: 15.008px;
+			line-height: 38px;
+			letter-spacing: 0em;
+			background-color: #fff;
+			border-radius: 50px;
+			display: inline-block;
+			border: 1px solid #cbcbcb;
+			color: #6a6a6a;
+			font-weight: 400;
+		}
+		body > .main > .inner > a.on {
+			color: #ff792a;
+			border: 1px solid #ff702a;
+		}
+		body > .main > .inner > .list > .left_list {
+			width: 585px;
+			height: 267.703px;
+			margin-top: 32px;
+			position: relative;
+			cursor: pointer;
+			float: left;
+		}
+		body > .main > .inner > .list > .left_list > .inner {
+			background-color: rgba(0, 0, 0, 0.2);
+			width: 585px;
+			height: 267.6px;
+			position: absolute;
+		}
+		body > .main > .inner > .list > .right_list {
+			width: 585px;
+			height: 267.703px;
+			margin-top: 32px;
+			margin-left: 14px;
+			position: relative;
+			cursor: pointer;
+		}
+		body > .main > .inner > .list > .right_list > .inner {
+			width: 585px;
+			height: 267.6px;
+			background-color: rgba(0,0,0,0.2);
+			position: absolute;
+			/* background-size: cover;
+			background-position: 50% 50%;
+			text-align: center; */
+		}
+		body > .main > .inner > .list > .right_list > #list_item {
+			/* top: 50%;
+			left: 50%;
+			position: absolute;
+			top: 50%;
+			left: 50%; */
+		}
+		body > .main > .inner > .list > .right_list > div:not(.inner) {
+			/* position: relative; */
+			text-align: center;
+			padding-top: 100px;		
+			position: absolute;
+		    top: 0;
+		    left: 0;
+	        width: 100%;
+		    z-index: 3;
+		}
+		body > .main > .inner > .list > .right_list > div > .title {
+			font-size: 32px;
+			line-height: 34px;
+			color: #ffffff;
+			text-shadow: 1px 1px 2px rgb(0 0 0 / 40%);
+			margin-top: 100px;
+		}
+		body > .main > .inner > .list > .right_list > div > .ment {
+			font-size: 19.2px;
+			line-height: 23.04px;
+			color: #ffffff;
+			margin-top: 10px;
+		    text-shadow: 1px 1px 2px rgb(0 0 0 / 40%);
+		    display: block;
+		    font-weight: 400;
+		}
+		body > .main > .inner > .list > .left_list > div:not(.inner) {
+			/* position: relative; */
+			text-align: center;
+			padding-top: 100px;
+			position: absolute;
+		    top: 0;
+		    left: 0;
+	        width: 100%;
+		    z-index: 3;
+		}
+		body > .main > .inner > .list > .left_list > div > .title {
+			font-size: 32px;
+			line-height: 34px;
+			color: #ffffff;
+			text-shadow: 1px 1px 2px rgb(0 0 0 / 40%);
+			margin-top: 100px;
+		}
+		body > .main > .inner > .list > .left_list > div > .ment {
+			font-size: 19.2px;
+			line-height: 23.04px;
+			color: #ffffff;
+			margin-top: 10px;
+		    text-shadow: 1px 1px 2px rgb(0 0 0 / 40%);
+		    display: block;
+		    font-weight: 400;
+		}
+		.footer {
+			width: auto;
+			height: 740px;
+			background-color: #3e3e3e;
+		}
+		.footer > .inner {
+			margin: 0 auto;
+		    padding: 65px 0 0 0;
+		    width: 1200px;
+		    height: 673px;
+		}
+		.footer > .inner > .mango {
+			display: inline-block;
+			margin-right: 168px;
+			width: 137.33px;
+			height: 104.31px;
+		}
+		.footer > .inner > .mango > .fl {
+			width: 137.33px;
+			height: 45.31px;
+		}
+		.footer > .inner > .mango > .fl > #mangologo {
+			width: 137.33px;
+			height: 45.31px;
+			margin-top: 2px;
+			cursor: pointer;
+		}
+		.footer > .inner > .mango > .ment {
+			height: 16px;
+			margin: 5px 0 0;
+		    padding-top: 7px;
+		    font-size: 14px;
+		    color: #6a6a6a;
+		}
+		.footer > .inner > .list {
+			width: 307px;
+			height: 315px;
+			margin: -5px 0 18px;
+			color: #9b9b9b;
+			font-size: 16px;
+			line-height: 20px;
+		}
+		.footer > .inner > .list > p {
+			margin: 15px 0;
+		}
+		.footer > .inner > .rightsns > .fr {
+			width: 153.59px;
+			height: 45px;
+		}
+		.footer > .inner > .rightsns > .fr > a > #sns {
+			width: 45px;
+			height: 45px;
+			margin: 0 0 0 30px;
+		}
+		.footer > .inner > .mango> .line {
+			width: 30px;
+			height: 30px;
+			border-bottom: 1px solid #6a6a6a;
+		}
+		.footer > .inner > .area {
+			width: 1200px;
+			height: 46px;
+			border-top: 1px solid #6a6a6a;
+			margin-bottom: 30px;
+			padding-top: 15px;
+		}
+		.footer > .inner > .area > .keyword {
+			font-size: 15px;
+			line-height: 23px;
+			width: 1200px;
+			height: 46px;
+			color: #9b9b9b;
+		}
+		.footer > .inner > .area > .keyword > p > .keyword {
+			text-decoration: none;
+			color: #9b9b9b;
+		}
+		.footer > .inner > .bottom {
+			width: 1200px;
+			height: 176px;
+			padding: 36px 0 42px 0;
+			border-top: 1px solid #6a6a6a;
+			line-height: 22px;
+		}
+		.footer > .inner > .bottom > .language {
+			position: relative;
+			top: 6px;
+		}
+		.footer > .inner > .bottom > .language > p > #english:before {
+			content: '|';
+			margin: 0 8px 0 6px;
+		}
+		.footer > .inner > .bottom > .language > p > #chinese:before {
+			content: '|';
+			margin: 0 8px 0 6px;
+		}
+		.footer > .inner > .bottom > p > a {
+			font-weight: bold;
+			text-decoration: underline;
+			color: #9b9b9b;
+		}
+		.fl { float: left; }
+		.fr { float: right; }

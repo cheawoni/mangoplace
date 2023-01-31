@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<!-- jQuery
+Ex10.html $(this) 그리고...
+		- "$(제이쿼리셀렉터)"
+		- $(셀렉터).parent() : 부모
+		- $(셀렉터).find(셀렉터) : 자식들 중에서 찾음
+(제이쿼리셀렉터 -> 요소 탐색)(구글링- 제이쿼리 요소 탐색)
+	- parent()	내 위에 부모
+	- parents() 부모들을 한번에 다 잡음
+	- children() 모든 직계자손들
+	- prev() 이전. 형
+	- next() 다음. 동생
+	- siblings() 모든 형제(주의! 나는 빼고)
+	- find() 자자손손 중에서 찾음
+	- eq(인덱스) 해당 인덱스번호에 해당하는 요소
+ -->
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script src="https://code.jquery.com/jquery-3.6.2.min.js" integrity="sha256-2krYZKh//PcchRtd+H+VyyQoZ/e3EcrkxhM8ycwASPA=" crossorigin="anonymous"></script>
+	<script><!--jquery문-->
+		function update_price(yg_this) {
+			/* var unit_price = $(".unit_price").text();	
+			unit_price = Number(unit_price.replace('원',''));	
+			var qty = Number($(".qty").val());	
+			var price = unit_price * qty;
+			$(".price").text(price + "원"); */
+			var unit_price = yg_this.parent().parent().find(".unit_price").text();	// '1000원'
+			unit_price = Number(unit_price.replace('원',''));	// 1000
+			var qty = yg_this.parent().find(".qty").val();	// 숫자로 된 수량의 값
+			var price = unit_price * qty;
+			yg_this.parent().parent().find(".price").text(price + "원");
+			
+			update_total_price();	// 어떤애들의 가격이 고쳐지면 업데이트프라이스 가격도 고치겠다.
+		}
+		function update_total_price() {	
+			var sum = 0;
+			$(".price").each( function(idx,obj) {	// .each(각각에 대해서 실행하겠다) .price의 배열 각 요소를 통해 each()문을 실행하겠다.
+				// 인덱스 ---> idx , 해당 요소 ---> (obj 아니고) $(this) 쓰세요.
+				//alert($(this).text());
+				sum += Number($(this).text().replace('원',''));
+			});
+			$("#total_price").text(sum);
+		}
+		$(function() {
+			$(".btn_minus").click(function() {	// jquery seleter 
+				//alert( $(this).text() );	// 달러디스: 클릭이벤스 디스너, 클릭이벤트가 어디서 발생 했는지 알려줌.
+				// 이해1. 여기서 "$(this)" ??
+				// 이해2. "$(this).parent()" 하면 어디 ??
+						/* alert($(this).html());	// 확인해보기
+						alert($(this).parent().html()); */
+				// 이해3. "$(this).parent().find('.qty')" 하면 어디??
+				var qty = Number($(this).parent().find(".qty").val());
+				if(qty>0) {
+					$(this).parent().find(".qty").val(qty-1);	// jQuery에서는 : .val함수의 호출을 해줘야됨.
+				}
+				update_price($(this));
+			});
+			$(".btn_plus").click(function() {
+				//$(".qty").val(Number($(".qty").val())+1);
+				var qty = Number($(this).parent().find(".qty").val());
+				$(this).parent().find(".qty").val(qty+1);
+				update_price($(this));
+			});
+			//update_price($(this));
+		});
+	</script>
+	<style>
+		table {
+			border-collapse: collapse;	
+			table-layout: fixed;		
+		}
+		td {
+			border: 2px solid grey;
+			text-align: center;
+		}
+		td:nth-child(1) { width: 300px; }
+		td:nth-child(2) { width: 120px; }
+		td:nth-child(3) { width: 120px; }
+		td:nth-child(4) { width: 120px; }
+		td > input { width: 50px; }
+	</style>
+</head>
+<body>
+	<table>
+		<tr>
+			<td>품목</td>
+			<td>단가</td>
+			<td>수량</td>
+			<td>가격</td>
+		</tr>
+		<tr>
+			<td><img src="../Images/참깨라면1000.png"/></td>
+			<td class="unit_price">1000원</td>
+			<td>
+				<button class="btn_minus">-</button>
+				<input type="text" class="qty" value="0"/>
+				<button class="btn_plus">+</button>				
+			</td>
+			<td class="price">0원</td>
+		</tr>
+		<tr>
+			<td><img src="../Images/햇반800.png" style="width:250px;"/></td>
+			<td class="unit_price">800원</td>
+			<td>
+				<button class="btn_minus">-</button>
+				<input type="text" class="qty" value="0"/>
+				<button class="btn_plus">+</button>				
+			</td>
+			<td class="price">0원</td>
+		</tr>
+		<tr>
+			<td><img src="../Images/무뚝뚝1500.png" style="width:250px;"/></td>
+			<td class="unit_price">1500원</td>
+			<td>
+				<button class="btn_minus">-</button>
+				<input type="text" class="qty" value="0"/>
+				<button class="btn_plus">+</button>				
+			</td>
+			<td class="price">0원</td>
+		</tr>
+		<tr>
+			<td colspan="4" style="text-align: end;">
+				총 가격 : <span id="total_price">0</span>원
+			</td>
+		</tr>
+	</table>
+</body>
+</html>
