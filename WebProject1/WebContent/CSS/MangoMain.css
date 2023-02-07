@@ -101,8 +101,8 @@
 			position: absolute;
 		    left: 33px;
 		    margin-top: 10px;
-		    background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/2018022864551sprites_desktop.png);
-		    background-position: -935px -620px;
+		    background-image: url(../Images/img_searchicon.png);
+		    background-size: cover;
 		    width: 30px;
 		    height: 31px;
 		}

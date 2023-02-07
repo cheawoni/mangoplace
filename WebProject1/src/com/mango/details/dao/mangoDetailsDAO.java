@@ -1,7 +1,6 @@
 package com.mango.details.dao;
 
 import java.sql.Connection;
-
 import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -20,6 +19,7 @@ import com.mango.details.dto.mangoDetailsRelatedTopDTO;
 import com.mango.details.dto.mangoDetailsTopReviewDTO;
 import com.mango.details.dto.mangoReviewDTO;
 import com.mango.details.dto.mangoReviewDetailDTO;
+import com.mango.details.dto.mangoReviewInsertDTO;
 
 public class mangoDetailsDAO {
 	private Connection getConnection() {
@@ -27,7 +27,7 @@ public class mangoDetailsDAO {
 		Connection conn = null;
 		
 		String driver = "oracle.jdbc.driver.OracleDriver";
-		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+		String url = "jdbc:oracle:thin:@203.245.30.223:1521:xe";
 		String dbID = "mango";
 		String dbPW = "1234";
 		
@@ -781,4 +781,36 @@ public class mangoDetailsDAO {
 		}
 		return nearList;
 	}//NearbyPoupularRestaurants
+	public void  insertReview(mangoReviewInsertDTO dto) {
+		Connection conn = getConnection();
+		
+		String sql = "INSERT INTO reviews(review_idx, plate_id, member_number, review_img, review_coment, tasty_like) "
+				+ " VALUES(REVIEWS_SEQ.nextval, ?,(SELECT member_number FROM member m  WHERE m.email = ?),?,?,?)";
+		
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,dto.getId());
+			pstmt.setString(2,dto.getEmail());
+			pstmt.setString(3,dto.getImg());
+			pstmt.setString(4,dto.getReview());
+			pstmt.setInt(5,dto.getTasty());
+			pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(pstmt != null)
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if(conn != null)
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }

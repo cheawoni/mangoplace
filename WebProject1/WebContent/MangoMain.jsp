@@ -24,7 +24,8 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>망고 메인페이지</title>
+	<link rel="icon" href="Images/profile/mango_favicon.png">
+	<title>망고플레이스 메인페이지</title>
 	<link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css' rel='stylesheet' type='text/css'>
 	<script src="https://code.jquery.com/jquery-3.6.2.js" integrity="sha256-pkn2CUZmheSeyssYw3vMp1+xyub4m+e+QK4sQskvuo4=" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js"></script>
@@ -34,31 +35,31 @@
 		$(function() {
 			$("body .main header .header .fl #logo").click(function() {
 				//alert("123");
-				loaction.href = "http://localhost:9090/WebProject1/MangoMain.jsp";
+				loaction.href = "MangoMain.jsp";
 			});
 			$("body .main header .header .fr .eatdeal").click(function() {
-				location.href="잇딜.jsp";
+				location.href="eat_deal_main.jsp";
 			});
 			$("body .main header .header .fr .matziplist").click(function() {
-				location.href="http://localhost:9090/WebProject1/Matziplist.jsp";
+				location.href="Matziplist.jsp";
 			});
 			$("body .main header .header .fr .mangostory").click(function() {
 				location.href="Mango_storyList.jsp";
 			});
 			$(".main .header .header_top .logo").click(function() {
-				location.href="http://localhost:9090/WebProject1/MangoMain.jsp";
+				location.href="MangoMain.jsp";
 			});
 			$(".main .header .header_top .fr .eatdeal").click(function() {
-				location.href="잇딜.jsp";
+				location.href="eat_deal_main.jsp";
 			});
 			$(".main .header .header_top .fr .matziplist").click(function() {
-				location.href="http://localhost:9090/WebProject1/Matziplist.jsp";
+				location.href="Matziplist.jsp";
 			});
 			$(".main .header .header_top .fr .mangostory").click(function() {
 				location.href="Mango_storyList.jsp";
 			});
 			$(".main .header .header_bottom .eatdeal_btn").click(function() {
-				location.href="잇딜.jsp";
+				location.href="eat_deal_main.jsp";
 			});
 			$(".header .header_middle .search .search_word #main_search").click(function() {
 				$(".keywordsuggester").css('display', 'block');
@@ -140,7 +141,7 @@
 				//alert('locat~~~~~~~');
 				var idx = $(this).attr('idx');
 				if(idx==121 || idx==119 || idx==23 || idx==22) {
-					location.href = "http://localhost:9090/WebProject1/MatzipDetail.jsp?idx=" + idx;
+					location.href = "MatzipDetail.jsp?idx=" + idx;
 				} else {
 					alert("준비중입니다.");
 				}
@@ -228,7 +229,7 @@
 				//alert('locat~~~~~~~');
 				var idx = $(this).attr('idx');
 				if(idx==121 || idx==119 || idx==23 || idx==22) {
-					location.href = "http://localhost:9090/WebProject1/MatzipDetail.jsp?idx=" + idx;
+					location.href = "MatzipDetail.jsp?idx=" + idx;
 				} else {
 					alert("준비중입니다.");
 				}
@@ -237,7 +238,7 @@
 				//alert('locat~~~~~~~');
 				var idx = $(this).attr('idx');
 				if(idx==121 || idx==119 || idx==23 || idx==22) {
-					location.href = "http://localhost:9090/WebProject1/MatzipDetail.jsp?idx=" + idx;
+					location.href = "MatzipDetail.jsp?idx=" + idx;
 				} else {
 					alert("준비중입니다.");
 				}
@@ -1274,7 +1275,7 @@
 		<div class="footer">		<!-- 11번 div 시작 -->
 			<div class="inner">
 				<div class="fl mango">
-					<div class="fl"><a href="http://localhost:9090/WebProject1/MangoMain.jsp"><img id="mangologo" src="Images/mango/mangoplace_removeback.png"/></a></div>
+					<div class="fl"><a href="MangoMain.jsp"><img id="mangologo" src="Images/mango/mangoplace_removeback.png"/></a></div>
 					<div class="fl line"></div>
 					<p class="fl ment">Eat, Share, Be Happy.</p>
 				</div>

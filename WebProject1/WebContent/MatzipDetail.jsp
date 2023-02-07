@@ -30,6 +30,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>맛집리스트 상세페이지</title>
+	<link rel="icon" href="Images/profile/mango_favicon.png">
 	<link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css' rel='stylesheet' type='text/css'>
 	<link rel='stylesheet' type='text/css' href='CSS/MatzipDetail.css'/>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ed05170950c386674ae9f4fdd636dcf0"></script>
@@ -56,7 +57,7 @@
 				location.href = "MangoMain.jsp";
 			});
 			$(".eatdeal").click(function() {
-				location.href = "잇딜.jsp";
+				location.href = "eat_deal_main.jsp";
 			});
 			$(".matziplist").click(function() {
 				location.href = "Matziplist.jsp";
@@ -64,6 +65,26 @@
 			$(".mangostory").click(function() {
 				location.href = "Mango_storyList.jsp";
 			});
+			
+			$("#img_logo").click(function() {
+	               //alert("망고플레이트 이동!");
+	               location.href = "MangoMain.jsp"
+            });
+			$("#div_header > .header_right").eq(3).find("span").click(function() {
+	               //alert("EAT딜 이동!");
+	               location.href = "eat_deal_main.jsp";
+	            });
+	            
+	            $("#div_header > .header_right").eq(2).find("span").click(function() {
+	               //alert("맛집 리스트 이동!");
+	               location.href = "Matziplist.jsp";
+	            });
+	            
+	            $("#div_header > .header_right").eq(1).find("span").click(function() {
+	               //alert("망고 스토리 이동!");
+	               location.href = "Mango_storyList.jsp";
+	            });
+	            
 			$(".header .fl .searchinput").click(function() {
 				$(".keywordsuggester").css('display', 'block');
 				$(".keywordsuggester_black").css('display', 'block');
@@ -240,117 +261,120 @@
 	</style>
 </head>
 <body>
-	<header>		<!-- header 시작 -->
-		<div class="header">		<!-- 1번 div 시작 -->
-			<div class="fr">
-				<div class="right"> 
-					<img id="profile" src="https://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_640x640.jpg?fit=around|56:56&crop=56:56;*,*&output-format=jpg&output-quality=80"/>
-				</div>
-			</div>
-			<div class="fr">
-				<div class="mangostory">
-					<span>망고 스토리</span>
-				</div>
-			</div>
-			<div class="fr">
-				<div class="matziplist">
-					<a href="http://localhost:9090/WebProject1/Matziplist.jsp" style="text-decoration: none; color: #888;"><span>맛집 리스트</span></a>
-				</div>
-			</div>
-			<div class="fr">
-				<div class="eatdeal">
-					<span style="position: relative;">EAT딜</span>
-				</div>
-			</div>
-			<div class="fl">
-				<img id="logo" src="Images/mango/mangoplace.png" style="witdh: 100px; height: 33px;"/>
-				<img id="search" src="Images/search_icon.png"/>
-				<div style="clear:both;"></div>
-			</div>
-			<div class="fl"><input type="text" class="searchinput" name="searchkeyword" placeholder="지역, 식당 또는 음식" value autocomplete="off" maxlength="50"></div>
-		</div>
-	</header>
+	<div id="div_header">
+         <div class="fl"><!-- (1)헤더 왼쪽 망고플레이트 로고 -->
+            <img id="img_logo" src="Images/mangoplace_logo.png"/>
+         </div>
+         <div class="fl"><!-- (2)헤더 왼쪽 서치아이콘 -->
+            <img id="img_search" src="Images/img_searchicon.png"/>
+            <label for="Input_search">
+               <input type="text" id="Input_search" placeholder="지역, 식당 또는 음식"/>
+            </label>
+         </div>
+         <div class="fr header_right"><!-- (3)헤더 오른쪽 유저아이콘 -->
+            <div style="background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/2018022864551sprites_desktop.png);background-position: -82px -919px;
+             width: 34px; height: 34px; margin-top: 15px; cursor: pointer; margin-left: 24px;"></div>
+          <span class="history_count" style="position: absolute; width: 24px; height: 24px; top: 10px; z-index: 1; border-radius: 50%; box-sizing: border-box; text-align: center; 
+            font-size: 14px; font-style: normal; color: #FFFFFF; background-color: #ff792a; line-height: 23px;">0
+          </span>
+         </div>
+         <div class="fr header_right"><!-- (4)헤더 오른쪽 망고스토리 아이콘 -->
+            <span>망고 스토리</span>
+         </div>
+         <div class="fr header_right"><!-- (5)헤더 오른쪽 맛집 리스트 아이콘 -->
+            <span>맛집 리스트</span>
+         </div>
+         <div class="fr header_right"><!-- (6)헤더 오른쪽 EAT딜 아이콘 -->
+            <span class="header_right_new">EAT딜</span>
+         </div>
+         <div style="clear:both;"></div>
+      </div>
+	<div class="input_search_keyword">   <!-- 검색어 클릭 이벤트 발생시 나오는 창 -->
+         <div class="input_search_backgroundDark"></div>      <!-- $("#input").css({display:"none"}); -->
+         <div class="input_search_content">
+            <div class="input_search_content_inner">
+               <div class="input_search_content_list">
+                  <div class="input_search_item_inner">
+                     <div class="input_search_item select inputSearchItem_tapButton-selected keyword_recommended">추천 검색어</div>
+                  </div>
+                  <div class="input_search_item_inner keyword_popular">
+                     <div class="input_search_item">인기 검색어</div>
+                  </div>
+                  <div class="input_search_item_inner keyword_history">
+                     <div class="input_search_item">최근 검색어</div>
+                  </div>
+               </div>
+               <div class="keywordListWrap_inner">
+                  <div class="input_search_content_keywordListWrap">
+                     <div class="small_recommended_search">
+                        <div class="input_search_content_keywordList">
+                           <span class="keywordList_item_img"></span>
+                           <span class="input_search_keywordList_item">강남역</span>
+                        </div>
+                        <div class="input_search_content_keywordList">
+                           <span class="keywordList_item_img"></span>
+                           <span class="input_search_keywordList_item">용리단길</span>
+                        </div>
+                        <div class="input_search_content_keywordList">
+                           <span class="keywordList_item_img"></span>
+                           <span class="input_search_keywordList_item">유튜버추천</span>
+                        </div>
+                        <div class="input_search_content_keywordList">
+                           <span class="keywordList_item_img"></span>
+                           <span class="input_search_keywordList_item">신촌</span>
+                        </div>
+                        <div class="input_search_content_keywordList">
+                           <span class="keywordList_item_img"></span>
+                           <span class="input_search_keywordList_item">참치</span>
+                        </div>
+                        <div class="input_search_content_keywordList">
+                           <span class="keywordList_item_img"></span>
+                           <span class="input_search_keywordList_item">성수</span>
+                        </div>
+                        <div class="input_search_content_keywordList">
+                           <span class="keywordList_item_img"></span>
+                           <span class="input_search_keywordList_item">와인</span>
+                        </div>
+                     </div>
+                     <div class="small_popular_search">
+                        <div class="input_search_content_keywordList">
+                           <span class="keywordList_item_img"></span>
+                           <span class="input_search_keywordList_item">홍대</span>
+                        </div>
+                        <div class="input_search_content_keywordList">
+                           <span class="keywordList_item_img"></span>
+                           <span class="input_search_keywordList_item">이태원</span>
+                        </div>
+                        <div class="input_search_content_keywordList">
+                           <span class="keywordList_item_img"></span>
+                           <span class="input_search_keywordList_item">신촌</span>
+                        </div>
+                        <div class="input_search_content_keywordList">
+                           <span class="keywordList_item_img"></span>
+                           <span class="input_search_keywordList_item">강남역</span>
+                        </div>
+                        <div class="input_search_content_keywordList">
+                           <span class="keywordList_item_img"></span>
+                           <span class="input_search_keywordList_item">가로수길</span>
+                        </div>
+                        <div class="input_search_content_keywordList">
+                           <span class="keywordList_item_img"></span>
+                           <span class="input_search_keywordList_item">평택시</span>
+                        </div>
+                        <div class="input_search_content_keywordList">
+                           <span class="keywordList_item_img"></span>
+                           <span class="input_search_keywordList_item">방배</span>
+                        </div>
+                     </div>
+                     <div class="small_history_search">
+                        <span class="input_search_keywordList_item_none">최근 검색어가 없습니다.</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
 	
-	<div class="keywordsuggester">		<!-- 2번 div 시작(검색어 화면) -->
-		<div class="keywordsuggester_black"></div>
-		<div class="keywordsuggester_container">
-			<nav class="keywordsuggester_navigation">
-				<ul class="keywordsuggester_list">
-					<li class="list_item">
-						<div class="keywordsuggester_button keywordsuggester_recommended keywordsuggester_button_selected">추천 검색어</div>
-					</li>
-					<li class="list_item">
-						<div class="keywordsuggester_button keywordsuggester_popular">인기 검색어</div>
-					</li>
-					<li class="list_item">
-						<div class="keywordsuggester_button keywordsuggester_history">최근 검색어</div>
-					</li>
-				</ul>
-				<div class="suggestkeywordlist">
-					<ul class="recommended_search">
-						<li>
-							<span class="little_search_icon"></span>
-							<span>강남역</span>
-						</li>
-						<li>
-							<span class="little_search_icon"></span>
-							<span>용리단길</span>
-						</li>
-						<li>
-							<span class="little_search_icon"></span>
-							<span>유튜버추천</span>
-						</li>
-						<li>
-							<span class="little_search_icon"></span>
-							<span>신촌</span>
-						</li>
-						<li>
-							<span class="little_search_icon"></span>
-							<span>참치</span>
-						</li>
-						<li>
-							<span class="little_search_icon"></span>
-							<span>성수</span>
-						</li>
-						<li>
-							<span class="little_search_icon"></span>
-							<span>와인</span>
-						</li>
-					</ul>
-					<ul class="popular_search">
-						<li>
-							<span class="little_search_icon"></span>
-							<span>홍대</span>
-						</li>
-						<li>
-							<span class="little_search_icon"></span>
-							<span>이태원</span>
-						</li>
-						<li>
-							<span class="little_search_icon"></span>
-							<span>신촌</span>
-						</li>
-						<li>
-							<span class="little_search_icon"></span>
-							<span>강남역</span>
-						</li>
-						<li>
-							<span class="little_search_icon"></span>
-							<span>가로수길</span>
-						</li>
-						<li>
-							<span class="little_search_icon"></span>
-							<span>평택시</span>
-						</li>
-						<li>
-							<span class="little_search_icon"></span>
-							<span>방배</span>
-						</li>
-					</ul>
-				</div>
-			</nav>
-		</div>
-	</div>
 	
 	<div>		<!-- 3번 div 시작 -->
 		<%
@@ -606,7 +630,7 @@
 	<div class="footer">		<!-- 6번 div 시작 -->
 		<div class="inner">
 			<div class="fl mango">
-				<div class="fl"><a href="http://localhost:9090/WebProject1/MangoMain.jsp"><img id="mangologo" src="Images/mango/mangoplace_removeback.png"/></a></div>
+				<div class="fl"><a href="MangoMain.jsp"><img id="mangologo" src="Images/mango/mangoplace_removeback.png"/></a></div>
 				<div class="fl line"></div>
 				<p class="fl ment">Eat, Share, Be Happy.</p>
 			</div>
@@ -630,7 +654,7 @@
 				<p>문의하기</p>
 			</div>
 			<div class="rightsns">
-				<div class="fr"><a href="https://www.facebook.com/MangoPlate/" target="_blank"><img id="sns" src="Images/facebook.png"/></a>
+				<div class="fr"><a href="https://www.facebook.com/MangoPlate/" target="_blank"><img id="sns" src="Images/mango/facebook.png"/></a>
 								<a href="https://www.instagram.com/mangoplate/" target="_blank"><img id="sns" src="Images/instargram.png"/></a>
 				</div>
 				<div style="clear:both;"></div>

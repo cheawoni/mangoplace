@@ -208,7 +208,8 @@ System.out.println("NEW strCookieRecentSearch : " + strCookieRecentSearch);
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>강남역 맛집 인기 검색순위 ㅣ 맛집 추천, 망고플레이트</title>
+	<title>맛집 인기 검색순위 ㅣ 맛집 추천, 망고플레이트</title>
+	<link rel="icon" href="Images/profile/mango_favicon.png">
 	<link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css' rel='stylesheet' type='text/css'><!-- 망고폰트 -->
 	<link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css' rel='stylesheet' type='text/css'><!-- 망고폰트 -->
 	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-applesdgothicneo@1.0/all.min.css"><!-- APPLE SD Gothic NEO -->
@@ -445,6 +446,27 @@ System.out.println("NEW strCookieRecentSearch : " + strCookieRecentSearch);
 			$(".popup_form .btn.cancel").click(function() {
 				$(".black_screen").css('display','none');
 				$(".popup_search_filter").css('display','none');
+			});
+			
+			// 헤더 클릭시 -----------------------------------------------------------
+			$("#div_header > .header_right").eq(3).find("span").click(function() {
+				alert("EAT딜 이동!");
+				location.href = "eat_deal_main.jsp";
+			});
+			
+			$("#div_header > .header_right").eq(2).find("span").click(function() {
+				alert("맛집 리스트 이동!");
+				location.href = "Matziplist.jsp";
+			});
+			
+			$("#div_header > .header_right").eq(1).find("span").click(function() {
+				alert("망고 스토리 이동!");
+				location.href = "Mango_storyList.jsp";
+			});
+			
+			$("#img_logo").click(function() {
+				alert("망고플레이트 이동!");
+				location.href = "MangoMain.jsp"
 			});
 			
 // 헤더 인기검색 팝업창 시작--------------------------------------------------------------------------------

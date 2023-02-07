@@ -6,16 +6,19 @@
 <%@ page import="com.mango.details.dao.*" %>
 
 <%
-int detailPk = 71;//Integer.parseInt( request.getParameter("detailPk") )
+int detailPk = Integer.parseInt( request.getParameter("detailPk") );
 int pageNum = 1;
 int tasty = 5;
 int number = 181;
+String email = (String)session.getAttribute("loginEmail");
+
+System.out.println(" email : " + email);
 	/* try{
-		detailPk = Integer.parseInt( request.getParameter("detailPk") );
+		bno = Integer.parseInt( request.getParameter("bno") );
 	}catch(NumberFormatException e){ 
-		System.out.println("잘못된 접근 detailPk : " + detailPk);
-	} */
-	
+		System.out.println("잘못된 접근 bno : " + bno);
+	} 
+	*/
 	mangoDetailsDAO mangoDAO = new mangoDetailsDAO();
 	mangoDetailsDTO DetailList = mangoDAO.getBoardDetailByBno(detailPk);
 	mangoReviewDetailDTO reviewDetailList = mangoDAO.getReviewDetail(detailPk,number);
@@ -29,7 +32,9 @@ int number = 181;
 	ArrayList<mangoDetailsMenuDTO> menuImgList = mangoDAO.getMenuContent(detailPk);
 	ArrayList<mangoDetailsNearDTO> nearList = mangoDAO.getNearbyPopularRestaurants(detailPk);
 	ArrayList<Integer> countList = mangoDAO.getReviewCount(detailPk);
-//System.out.println("reviewList size : " + reviewList.size());
+	
+	
+System.out.println("reviewList.size: " + reviewList.size());
 //System.out.println("reviewList size : " + storyList.size());
 int tastyGood = 0;
 int tastyNotBad = 0;
@@ -41,67 +46,32 @@ int tastyBad = 0;
 	}
 %>	
 <%
-   // 여기부터 쿠키쿠키 ------------------------------------------------------------------------------
-   String strCookieRecentSearch = "";
-   // add cookie.
-   Cookie[] cookies = request.getCookies();
-   if(cookies!=null) {
-      for(Cookie c : cookies) {
-         if("recent_search".equals(c.getName())) {
-            strCookieRecentSearch = c.getValue();
-         }
-      }   
-   }
-   if(strCookieRecentSearch!=null && strCookieRecentSearch.length()>0 && strCookieRecentSearch.charAt(0)=='_')
-      strCookieRecentSearch = strCookieRecentSearch.substring(1);
-   System.out.println("strCookieRecentSearch : " + strCookieRecentSearch);
-   // 여기까지 쿠키쿠키 ------------------------------------------------------------------------------
+	String strCookieRecentSearch = "";
+	// add cookie.
+	Cookie[] cookies = request.getCookies();
+	if(cookies!=null) {
+	   for(Cookie c : cookies) {
+	      if("recent_search".equals(c.getName())) {
+	         strCookieRecentSearch = c.getValue();
+	      }
+	   }   
+	}
+	if(strCookieRecentSearch!=null && strCookieRecentSearch.length()>0 && strCookieRecentSearch.charAt(0)=='_')
+	   strCookieRecentSearch = strCookieRecentSearch.substring(1);
+	System.out.println("strCookieRecentSearch : " + strCookieRecentSearch);
+
 %>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>망고 상세 페이지</title>
+	<link rel="icon" href="Images/profile/mango_favicon.png">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 	<link rel="stylesheet" href="CSS/mango_details.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ed05170950c386674ae9f4fdd636dcf0"></script>
-	<script>
-      // 여기부터 쿠키쿠키 ------------------------------------------------------------------------------
-      function applyRecentListFromList(arr) {
-         if(arr.length==0) {
-            $(".small_history_search").html('<span class="input_search_keywordList_item_none">최근 검색어가 없습니다.</span>');         
-         } else {
-            $(".small_history_search").html('');
-         }
-         
-         for(var i=0; i<=arr.length-1; i++) {
-            var str = '<div class="input_search_content_keywordList">'
-                  +'<span class="keywordList_item_img"></span>'
-                  +'<span class="input_search_keywordList_item">'+arr[i]+'</span>'
-                  +'</div>';
-            $(".small_history_search").append(str);
-         }
-      }
-      // 여기까지 쿠키쿠키 ------------------------------------------------------------------------------
-      // 여기부터 쿠키쿠키 ------------------------------------------------------------------------------
-      <%
-            String str_making_array2 = "";
-            if(strCookieRecentSearch.length()>0) {
-               //for(String s : strCookieRecentSearch.split("_")) {
-               for(int i=0; i<=strCookieRecentSearch.split("_").length-1; i++) {
-                  str_making_array2 += "'" + strCookieRecentSearch.split("_")[i] + "'";
-                  if(i<strCookieRecentSearch.split("_").length-1) {
-                     str_making_array2 += ",";
-                  }
-               }
-            }
-      %>
-            var arrRecent = [<%=str_making_array2%>];   // "'방배1','방배2','방배3','방배4'"
-      // 여기까지 쿠키쿠키 ------------------------------------------------------------------------------
-
-   </script>
 	<script>
 		var current_slide=0;
 		var pageNum = 1;
@@ -119,85 +89,61 @@ int tastyBad = 0;
 			$(".img_area_content_content > div:nth-child(1)").text(arrayMenuComent[newIndex]);
 			$(".img_area_content_content > div:nth-child(2)").text(arrayMenuUpdateDate[newIndex]);
 		}
-		
-		$(function(){
-			// 헤더 인기검색 팝업창 시작--------------------------------------------------------------------------------
-	         $(".input_search_backgroundDark").click(function() {
-	            $(this).parent().removeClass("open");
-	         }); 
+	      // 여기부터 쿠키쿠키 ------------------------------------------------------------------------------
+	      function applyRecentListFromList(arr) {
+	         if(arr.length==0) {
+	            $(".small_history_search").html('<span class="input_search_keywordList_item_none">최근 검색어가 없습니다.</span>');         
+	         } else {
+	            $(".small_history_search").html('');
+	         }
 	         
-	         $("#Input_search").click(function() {
-	            $(".input_search_keyword").addClass("open");
-	         });
-	         
-	         $(".input_search_item").click(function() {
-	            idx = $(".input_search_item").index($(this));
-	            
-	            $(".input_search_item").each(function(select_idx,obj) {
-	               if(idx==select_idx) {
-	                  $(this).addClass("select inputSearchItem_tapButton-selected");
-	               } else {
-	                  $(this).removeClass("select inputSearchItem_tapButton-selected");
+	         for(var i=0; i<=arr.length-1; i++) {
+	            var str = '<div class="input_search_content_keywordList">'
+	                  +'<span class="keywordList_item_img"></span>'
+	                  +'<span class="input_search_keywordList_item">'+arr[i]+'</span>'
+	                  +'</div>';
+	            $(".small_history_search").append(str);
+	         }
+	      }
+	      // 여기까지 쿠키쿠키 ------------------------------------------------------------------------------
+	      // 여기부터 쿠키쿠키 ------------------------------------------------------------------------------
+	      <%
+	            String str_making_array2 = "";
+	            if(strCookieRecentSearch.length()>0) {
+	               //for(String s : strCookieRecentSearch.split("_")) {
+	               for(int i=0; i<=strCookieRecentSearch.split("_").length-1; i++) {
+	                  str_making_array2 += "'" + strCookieRecentSearch.split("_")[i] + "'";
+	                  if(i<strCookieRecentSearch.split("_").length-1) {
+	                     str_making_array2 += ",";
+	                  }
 	               }
-	            });
-	         });
-	         
-	         $(".input_search_content_keywordList").mouseenter(function() {
-	                 $(this).css('background','#f7f7f7');
-	              });
-	              $(".input_search_content_keywordList").mouseleave(function() {
-	                 $(this).css('background','#fff');
-	              });
-	              
-	         $(".keyword_recommended").click(function() {
-	            $(".small_popular_search").css('display','none');
-	            $(".small_history_search").css('display','none');
-	            $(".small_recommended_search").css('display','block');
-	         });
-	         
-	         $(".keyword_popular").click(function() {
-	            $(".small_recommended_search").css('display','none');
-	            $(".small_history_search").css('display','none');
-	            $(".small_popular_search").css('display','block');
-	         });
-	         
-	         $(".keyword_history").click(function() {
-	            $(".small_recommended_search").css('display','none');
-	            $(".small_popular_search").css('display','none');
-	            $(".small_history_search").css('display','block');
-	         });
-	         
-	         // 스크롤
-	         $(".keywordListWrap_inner").mouseenter(function() {
-	            $(this).css('overflow','auto');
-	         });
-	         
-	         $(".keywordListWrap_inner").mouseleave(function() {
-	            $(this).css('overflow','hidden');
-	         });
-	         
-	         $(".small_popular_search").css('display','none');
-	         $(".small_history_search").css('display','none');
-	         $(".small_recommended_search").css('display','block');
-	         
-	         // 엔터키이벤트 엔터를 누르면 발생
-	         $("#Input_search").keypress(function(e) { // 입력시 검색어 들어감
-	             if (e.keyCode == 13){   
-	                 var url_input_search = "Mango_popularSearch2.jsp?keyword="+$("#Input_search").val().replace(" ","_");
-	                 location.href = url_input_search;
-	             }    
-	         });
-	         
-	         $(document).on("click", ".input_search_content_keywordList", function() {   // 클릭시 검색어 들어감
-	            var item = $(this).find(".input_search_keywordList_item").text();
-	              var url_input_search = "Mango_popularSearch2.jsp?keyword="+item;
-	              location.href = url_input_search;
-	         });
-	// 헤더 인기검색어 팝업창 끝--------------------------------------------------------------------------------------
-			// 쿠키 --------------------------------------------------------------------------------------------------
-         		applyRecentListFromList(arrRecent);
-         	// 쿠키 끝--------------------------------------------------------------------------------------------------
-         
+	            }
+	      %>
+	            var arrRecent = [<%=str_making_array2%>];   // "'방배1','방배2','방배3','방배4'"
+	      // 여기까지 쿠키쿠키 ------------------------------------------------------------------------------
+		$(function(){
+			
+			 $("#div_header > .header_right").eq(3).find("span").click(function() {
+		            //alert("EAT딜 이동!");
+		            location.href = "eat_deal_main.jsp";
+		         });
+		         
+		         $("#div_header > .header_right").eq(2).find("span").click(function() {
+		           // alert("맛집 리스트 이동!");
+		            location.href = "Matziplist.jsp";
+		         });
+		         
+		         $("#div_header > .header_right").eq(1).find("span").click(function() {
+		           // alert("망고 스토리 이동!");
+		            location.href = "Mango_storyList.jsp";
+		         });
+		         
+		         $("#img_logo").click(function() {
+		           // alert("망고플레이트 이동!");
+		            location.href = "MangoMain.jsp"
+		         });
+		///////////////////////////////////////////////////////////////
+			applyRecentListFromList(arrRecent);
 			$(document).on("click",".user_review_img_wrap > img , .user_review_img_wrap > span ",function(){
 				var Mnumber = $(this).parent().parent().parent().parent().attr("mnum");
 				/* idx = $(".user_review_img").index($(this)); */
@@ -372,6 +318,9 @@ int tastyBad = 0;
 					var openNewWindow = window.open("about:blank");
 					openNewWindow.location.href="mango_review_detail.jsp?detailPk="+detailPk+"&mNumber="+mNumber;
 				}
+			});
+			$(".title_header > div:nth-child(3)").click(function(){
+				location.href="mango_review.jsp?detailPk="+<%=detailPk%>;
 			});
 			if(tastyLike == 0){
 				$(document).on("click", ".more", function() {
@@ -741,7 +690,7 @@ int tastyBad = 0;
 			if( tastyNotBad > 0 ){
 	 			$(document).on("click", ".review_tasty_notBad", function() {
 					tastyLike = 3;
-					pageNum = 1;
+					pageNum = 1; 
 					$(this).css({ color: "#ff792a" });
 					$(".review_tasty_good").css({ color: "#9b9b9b" });
 					$(".review_tasty_like").css({ color: "#9b9b9b" });
@@ -924,68 +873,81 @@ int tastyBad = 0;
 					}
 				});	
 			});
-			//검색창 클릭시 모달 창 띄우기
-			$("#input_search").click(function(){
-				$("#details_background_dark").css({ display:"block" });
-				$("#search_wrap").css({ display:"block" });
-				$("body").css("overflow-y","hidden");
-			});
-			//배경 클릭시 모달 창 나가기
-			$("#details_background_dark").click(function(){
-				$("#details_background_dark").css({ display:"none" });
-				$("#search_wrap").css({ display:"none" });
-				$("body").css("overflow-y","auto");
-			});
-			
-			// 검색창 추천검색어 변경
-			$(".Keyword_item").click(function(){
-		 		idx = $(this).parent().find(".Keyword_item").index($(this));
-/* 		 		t_idx = $(this).parents("#search_wrap").index($(this));
-		 		console.log($(this).parents("#search_wrap").html()); */
-		 		
-		 		if(idx==0) {
-					$(this).parents("#search_wrap").find("#Keyword_content_wrap").css("display","block");		 			
-					$(this).parents("#search_wrap").find("#popular_content_wrap").css("display","none");		 			
-					$(this).parents("#search_wrap").find("#lately_content_wrap").css("display","none");		 			
-		 		} else if(idx==1) {
-					$(this).parents("#search_wrap").find("#Keyword_content_wrap").css("display","none");		 			
-					$(this).parents("#search_wrap").find("#popular_content_wrap").css("display","block");		 			
-					$(this).parents("#search_wrap").find("#lately_content_wrap").css("display","none");		 			
-		 		} else if(idx==2) {
-					$(this).parents("#search_wrap").find("#Keyword_content_wrap").css("display","none");		 			
-					$(this).parents("#search_wrap").find("#popular_content_wrap").css("display","none");		 			
-					$(this).parents("#search_wrap").find("#lately_content_wrap").css("display","block");		 			
-		 		}
-		 		
-				$(this).parent().find(".Keyword_item").each(function(K_idx,obj) {
-		 			if(idx==K_idx) {
-						$(this).addClass('Keyword_item_Active');
-					} else {
-						$(this).removeClass('Keyword_item_Active');
-					}
-		 		});
-		 	});
-			
-		 	// 검색어에 마우스가 올라갔을 떄 스크롤 생성
-			$("#Keyword_content_wrap").mouseenter(function(){
-				$("#Keyword_content_wrap").css('overflow-y', 'scroll');
-			});
-			$("#Keyword_content_wrap").mouseleave(function(){
-				$("#Keyword_content_wrap").css('overflow-y', 'hidden');
-			});
-			$("#popular_content_wrap").mouseenter(function(){
-				$("#popular_content_wrap").css('overflow-y', 'scroll');
-			});
-			$("#popular_content_wrap").mouseleave(function(){
-				$("#popular_content_wrap").css('overflow-y', 'hidden');
-			});
-			$("#lately_content_wrap").mouseenter(function(){
-				$("#lately_content_wrap").css('overflow-y', 'scroll');
-			});
-			$("#lately_content_wrap").mouseleave(function(){
-				$("#lately_content_wrap").css('overflow-y', 'hidden');
-			});
 
+	         $(".input_search_backgroundDark").click(function() {
+	            $(this).parent().removeClass("open");
+	         }); 
+	         
+	         $("#Input_search").click(function() {
+	            $(".input_search_keyword").addClass("open");
+	         });
+	         
+	         $(".input_search_item").click(function() {
+	            idx = $(".input_search_item").index($(this));
+	            
+	            $(".input_search_item").each(function(select_idx,obj) {
+	               if(idx==select_idx) {
+	                  $(this).addClass("select inputSearchItem_tapButton-selected");
+	               } else {
+	                  $(this).removeClass("select inputSearchItem_tapButton-selected");
+	               }
+	            });
+	         });
+	         
+	         $(".input_search_content_keywordList").mouseenter(function() {
+	                 $(this).css('background','#f7f7f7');
+	              });
+	              $(".input_search_content_keywordList").mouseleave(function() {
+	                 $(this).css('background','#fff');
+	              });
+	              
+	         $(".keyword_recommended").click(function() {
+	            $(".small_popular_search").css('display','none');
+	            $(".small_history_search").css('display','none');
+	            $(".small_recommended_search").css('display','block');
+	         });
+	         
+	         $(".keyword_popular").click(function() {
+	            $(".small_recommended_search").css('display','none');
+	            $(".small_history_search").css('display','none');
+	            $(".small_popular_search").css('display','block');
+	         });
+	         
+	         $(".keyword_history").click(function() {
+	            $(".small_recommended_search").css('display','none');
+	            $(".small_popular_search").css('display','none');
+	            $(".small_history_search").css('display','block');
+	         });
+	         
+	         // 스크롤
+	         $(".keywordListWrap_inner").mouseenter(function() {
+	            $(this).css('overflow','auto');
+	         });
+	         
+	         $(".keywordListWrap_inner").mouseleave(function() {
+	            $(this).css('overflow','hidden');
+	         });
+	         
+	         $(".small_popular_search").css('display','none');
+	         $(".small_history_search").css('display','none');
+	         $(".small_recommended_search").css('display','block');
+	         
+	         // 엔터키이벤트 엔터를 누르면 발생
+	         $("#Input_search").keypress(function(e) { // 입력시 검색어 들어감
+	             if (e.keyCode == 13){   
+	                 var url_input_search = "Mango_popularSearch2.jsp?keyword="+$("#Input_search").val().replace(" ","_");
+	                 location.href = url_input_search;
+	             }    
+	         });
+	         
+	         $(document).on("click", ".input_search_content_keywordList", function() {   // 클릭시 검색어 들어감
+	            var item = $(this).find(".input_search_keywordList_item").text();
+	              var url_input_search = "Mango_popularSearch2.jsp?keyword="+item;
+	              location.href = url_input_search;
+	         });
+	// 헤더 인기검색어 팝업창 끝--------------------------------------------------------------------------------------
+	
+	
 			// 테이블 메뉴판 이미지 모달창 띄우기
 			$(".menu_img").click(function(){
 				idx = $(".menu_img").index($(this));
@@ -1286,13 +1248,33 @@ int tastyBad = 0;
 					slider.destroySlider();
 			    }
 			});
+			
 		});
 			
 			
 	</script>	
 </head>
 <body>
-<!-- ///////////////////////////  헤더 시작   ////////////////////////////////////////////////// -->
+		<!-- 상단 바 -->
+<!-- 	<div id="div_header">
+		<div class="fl">
+			<a href="https://www.mangoplate.com/">
+				<img id="img_logo" src="Images/img_logo.png">
+			</a>
+		</div>
+		<div class="fl">
+			<img id="img_search" src="Images/icon_search.png">
+			<label for="input_search" style="width:500px;">
+				<input type="text" id="input_search" style="width:500px;" placeholder="지역, 식당 또는 음식"/>
+			</label>
+		</div>
+		<div class="fr header_right"><img class ="UserProfileButton__PersonIcon" src="Images/icon_user.png"></div>
+		<a href = "https://www.mangoplate.com/mango_picks"><div class="fr header_right"><span>망고 스토리</span></div></a>
+		<a href = "https://www.mangoplate.com/top_lists"><div class="fr header_right"><span>맛집 리스트</span></div></a>
+		<a href = "https://www.mangoplate.com/eat_deals"><div class="fr header_right"><span>EAT딜</span></div></a>
+		<div style="clear:both;"></div>
+	</div> -->
+	<!-- ///////////////////////////  헤더 시작   ////////////////////////////////////////////////// -->
    <!-- nth child(1) 헤더(로고..검색..등등) -->
    <div id="div_header">
       <div class="fl"><!-- (1)헤더 왼쪽 망고플레이트 로고 -->
@@ -1405,25 +1387,6 @@ int tastyBad = 0;
    </div>
    <!-- ///////////////////////////  헤더 끝   ////////////////////////////////////////////////// -->
    <!-- nth child(2) 상단 메인 스토리 -->
-		<!-- 상단 바 -->
-<!-- 	<div id="div_header">
-		<div class="fl">
-			<a href="https://www.mangoplate.com/">
-				<img id="img_logo" src="Images/img_logo.png">
-			</a>
-		</div>
-		<div class="fl">
-			<img id="img_search" src="Images/icon_search.png">
-			<label for="input_search" style="width:500px;">
-				<input type="text" id="input_search" style="width:500px;" placeholder="지역, 식당 또는 음식"/>
-			</label>
-		</div>
-		<div class="fr header_right"><img class ="UserProfileButton__PersonIcon" src="Images/icon_user.png"></div>
-		<a href = "https://www.mangoplate.com/mango_picks"><div class="fr header_right"><span>망고 스토리</span></div></a>
-		<a href = "https://www.mangoplate.com/top_lists"><div class="fr header_right"><span>맛집 리스트</span></div></a>
-		<a href = "https://www.mangoplate.com/eat_deals"><div class="fr header_right"><span>EAT딜</span></div></a>
-		<div style="clear:both;"></div>
-	</div>
 	<div id="details_background_dark"></div>
 		<div id="search_wrap">
 			<div id="Keyword_items_wrap">
@@ -1529,7 +1492,7 @@ int tastyBad = 0;
 			<div class="scroll">
 				<div class="scroll_item"></div>
 			</div>
-		</div> -->
+		</div>
 	<div id = "div_img">
 	
 	 <%
@@ -1614,538 +1577,555 @@ int tastyBad = 0;
 	<!-- inner 만들기-->
 	<!-- <div class="fl"></div> -->
 	<!-- column-contents in -->
-	<div id= "column-contents">
-		<!-- title in -->
-		<div class="title">
-			<div class="title_header">
-				<!-- detail in -->
-				<div class="fl restaurant_detail">
-					<h1 class="fl restaurant_name"><%=DetailList.getName()%></h1> 
-					<strong class="fl score">
-						<span><%=DetailList.getScore()%></span>
-					</strong>
-					<div style="clear:both;"></div>
-					<p class="branch"><%=DetailList.getBranch()%></p>
-		
-		            <!-- count in -->
-					<div id="status">
-						<div class="fl count"><img src="Images/icon_hitcount.png"> <%=DetailList.getHitcount2()%></div>
-						<div class="fl count"><img src="Images/icon_review_count.png"> <%=DetailList.getReview2()%></div>
-						<div class="fl count"><img src="Images/icon_wannago_count.png"> <%=DetailList.getWish2()%></div>
-					</div>	
-					<div style="clear:both;"></div>
-					<!-- count out -->
-				</div>
-				<!-- button in -->
-				<div class="fr button">
-	               	<!-- <button class="restaurant_wannago_button"> -->
-	             	<img id= "wannago_button" src="Images/icon_wannago.png"/><br/>
-	             	<span id="wannago">가고싶다</span>
-	               	<!-- </button> -->
-				</div>
-				<div class= "fr button">
-	               	<!-- <button class="restaurant_writer_button"> -->
-	               	<div class="writer_button">
-	              		<a href="mango_review.html">
-	               			<img class= "writer_button1" src="Images/icon_writer.png"/>
-	               			<img class= "writer_button2" src="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/review_writing_active_icon2.png"/>
-	               		</a>
-	               	</div>
-	               	<span id="writer">리뷰쓰기</span>
-	               	<!-- </button> -->
-	            </div>
-	            <div style="clear:both;"></div>
-				<!-- button out -->
-				<div>
-					<div class="line"></div>
-					<!-- table in -->
-					<div class="detail_table">
-						<table>
-							<tr>
-								<th>주소</th>
-								<td><%=DetailList.getStAddress()%><br/>
-									<span class="jibun_address_icon">지번</span>
-									<span class="jibun_address"><%=DetailList.getJibunAddress()%></span>
-								</td>
-							</tr>
-							<tr>
-								<th>전화번호</th>
-								<td><%=DetailList.getPhoneNum()%></td>
-							</tr>
-							<tr>
-								<th>음식 종류</th>
-								<td><%=DetailList.getType()%></td>
-							</tr>
-							<tr>
-								<th>가격대</th>
-								<td><%=DetailList.getPrice()%></td>
-							</tr>
-							<tr>
-								<th>주차</th>
-								<td><%=DetailList.getParking()%></td>
-							</tr>
-							<tr>
-								<th>영업시간</th>
-								<td><%=DetailList.getBusinessHour()%>
-								</td>
-							</tr>
-							<tr>
-								<th>휴일</th>
-								<td><%=DetailList.getDayOff()%></td>
-							</tr>
-							<tr>
-								<th>메뉴</th>
-								<td>
-									<ul>
-									<% for(MenuDTO menu : menuList){ %>
-										<li class="menu_list">
-											<span class="menu"><%=menu.getMenuName()%></span>
-											<span class="fr"><%=(menu.getMenuPrice())+"원"%></span>
-										</li>
-									<% } %>
-									</ul>
-								</td>
-							</tr>
-							<tr>
-								<th></th>
-								<td>
-									<div>	<!-- 메뉴판이미지 -->
-									<% for (mangoDetailsMenuDTO dto : menuImgList){ %>
-										<img class="fl menu_img" src="Images/TableMenuImg/<%=dto.getMenuImg()%>">
+	<div id="body_contents">
+		<div id= "column-contents" class="fl">
+			<!-- title in -->
+			<div class="title">
+				<div class="title_header">
+					<!-- detail in -->
+					<div class="fl restaurant_detail">
+						<h1 class="fl restaurant_name"><%=DetailList.getName()%></h1> 
+						<strong class="fl score">
+							<span><%=DetailList.getScore()%></span>
+						</strong>
+						<div style="clear:both;"></div>
+						<p class="branch"><%=DetailList.getBranch()%></p>
+			
+			            <!-- count in -->
+						<div id="status">
+							<div class="fl count"><img src="Images/icon_hitcount.png"> <%=DetailList.getHitcount2()%></div>
+							<div class="fl count"><img src="Images/icon_review_count.png"> <%=DetailList.getReview2()%></div>
+							<div class="fl count"><img src="Images/icon_wannago_count.png"> <%=DetailList.getWish2()%></div>
+						</div>	
+						<div style="clear:both;"></div>
+						<!-- count out -->
+					</div>
+					<!-- button in -->
+					<div class="fr button">
+		               	<!-- <button class="restaurant_wannago_button"> -->
+		             	<img id= "wannago_button" src="Images/icon_wannago.png"/><br/>
+		             	<span id="wannago">가고싶다</span>
+		               	<!-- </button> -->
+					</div>
+					<div class= "fr button">
+		               	<!-- <button class="restaurant_writer_button"> -->
+		               	<div class="writer_button">
+		              		<!-- <a href="mango_review.html"> -->
+		               			<img class= "writer_button1" src="Images/icon_writer.png"/>
+		               			<img class= "writer_button2" src="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/review_writing_active_icon2.png"/>
+		               		<!-- </a> -->
+		               	</div>
+		               	<span id="writer">리뷰쓰기</span>
+		               	<!-- </button> -->
+		            </div>
+		            <div style="clear:both;"></div>
+					<!-- button out -->
+					<div>
+						<div class="line"></div>
+						<!-- table in -->
+						<div class="detail_table">
+							<table>
+								<tr>
+									<th>주소</th>
+									<td><%=DetailList.getStAddress()%><br/>
+										<span class="jibun_address_icon">지번</span>
+										<span class="jibun_address"><%=DetailList.getJibunAddress()%></span>
+									</td>
+								</tr>
+								<tr>
+									<th>전화번호</th>
+									<td><%=DetailList.getPhoneNum()%></td>
+								</tr>
+								<tr>
+									<th>음식 종류</th>
+									<td><%=DetailList.getType()%></td>
+								</tr>
+								<tr>
+									<th>가격대</th>
+									<td><%=DetailList.getPrice()%></td>
+								</tr>
+								<tr>
+									<th>주차</th>
+									<td><%=DetailList.getParking()%></td>
+								</tr>
+								<tr>
+									<th>영업시간</th>
+									<td><%=DetailList.getBusinessHour()%>
+									</td>
+								</tr>
+								<%if(DetailList.getDayOff() != null){ %>
+								<tr>
+									<th>휴일</th>
+									<td><%=DetailList.getDayOff()%></td>
+								</tr>
+			                   <% } %>
+								<tr>
+									<th>메뉴</th>
+									<td>
+										<ul>
+										<% for(MenuDTO menu : menuList){ %>
+											<li class="menu_list">
+												<span class="menu"><%=menu.getMenuName()%></span>
+												<span class="fr"><%=(menu.getMenuPrice())+"원"%></span>
+											</li>
+										<% } %>
+										</ul>
+									</td>
+								</tr>
+								<tr>
+									<th></th>
+									<td>
+										<div>	<!-- 메뉴판이미지 -->
+										    <% for (mangoDetailsMenuDTO dto : menuImgList){ 
+                                    			if(dto.getMenuImg() != null){%>
+
+											<img class="fl menu_img" src="Images/TableMenuImg/<%=dto.getMenuImg()%>">
+											<% }
+	                                    	} %>	
+										</div>
+									</td>
+									<div style="clear:both;"></div>
+								</tr>
+							</table>
+						</div>	<!-- table out -->
+						<div class="menu_img_big">
+							<div class="img_area">
+								<div class="img_area_wrap">
+									<div class="img_area_img">
+									<%for(mangoDetailsMenuDTO dto : menuImgList){  %>
+										<div>
+											<img src="Images/TableMenuImg/<%=dto.getMenuImg() %>">
+										</div>
 									<% } %>	
 									</div>
-								</td>
-								<div style="clear:both;"></div>
-							</tr>
-						</table>
-					</div>	<!-- table out -->
-					<div class="menu_img_big">
+									<div class="img_area_button"></div>
+									<div class="img_area_small">
+										<div class="img_area_small_img" id="bx_pager2">
+										<script>
+											var arrayMenuComent = new Array(<%=menuImgList.size()%>);
+											var arrayMenuUpdateDate = new Array(<%=menuImgList.size()%>);
+										</script>
+										<%for (int i=0; i<=menuImgList.size()-1; i++){ %>
+											<script>
+												<%-- <%System.out.println(menuImgList.get(i).getUpdateDate2());%> --%>
+												arrayMenuComent[<%=i%>] = '<%=menuImgList.get(i).getComent() %>';
+												<%if(menuImgList.get(i).getUpdateDate2()!=null){%>
+													arrayMenuUpdateDate[<%=i%>] = '<%=menuImgList.get(i).getUpdateDate2().split(" ")[0] %>';
+												<% } %>
+											</script>
+										 	<a data-slide-index="<%=i %>" href=""><div class="fl img_area_small_img_dark" style="background-image: url(Images/TableMenuImg/<%=menuImgList.get(i).getMenuImg() %>);"></div></a>
+									    <% } %>
+										</div>
+									</div>
+								</div>
+								<div class="img_area_content">
+									<div class="img_area_content_title"><span><%=DetailList.getName()%></span></div>
+									<div class="img_area_content_content">
+										<div><%=menuImgList.get(0).getComent() %></div> 
+										<div><%=menuImgList.get(0).getUpdateDate2() %></div>
+									</div>
+								</div>
+								<div class="close_button"></div>
+							</div>
+						</div>
+						<div class="black_screen"></div>
+						<p class="update_date"> 업데이트 : <%=DetailList.getUpdate_date()%> </p>
+						<div class="line"></div>	<!-- 선나누기 -->
+					<!-- 리뷰 시작 -->
+					</div>	<!-- detail out -->
+				</div> <!-- title herder out -->
+				<div class="title_header2">
+					<div class="review_table">
+						<div class="review_list">
+						<% 	int sum=0;
+							int good=0;
+							int notBad=0;
+							int bad=0;
+							for(int i=0; i<=countList.size()-1; i++){
+								sum++;
+								if(countList.get(i) == 5){ good++; }
+								if(countList.get(i) == 3){ notBad++; }
+								if(countList.get(i) == 1){ bad++; }
+						  	}					
+						%>
+							<span class="review_title">리뷰</span>
+							<span class="review_count">(<%=sum %>)</span>
+							<span class="fr review_tasty_bad">별로다 (<%=bad %>)</span>
+							<span class="fr review_tasty_notBad">괜찮다 (<%=notBad %>)</span>
+							<span class="fr review_tasty_good">맛있다 (<%=good %>)</span>
+							<span class="fr review_tasty_like">전체 (<%=sum %>)</span>
+						</div>
+					</div>
+					<div class="review_content_list_Wrap">
+						<% for(mangoReviewDTO dto : reviewList) { %>
+							<div class="review_content_list" idx="<%=detailPk %>" mNum="<%=dto.getMember() %>">
+								<div class="fl review_user">
+									<div><img class="user_img" src="Images/Member_Img/<%=dto.getMemberImg()%>"></div>
+									<div class="user_name"><%=dto.getName()%></div>
+									<div class="user_count_wrap">
+										<div class="fl user_write_count"><div class="user_write_img"></div><%=dto.getWriteCount()%></div>
+										<div class="fl user_follow_count"><div class="user_follow_img"></div><%=dto.getFollowCount()%></div>
+										<div style="clear:both;"></div>
+									</div>
+									<% if(dto.getHolic()==1) {%>
+										<div class="user_level"><img class="user_level_img" src="Images/user_level.png"></div>
+									<% } %>
+								</div>
+								<div class="fl review_content">
+									<div class="user_review_writedate"><%=dto.getWritedate()%></div>
+									<p class="user_review"><%=dto.getComent()%></p>
+									<div class="user_review_img_list">
+									 	<div class="user_review_img_wrap">	
+										<% if(reviewList.size() != 0){
+											if(reviewDetailList!=null){
+												for(int i=0; i<=dto.getImgNum().length-1; i++) { 
+													if(i <= 2){ %>
+														<img class="fl user_review_img" number = "<%=reviewDetailList.getMemberNumber() %>" src="Images/Detail_Review_Img/<%=dto.getImgNum()[i]%>">
+												 <% } else if(i == 3) { %>
+														<img class="fl user_review_img" style="filter: brightness(0.4);" src="Images/Detail_Review_Img/<%=dto.getImgNum()[i]%>">
+														<span class="user_review_img_else">+<%=dto.getImgNum().length-1-i%></span>
+												 <% }
+											 	}
+											}
+										   } %>
+										   <div style="clear:both;"></div>
+										</div>	
+									</div>
+								</div>
+								<% if(dto.getTasty()==5){ %>
+									<div class="fl review_score">
+										<div class="icon_tasty_like_good"></div>
+										<div class="user_review_like">맛있다</div>
+									</div>
+								<% }else if(dto.getTasty()==3){ %>
+									<div class="fl review_score">
+										<div class="icon_tasty_like_notbad"></div>
+										<div class="user_review_like">괜찮다</div>
+									</div>
+								<% }else if(dto.getTasty()==1){ %>
+									<div class="fl review_score">
+										<div class="icon_tasty_like_bad"></div>
+										<div class="user_review_like">별로다</div>
+									</div>
+								<% } %>
+								<div style="clear:both; min-height:0 !important; height:0; border:none;"></div>
+							</div>	<!-- 리뷰끝 -->
+						<% } %>
+					</div>
+					<div class="user_review_img_big">
 						<div class="img_area">
 							<div class="img_area_wrap">
 								<div class="img_area_img">
-								<%for(mangoDetailsMenuDTO dto : menuImgList){  %>
-									<div>
-										<img src="Images/TableMenuImg/<%=dto.getMenuImg() %>">
-									</div>
-								<% } %>	
+								<%if(reviewDetailList!=null){ %>
+								<%for(int i=0; i<=reviewDetailList.getImg().length-1; i++) {%>
+									<div class="Bximg"><img src="Images/Detail_Review_Img/<%=reviewDetailList.getImg()[i] %>"></div>
+								<% }
+								}%>
+									<!-- <div><img src="https://mp-seoul-image-production-s3.mangoplate.com/47875_1664354631132577.jpg"></div>
+									<div><img src="https://mp-seoul-image-production-s3.mangoplate.com/47875_1664354633101170.jpg"></div>
+									<div><img src="https://mp-seoul-image-production-s3.mangoplate.com/47875_1664354633728158.jpg"></div> -->
 								</div>
-								<div class="img_area_button"></div>
+								<div class="img_area_button">
+				<!-- 					<img src="Images/icon_left.png">
+									<img src="Images/icon_right.png"> -->
+								</div>
 								<div class="img_area_small">
-									<div class="img_area_small_img" id="bx_pager2">
-									<script>
-										var arrayMenuComent = new Array(<%=menuImgList.size()%>);
-										var arrayMenuUpdateDate = new Array(<%=menuImgList.size()%>);
-									</script>
-									<%for (int i=0; i<=menuImgList.size()-1; i++){ %>
-										<script>
-											arrayMenuComent[<%=i%>] = '<%=menuImgList.get(i).getComent() %>';
-											arrayMenuUpdateDate[<%=i%>] = '<%=menuImgList.get(i).getUpdateDate2().split(" ")[0] %>';
-										</script>
-									 	<a data-slide-index="<%=i %>" href=""><div class="fl img_area_small_img_dark" style="background-image: url(Images/TableMenuImg/<%=menuImgList.get(i).getMenuImg() %>);"></div></a>
-								    <% } %>
+									<div class="img_area_small_img" id="bx_pager3">
+										 <a data-slide-index="0" href=""><div class="fl img_area_small_img_dark" style="background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/47875_1664354631132577.jpg);"></div></a>
+									 	 <a data-slide-index="1" href=""><div class="fl img_area_small_img_dark" style="background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/47875_1664354633101170.jpg);"></div></a>
+									 	 <a data-slide-index="2" href=""><div class="fl img_area_small_img_dark" style="background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/47875_1664354633728158.jpg);"></div></a>
+										 <div style="clear:both"></div>
 									</div>
 								</div>
 							</div>
 							<div class="img_area_content">
-								<div class="img_area_content_title"><span><%=DetailList.getName()%></span></div>
+								<div class="img_area_content_title"><span>농민백암왕순대</span></div>
+								<div class="img_area_user_items">
+									<div class="user_header">
+										<div class="fl user_header_img" style="background-image:url(Images/user_junyuong.jpg)"></div>
+										<div class="fl user_header_items_wrap">
+											<div class="user_header_items">
+												<div class="user_header_name">준영</div>
+												<div class="user_header_level"></div>
+											</div>
+											<div class="fl user_header_stat">
+												<div class="fl review_icon"></div>
+												<span class="fl user_count">4395</span>
+												<div class="fl follow_icon"></div>
+												<span class="fl user_count">1322</span>
+												<div style="clear:both"></div>
+											</div>
+										</div>	
+										<div class="fr tasty_like_wrap">
+											<div class="user_header_tasty_good"></div>
+											<div class="user_header_review_like">맛있다</div>
+										</div>
+										<div style="clear:both"></div>
+									</div>
+								</div>
 								<div class="img_area_content_content">
-									<div><%=menuImgList.get(0).getComent() %></div> 
-									<div><%=menuImgList.get(0).getUpdateDate2() %></div>
+									<div>오랜만에 다시 찾은 농민백암순대! 주말 점심 12시 좀 전에 방문했는데 웨이팅이 6팀 있었어요. 다행히 10~20분 안에 들어갈 수 있었답니다. 2인이었는데도 2인 테이블에 좁게 안앉히고 4인 테이블에 넉넉하게 앉혀주셔서 좋았어요. 앞치마도 먼저 챙겨주시고ㅎㅎ 순대국은 정식 안된대서 특으로 먹었는데 고기가 정말 바텀리스..! 순대가 쪼그맣게 4피스인건 조금 아쉬웠지만 부들부들 맛있는 고기가 가득해서 너무 좋았어요. 여기는 언제 먹어도 너무 맛있는 듯ㅎㅎㅎ</div>
+									<div>2022-09-28</div>
 								</div>
 							</div>
 							<div class="close_button"></div>
 						</div>
 					</div>
 					<div class="black_screen"></div>
-					<p class="update_date"> 업데이트 : <%=DetailList.getUpdate_date()%> </p>
-					<div class="line"></div>	<!-- 선나누기 -->
-				<!-- 리뷰 시작 -->
-				</div>	<!-- detail out -->
-			</div> <!-- title herder out -->
-			<div class="title_header2">
-				<div class="review_table">
-					<div class="review_list">
-					<% 	int sum=0;
-						int good=0;
-						int notBad=0;
-						int bad=0;
-						for(int i=0; i<=countList.size()-1; i++){
-							sum++;
-							if(countList.get(i) == 5){ good++; }
-							if(countList.get(i) == 3){ notBad++; }
-							if(countList.get(i) == 1){ bad++; }
-					  	}					
-					%>
-						<span class="review_title">리뷰</span>
-						<span class="review_count">(<%=sum %>)</span>
-						<span class="fr review_tasty_bad">별로다 (<%=bad %>)</span>
-						<span class="fr review_tasty_notBad">괜찮다 (<%=notBad %>)</span>
-						<span class="fr review_tasty_good">맛있다 (<%=good %>)</span>
-						<span class="fr review_tasty_like">전체 (<%=sum %>)</span>
+					<div id="more_list"> 
+						<!-- <div class="icon_more"> --><img class="fl icon_more1" src="Images/icon_more.png"><!-- </div> -->
+						<div class="fl more">더보기</div>
+						<!-- <div class="icon_more"> --><img class="fl icon_more2" src="Images/icon_more.png"><!-- </div> -->
+						<div style="clear:both;"></div>
 					</div>
-				</div>
-				<div class="review_content_list_Wrap">
-					<% for(mangoReviewDTO dto : reviewList) { %>
-						<div class="review_content_list" idx="<%=detailPk %>" mNum="<%=dto.getMember() %>">
-							<div class="fl review_user">
-								<div><img class="user_img" src="Images/Member_Img/<%=dto.getMemberImg()%>"></div>
-								<div class="user_name"><%=dto.getName()%></div>
-								<div class="user_count_wrap">
-									<div class="fl user_write_count"><div class="user_write_img"></div><%=dto.getWriteCount()%></div>
-									<div class="fl user_follow_count"><div class="user_follow_img"></div><%=dto.getFollowCount()%></div>
-									<div style="clear:both;"></div>
+				</div><!-- header2 out -->
+				<!-- header3 in -->
+				<div class="title_header3">
+					<%if(relatedList.size()!=0){%>
+					<!-- best 시작 -->
+					<div class="best_restaurant_title"><a href="MatzipDetail.jsp?idx=23" style="text-decoration: underline;"><%=relatedList.get(0).getR_list()%></a>에 있는 다른 식당</div>
+					<div class="best_restaurants_list">
+					
+					<%for(mangoDetailsRelatedDTO dto : relatedList) {%> 
+						<div class="fl best_restaurant_content1">
+							<a href="mango_details.jsp?detailPk=<%=dto.getId()%>">
+								<img class="best_restaurant_img" src="Images/Main_img/<%=dto.getImg()%>">
+								<div class="best_restaurant_name">
+									<span class="best_name"><%=dto.getName()%></span>
+									<strong class="best_score"><%=dto.getScore()%></strong>
+									<div class="best_category"><%=dto.getArea()%> - <%=dto.getType()%></div>
 								</div>
-								<% if(dto.getHolic()==1) {%>
-									<div class="user_level"><img class="user_level_img" src="Images/user_level.png"></div>
-								<% } %>
-							</div>
-							<div class="fl review_content">
-								<div class="user_review_writedate"><%=dto.getWritedate()%></div>
-								<p class="user_review"><%=dto.getComent()%></p>
-								<div class="user_review_img_list">
-								 	<div class="user_review_img_wrap">	
-									<% if(dto.getImg() != null){
-										for(int i=0; i<=dto.getImgNum().length-1; i++) { 
-											if(i <= 2){ %>
-												<img class="fl user_review_img" number = "<%=reviewDetailList.getMemberNumber() %>" src="Images/Detail_Review_Img/<%=dto.getImgNum()[i]%>">
-										 <% } else if(i == 3) { %>
-												<img class="fl user_review_img" style="filter: brightness(0.4);" src="Images/Detail_Review_Img/<%=dto.getImgNum()[i]%>">
-												<span class="user_review_img_else">+<%=dto.getImgNum().length-1-i%></span>
-										 <% }
-										 } 
-									   } %>
-									   <div style="clear:both;"></div>
-									</div>	
-								</div>
-							</div>
-							<% if(dto.getTasty()==5){ %>
-								<div class="fl review_score">
-									<div class="icon_tasty_like_good"></div>
-									<div class="user_review_like">맛있다</div>
-								</div>
-							<% }else if(dto.getTasty()==3){ %>
-								<div class="fl review_score">
-									<div class="icon_tasty_like_notbad"></div>
-									<div class="user_review_like">괜찮다</div>
-								</div>
-							<% }else if(dto.getTasty()==1){ %>
-								<div class="fl review_score">
-									<div class="icon_tasty_like_bad"></div>
-									<div class="user_review_like">별로다</div>
-								</div>
-							<% } %>
-							<div style="clear:both; min-height:0 !important; height:0; border:none;"></div>
-						</div>	<!-- 리뷰끝 -->
-					<% } %>
-				</div>
-				<div class="user_review_img_big">
-					<div class="img_area">
-						<div class="img_area_wrap">
-							<div class="img_area_img">
-							<%for(int i=0; i<=reviewDetailList.getImg().length-1; i++) {%>
-								<div class="Bximg"><img src="Images/Detail_Review_Img/<%=reviewDetailList.getImg()[i] %>"></div>
-							<% } %>
-								<!-- <div><img src="https://mp-seoul-image-production-s3.mangoplate.com/47875_1664354631132577.jpg"></div>
-								<div><img src="https://mp-seoul-image-production-s3.mangoplate.com/47875_1664354633101170.jpg"></div>
-								<div><img src="https://mp-seoul-image-production-s3.mangoplate.com/47875_1664354633728158.jpg"></div> -->
-							</div>
-							<div class="img_area_button">
-			<!-- 					<img src="Images/icon_left.png">
-								<img src="Images/icon_right.png"> -->
-							</div>
-							<div class="img_area_small">
-								<div class="img_area_small_img" id="bx_pager3">
-									 <a data-slide-index="0" href=""><div class="fl img_area_small_img_dark" style="background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/47875_1664354631132577.jpg);"></div></a>
-								 	 <a data-slide-index="1" href=""><div class="fl img_area_small_img_dark" style="background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/47875_1664354633101170.jpg);"></div></a>
-								 	 <a data-slide-index="2" href=""><div class="fl img_area_small_img_dark" style="background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/47875_1664354633728158.jpg);"></div></a>
-									 <div style="clear:both"></div>
-								</div>
-							</div>
+							</a>	
 						</div>
-						<div class="img_area_content">
-							<div class="img_area_content_title"><span>농민백암왕순대</span></div>
-							<div class="img_area_user_items">
-								<div class="user_header">
-									<div class="fl user_header_img" style="background-image:url(Images/user_junyuong.jpg)"></div>
-									<div class="fl user_header_items_wrap">
-										<div class="user_header_items">
-											<div class="user_header_name">준영</div>
-											<div class="user_header_level"></div>
-										</div>
-										<div class="fl user_header_stat">
-											<div class="fl review_icon"></div>
-											<span class="fl user_count">4395</span>
-											<div class="fl follow_icon"></div>
-											<span class="fl user_count">1322</span>
-											<div style="clear:both"></div>
-										</div>
-									</div>	
-									<div class="fr tasty_like_wrap">
-										<div class="user_header_tasty_good"></div>
-										<div class="user_header_review_like">맛있다</div>
-									</div>
-									<div style="clear:both"></div>
-								</div>
-							</div>
-							<div class="img_area_content_content">
-								<div>오랜만에 다시 찾은 농민백암순대! 주말 점심 12시 좀 전에 방문했는데 웨이팅이 6팀 있었어요. 다행히 10~20분 안에 들어갈 수 있었답니다. 2인이었는데도 2인 테이블에 좁게 안앉히고 4인 테이블에 넉넉하게 앉혀주셔서 좋았어요. 앞치마도 먼저 챙겨주시고ㅎㅎ 순대국은 정식 안된대서 특으로 먹었는데 고기가 정말 바텀리스..! 순대가 쪼그맣게 4피스인건 조금 아쉬웠지만 부들부들 맛있는 고기가 가득해서 너무 좋았어요. 여기는 언제 먹어도 너무 맛있는 듯ㅎㅎㅎ</div>
-								<div>2022-09-28</div>
-							</div>
-						</div>
-						<div class="close_button"></div>
-					</div>
-				</div>
-				<div class="black_screen"></div>
-				<div id="more_list"> 
-					<!-- <div class="icon_more"> --><img class="fl icon_more1" src="Images/icon_more.png"><!-- </div> -->
-					<div class="fl more">더보기</div>
-					<!-- <div class="icon_more"> --><img class="fl icon_more2" src="Images/icon_more.png"><!-- </div> -->
-					<div style="clear:both;"></div>
-				</div>
-			</div><!-- header2 out -->
-			<!-- header3 in -->
-			<div class="title_header3">
-				<!-- best 시작 -->
-				<div class="best_restaurant_title"><a href="https://www.mangoplate.com/top_lists/2892_hangover_gangnamstation" style="text-decoration: underline;"><%=relatedList.get(0).getR_list()%></a>에 있는 다른 식당</div>
-				<div class="best_restaurants_list">
-				<% for(mangoDetailsRelatedDTO dto : relatedList) { %>
-					<div class="fl best_restaurant_content1">
-						<a href="https://www.mangoplate.com/restaurants/-39YxkOe8auF">
-							<img class="best_restaurant_img" src="Images/Main_img/<%=dto.getImg()%>">
-							<div class="best_restaurant_name">
-								<span class="best_name"><%=dto.getName()%></span>
-								<strong class="best_score"><%=dto.getScore()%></strong>
-								<div class="best_category"><%=dto.getArea()%> - <%=dto.getType()%></div>
-							</div>
-						</a>	
-					</div>
-				<% } %>	
-					<div style="clear:both;"></div>
-				</div>	<!-- best out -->
-			<% if(topList.size() != 0){ %>
-				<div id="related_top">
-					<div class="related_top_title">관련 TOP 리스트</div>
-					<div>
-						<div class="related_top_list">
-							<div class="related_top_item">							
-								<div class="fl related_top_content1">
-									<a href="https://www.mangoplate.com/top_lists/WY7HXPG">
-										<div class="dark"></div>
-										<div class="image_below_dark" style="background-image : url(Images/Main_img/<%=topList.get(0).getImg()%>)"></div>
-										<div class="related_top_content_title"><%=topList.get(0).getTitle() %></div>
-										<div class="related_top_content_content">"<%=topList.get(0).getMent() %>"</div>
-									</a>
-								</div>
-							<% if(topList.size() >= 2){ %>
-								<div class="fl related_top_content2">
-									<a href="https://www.mangoplate.com/top_lists/-5LLZMO">
-										<div class="dark"></div>
-										<div class="image_below_dark" style="background-image : url(Images/Main_img/<%=topList.get(1).getImg()%>)"></div>
-										<div class="related_top_content_title"><%=topList.get(1).getTitle() %></div>
-										<div class="related_top_content_content">"<%=topList.get(1).getMent() %>"</div>
-									</a>
-								</div>
-							<% } %>	
-								<div style="clear:both;"></div>
-							</div>	
-							<div class="related_top_item">
-							<% if(topList.size() >= 3){ %>							
-								<div class="fl related_top_content3">
-									<a href="https://www.mangoplate.com/top_lists/LLTO9PC">
-										<div class="dark"></div>
-										<div class="image_below_dark" style="background-image : url(Images/Main_img/<%=topList.get(2).getImg()%>)"></div>
-										<div class="related_top_content_title"><%=topList.get(2).getTitle() %></div>
-										<div class="related_top_content_content">"<%=topList.get(2).getMent() %>"</div>
-									</a>
-								</div>
-							<% } %> 
-							<% if(topList.size() >= 4){ %>
-								<div class="fl related_top_content4">
-									<a href="https://www.mangoplate.com/top_lists/PVRODEM">
-										<div class="dark"></div>
-										<div class="image_below_dark" style="background-image : url(Images/Main_img/<%=topList.get(3).getImg()%>)"></div>
-										<div class="related_top_content_title"><%=topList.get(3).getTitle() %></div>
-										<div class="related_top_content_content">"<%=topList.get(3).getMent() %>"</div>
-									</a>
-								</div>
-							<% } %>	
-								<div style="clear:both;"></div>
-							</div>	
-						</div>	<!-- related_list out -->
-					</div>
-				</div>	<!-- related top out -->
-			<% } %>	
-			<% if(storyList.size() != 0 ) {%>
-				<div id="related_story">
-					<div class="related_story_title">관련 스토리</div>
+					<% } 
+					}%>	
+						<div style="clear:both;"></div>
+					</div>	<!-- best out -->
+				<% if(topList.size() != 0){ %>
+					<div id="related_top">
+						<div class="related_top_title">관련 TOP 리스트</div>
 						<div>
-							<div class="related_story_list">
-								<div class="related_story_item">
-									<div class="fl related_story_content1">
-										<a href="https://www.mangoplate.com/mango_picks/2441">
-											<div class="dark"></div>											
-											<div class="image_below_dark" style="background-image : url(Images/StoryMain_Img/<%=storyList.get(0).getImg()%>)"></div>
-											<div class="related_story_content_title"><%=storyList.get(0).getTitle() %></div>
-											<div class="related_story_content_content">"<%=storyList.get(0).getSubTitle() %>"</div>
+							<div class="related_top_list">
+								<div class="related_top_item">							
+									<div class="fl related_top_content1">
+										<a href="MatzipDetail.jsp?idx=22">
+											<div class="dark"></div>
+											<div class="image_below_dark" style="background-image : url(Images/Main_img/<%=topList.get(0).getImg()%>)"></div>
+											<div class="related_top_content_title"><%=topList.get(0).getTitle() %></div>
+											<div class="related_top_content_content">"<%=topList.get(0).getMent() %>"</div>
 										</a>
 									</div>
-								<% if(storyList.size() >= 2){ %>
-									<div class="fl related_story_content2">
-										<a href="https://www.mangoplate.com/mango_picks/2347">
+								<% if(topList.size() >= 2){ %>
+									<div class="fl related_top_content2">
+										<a href="MatzipDetail.jsp?idx=22">
 											<div class="dark"></div>
-											<div class="image_below_dark" style="background-image: url(Images/StoryMain_Img/<%=storyList.get(1).getImg()%>)"></div>
-											<div class="related_story_content_title"><%=storyList.get(1).getTitle() %></div>
-											<div class="related_story_content_content">"<%=storyList.get(1).getSubTitle() %>"</div>
-										</a>
-									</div>
-								<% } %>
-									<div style="clear:both;"></div>
-								</div>	
-								<div class="related_story_item">			
-								<% if(storyList.size() >= 3){ %>				
-									<div class="fl related_story_content3">
-										<a href="https://www.mangoplate.com/mango_picks/2316">
-											<div class="dark"></div>
-											<div class="image_below_dark" style="background-image: url(Images/StoryMain_Img/<%=storyList.get(2).getImg()%>)"></div>
-											<div class="related_story_content_title"><%=storyList.get(2).getTitle() %></div>
-											<div class="related_story_content_content">"<%=storyList.get(2).getSubTitle() %>"</div>
-										</a>
-									</div>
-								<% } %>
-								<% if(storyList.size() >= 4){ %>	
-									<div class="fl related_story_content4">
-										<a href="https://www.mangoplate.com/mango_picks/2172">
-											<div class="dark"></div>
-											<div class="image_below_dark" style="background-image: url(Images/StoryMain_Img/<%=storyList.get(3).getImg()%>)"></div>
-											<div class="related_story_content_title"><%=storyList.get(3).getTitle() %></div>
-											<div class="related_story_content_content">"<%=storyList.get(3).getSubTitle() %>"</div>
+											<div class="image_below_dark" style="background-image : url(Images/Main_img/<%=topList.get(1).getImg()%>)"></div>
+											<div class="related_top_content_title"><%=topList.get(1).getTitle() %></div>
+											<div class="related_top_content_content">"<%=topList.get(1).getMent() %>"</div>
 										</a>
 									</div>
 								<% } %>	
 									<div style="clear:both;"></div>
-								</div>
+								</div>	
+								<div class="related_top_item">
+								<% if(topList.size() >= 3){ %>							
+									<div class="fl related_top_content3">
+										<a href="MatzipDetail.jsp?idx=22">
+											<div class="dark"></div>
+											<div class="image_below_dark" style="background-image : url(Images/Main_img/<%=topList.get(2).getImg()%>)"></div>
+											<div class="related_top_content_title"><%=topList.get(2).getTitle() %></div>
+											<div class="related_top_content_content">"<%=topList.get(2).getMent() %>"</div>
+										</a>
+									</div>
+								<% } %> 
+								<% if(topList.size() >= 4){ %>
+									<div class="fl related_top_content4">
+										<a href="MatzipDetail.jsp?idx=22">
+											<div class="dark"></div>
+											<div class="image_below_dark" style="background-image : url(Images/Main_img/<%=topList.get(3).getImg()%>)"></div>
+											<div class="related_top_content_title"><%=topList.get(3).getTitle() %></div>
+											<div class="related_top_content_content">"<%=topList.get(3).getMent() %>"</div>
+										</a>
+									</div>
+								<% } %>	
+									<div style="clear:both;"></div>
+								</div>	
 							</div>	<!-- related_list out -->
 						</div>
-					</div>	<!-- related_story out -->
-					<% } %>
-			</div>	<!-- header3 out -->
-		</div>	<!-- title out -->
-		<!-- map in-->
-		<div class="side">
-			<div id="map"></div>
-			
-	<script>	//지도 위에 설정하면 ERR(body안에 사용해야함)
-	//----------------------------------------------------------------카카오지도
-		var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
-		mapOption = {
-		    center: new kakao.maps.LatLng(37.49491, 127.0315), // 지도의 중심좌표
-		    level: 3 // 지도의 확대 레벨
-		};
-		
-		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-		
-		//마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다
-		var positions = [
-		{
-		    content: '<div>농민백암왕순대</div>',
-		    latlng: new kakao.maps.LatLng(37.49491, 127.0315)
-		}
-		];
-		
-		for (var i = 0; i < positions.length; i ++) {
-		// 마커를 생성합니다
-		var marker = new kakao.maps.Marker({
-		    map: map, // 마커를 표시할 지도
-		    position: positions[i].latlng // 마커의 위치
-		});
-		
-		// 마커에 표시할 인포윈도우를 생성합니다
-		var infowindow = new kakao.maps.InfoWindow({
-		    content: positions[i].content // 인포윈도우에 표시할 내용
-		});
-		
-		// 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
-		// 이벤트 리스너로는 클로저를 만들어 등록합니다
-		// for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
-		kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
-		kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
-		}
-		
-		//인포윈도우를 표시하는 클로저를 만드는 함수입니다
-		function makeOverListener(map, marker, infowindow) {
-		return function() {
-		    	infowindow.open(map, marker);
-			};
-		}
-		
-		//인포윈도우를 닫는 클로저를 만드는 함수입니다
-		function makeOutListener(infowindow) {
-		return function() {
-		   		infowindow.close();
-			};
-		}
-	//-----------------------------------------------------------------------
-	</script>
-			<!-- map out-->
-			<div id="side_body">
-				<div class="near_restaurant">
-					<div class="near_title">주변 인기 식당</div>
-					<div class="near_items">
-					<% for(mangoDetailsNearDTO dto : nearList){ %>
-						<div class="near_content">
+					</div>	<!-- related top out -->
+				<% } %>	
+				<% if(storyList.size() != 0 ) {%>
+					<div id="related_story">
+						<div class="related_story_title">관련 스토리</div>
 							<div>
-								<a href="https://www.mangoplate.com/restaurants/t_t308ONIJ"><img class="fl near_img" src="Images/Main_img/<%=dto.getMainImg()%>"></a>
-								<div class="fl near_content_inner">
-									<div class="near_content_inner_box">
-										<a href="https://www.mangoplate.com/restaurants/t_t308ONIJ"><div class="fl near_name"><%=dto.getName() %></div></a>
-										<div class="fl near_score"><%=dto.getScore() %></div>
+								<div class="related_story_list">
+									<div class="related_story_item">
+										<div class="fl related_story_content1">
+											<a href="Mango_storyContent2.jsp?story_id=12">
+												<div class="dark"></div>											
+												<div class="image_below_dark" style="background-image : url(Images/StoryMain_Img/<%=storyList.get(0).getImg()%>)"></div>
+												<div class="related_story_content_title"><%=storyList.get(0).getTitle() %></div>
+												<div class="related_story_content_content">"<%=storyList.get(0).getSubTitle() %>"</div>
+											</a>
+										</div>
+									<% if(storyList.size() >= 2){ %>
+										<div class="fl related_story_content2">
+											<a href="Mango_storyContent2.jsp?story_id=13">
+												<div class="dark"></div>
+												<div class="image_below_dark" style="background-image: url(Images/StoryMain_Img/<%=storyList.get(1).getImg()%>)"></div>
+												<div class="related_story_content_title"><%=storyList.get(1).getTitle() %></div>
+												<div class="related_story_content_content">"<%=storyList.get(1).getSubTitle() %>"</div>
+											</a>
+										</div>
+									<% } %>
+										<div style="clear:both;"></div>
+									</div>	
+									<div class="related_story_item">			
+									<% if(storyList.size() >= 3){ %>				
+										<div class="fl related_story_content3">
+											<a href="Mango_storyContent2.jsp?story_id=14">
+												<div class="dark"></div>
+												<div class="image_below_dark" style="background-image: url(Images/StoryMain_Img/<%=storyList.get(2).getImg()%>)"></div>
+												<div class="related_story_content_title"><%=storyList.get(2).getTitle() %></div>
+												<div class="related_story_content_content">"<%=storyList.get(2).getSubTitle() %>"</div>
+											</a>
+										</div>
+									<% } %>
+									<% if(storyList.size() >= 4){ %>	
+										<div class="fl related_story_content4">
+											<a href="Mango_storyContent2.jsp?story_id=155">
+												<div class="dark"></div>
+												<div class="image_below_dark" style="background-image: url(Images/StoryMain_Img/<%=storyList.get(3).getImg()%>)"></div>
+												<div class="related_story_content_title"><%=storyList.get(3).getTitle() %></div>
+												<div class="related_story_content_content">"<%=storyList.get(3).getSubTitle() %>"</div>
+											</a>
+										</div>
+									<% } %>	
 										<div style="clear:both;"></div>
 									</div>
-									<div class="near_content_inner_box">
-										<div class="fl near_category1">음식 종류:</div>
-										<div class="fl near_category2"><%=dto.getType() %></div>
-										<div style="clear:both;"></div>
-									</div>
-									<div class="near_content_inner_box">
-										<div class="fl near_category1">위치:</div>
-										<div class="fl near_category2"><%=dto.getArea() %></div>
-										<div style="clear:both;"></div>
-									</div>
-									<div class="near_content_inner_box">
-										<div class="fl near_category1">가격대:</div>
-										<div class="fl near_category2"><%=dto.getPrice() %></div>
-										<div style="clear:both;"></div>
-									</div>
-								</div>
-								<div style="clear:both;"></div>
+								</div>	<!-- related_list out -->
 							</div>
+						</div>	<!-- related_story out -->
+						<% } %>
+				</div>	<!-- header3 out -->
+			</div>	<!-- title out -->
+			<!-- map in-->
+			<div class="fl side">
+				<div id="map"></div>
+				
+		<script>	//지도 위에 설정하면 ERR(body안에 사용해야함)
+		//----------------------------------------------------------------카카오지도
+			var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+			mapOption = {
+			    center: new kakao.maps.LatLng(<%=DetailList.getLatitude()%>, <%=DetailList.getLongitude()%>), // 지도의 중심좌표
+			    level: 3 // 지도의 확대 레벨
+			};
+			
+			var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+			
+			//마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다
+			var positions = [
+			{
+			    content: '<div>농민백암왕순대</div>',
+			    latlng: new kakao.maps.LatLng(<%=DetailList.getLatitude()%>, <%=DetailList.getLongitude()%>)
+			}
+			];
+			
+			for (var i = 0; i < positions.length; i ++) {
+			// 마커를 생성합니다
+			var marker = new kakao.maps.Marker({
+			    map: map, // 마커를 표시할 지도
+			    position: positions[i].latlng // 마커의 위치
+			});
+			
+			// 마커에 표시할 인포윈도우를 생성합니다
+			var infowindow = new kakao.maps.InfoWindow({
+			    content: positions[i].content // 인포윈도우에 표시할 내용
+			});
+			
+			// 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+			// 이벤트 리스너로는 클로저를 만들어 등록합니다
+			// for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+			kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+			kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+			}
+			
+			//인포윈도우를 표시하는 클로저를 만드는 함수입니다
+			function makeOverListener(map, marker, infowindow) {
+			return function() {
+			    	infowindow.open(map, marker);
+				};
+			}
+			
+			//인포윈도우를 닫는 클로저를 만드는 함수입니다
+			function makeOutListener(infowindow) {
+			return function() {
+			   		infowindow.close();
+				};
+			}
+		//-----------------------------------------------------------------------
+		</script>
+				<!-- map out-->
+				<div id="side_body">
+					<div class="near_restaurant">
+						<div class="near_title">주변 인기 식당</div>
+						<div class="near_items">
+						<% for(mangoDetailsNearDTO dto : nearList){ %>
+							<div class="near_content">
+								<div>
+									<a href="mango_details.jsp?detailPk=<%=dto.getId()%>"><img class="fl near_img" src="Images/Main_img/<%=dto.getMainImg()%>"></a>
+									<div class="fl near_content_inner">
+										<div class="near_content_inner_box">
+											<a href="https://www.mangoplate.com/restaurants/t_t308ONIJ"><div class="fl near_name"><%=dto.getName() %></div></a>
+											<div class="fl near_score"><%=dto.getScore() %></div>
+											<div style="clear:both;"></div>
+										</div>
+										<div class="near_content_inner_box">
+											<div class="fl near_category1">음식 종류:</div>
+											<div class="fl near_category2"><%=dto.getType() %></div>
+											<div style="clear:both;"></div>
+										</div>
+										<div class="near_content_inner_box">
+											<div class="fl near_category1">위치:</div>
+											<div class="fl near_category2"><%=dto.getArea() %></div>
+											<div style="clear:both;"></div>
+										</div>
+										<div class="near_content_inner_box">
+											<div class="fl near_category1">가격대:</div>
+											<div class="fl near_category2"><%=dto.getPrice() %></div>
+											<div style="clear:both;"></div>
+										</div>
+									</div>
+									<div style="clear:both;"></div>
+								</div>
+							</div>
+						<% } %>	
+						</div>	<!-- near_item out -->
+					</div>	<!-- near_restaurant out -->
+					<div class="related_hashtag">
+						<div class="hashtag_title">이 식당 관련 태그</div>
+						<div class="hashtag_items">
+						<% if(DetailList.getHashtag() != null){
+							for(int i=0; i<=DetailList.getHashtagArr().length-1; i++) { %>
+							<div class="fl hashtag_box">
+								<a href="Mango_popularSearch2.jsp?keyword=강남역">
+									<div class="hashtag">#<%=DetailList.getHashtagArr()[i] %></div>
+								</a>
+							</div>
+						<% 	} 
+						   }%>
+							<div style="clear:both;"></div>
 						</div>
-					<% } %>	
-					</div>	<!-- near_item out -->
-				</div>	<!-- near_restaurant out -->
-				<div class="related_hashtag">
-					<div class="hashtag_title">이 식당 관련 태그</div>
-					<div class="hashtag_items">
-					<% if(DetailList.getHashtag() != null){
-						for(int i=0; i<=DetailList.getHashtagArr().length-1; i++) { %>
-						<div class="fl hashtag_box">
-							<a href="https://www.mangoplate.com/search/%EC%97%90%EB%94%94%ED%84%B0">
-								<div class="hashtag">#<%=DetailList.getHashtagArr()[i] %></div>
-							</a>
-						</div>
-					<% 	} 
-					   }%>
-						<div style="clear:both;"></div>
 					</div>
-				</div>
-			</div>	<!-- side_body out -->
-		</div> <!--  side out -->
+				</div>	<!-- side_body out -->
+			</div> <!--  side out -->
+		</div>
 		<div id = "map2"></div>
 <script>	//지도 위에 설정하면 ERR(body안에 사용해야함)
 	//----------------------------------------------------------------카카오지도
 		var mapContainer = document.getElementById('map2'), // 지도를 표시할 div  
 		mapOption = {
-		    center: new kakao.maps.LatLng(37.49491, 127.0315), // 지도의 중심좌표
+		    center: new kakao.maps.LatLng(<%=DetailList.getLatitude()%>, <%=DetailList.getLongitude()%>), // 지도의 중심좌표
 		    level: 7 // 지도의 확대 레벨
 		};
 		
@@ -2156,7 +2136,7 @@ int tastyBad = 0;
 		var positions = [
 		{
 		    content: '<div>농민백암왕순대</div>',
-		    latlng: new kakao.maps.LatLng(37.49491, 127.0315)
+		    latlng: new kakao.maps.LatLng(<%=DetailList.getLatitude()%>, <%=DetailList.getLongitude()%>)
 		}
 		];
 		
@@ -2207,6 +2187,7 @@ int tastyBad = 0;
 </script>
 		<div class="black_screen"></div>
 	</div>	<!-- column-contents out -->
+	<div style="clear:both"></div>
 	<div class="footer">
 		<div class="footer_inner">
 			<div class="footer_logo">

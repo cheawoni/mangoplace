@@ -70,10 +70,12 @@
 <head>
 	<meta charset="UTF-8">
 	<title>망고스토리 디테일 - 전국 24시간 영업 맛집 10곳</title>
+	<link rel="icon" href="Images/profile/mango_favicon.png">
 	<link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css' rel='stylesheet' type='text/css'><!-- 망고폰트 -->
 	<link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css' rel='stylesheet' type='text/css'><!-- 망고폰트 -->
 	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-applesdgothicneo@1.0/all.min.css"><!-- APPLE SD Gothic NEO -->
 	<link rel='stylesheet' type='text/css' href='CSS/Mango_storyContent2.css'/>
+	<link rel="icon" href="Images/profile/mango_favicon.png">
 	<script src="https://code.jquery.com/jquery-3.6.2.js" integrity="sha256-pkn2CUZmheSeyssYw3vMp1+xyub4m+e+QK4sQskvuo4=" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.10/clipboard.min.js"></script>
 	<script>
@@ -150,22 +152,22 @@
 	        });
 	        
 			$("#div_header > .header_right").eq(3).find("span").click(function() {
-				alert("EAT딜 이동!");
-				location.href = "Mango_eatDeal.jsp";
+				//alert("EAT딜 이동!");
+				location.href = "eat_deal_main.jsp";
 			});
 			
 			$("#div_header > .header_right").eq(2).find("span").click(function() {
-				alert("맛집 리스트 이동!");
+				//alert("맛집 리스트 이동!");
 				location.href = "Matziplist.jsp";
 			});
 			
 			$("#div_header > .header_right").eq(1).find("span").click(function() {
-				alert("망고 스토리 이동!");
+				//alert("망고 스토리 이동!");
 				location.href = "Mango_storyList.jsp";
 			});
 			
 			$("#img_logo").click(function() {
-				alert("망고플레이트 이동!");
+				//alert("망고플레이트 이동!");
 				location.href = "MangoMain.jsp"
 			});
 

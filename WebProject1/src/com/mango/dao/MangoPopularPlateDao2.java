@@ -14,7 +14,7 @@ public class MangoPopularPlateDao2 {
 		Connection conn = null;
 		
 		String driver = "oracle.jdbc.driver.OracleDriver";
-		String url = "jdbc:oracle:thin:@localhost:1521:xe";   // localhost --> 203.245.30.223
+		String url = "jdbc:oracle:thin:@203.245.30.223:1521:xe";   // localhost --> 203.245.30.223
 		String dbId = "mango";
 		String dbPw = "1234";
 		

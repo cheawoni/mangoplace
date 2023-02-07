@@ -10,7 +10,7 @@ public class JoinDAO {
 		Connection conn = null;
 		
 		String driver = "oracle.jdbc.driver.OracleDriver";
-		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+		String url = "jdbc:oracle:thin:@203.245.30.223:1521:xe";
 		String dbId = "mango";
 		String dbPw = "1234";
 		
@@ -28,7 +28,7 @@ public class JoinDAO {
 
 	public void insertmember(JoinDTO dto) throws Exception {
 		Connection conn = getConnection();
-		String sql = "INSERT INTO member_table(member_number, member_id, email, password, phone )"
+		String sql = "INSERT INTO member(member_number, member_id, email, password, phone )"
 				+ " VALUES (member_seq.nextval, ?, ?, ?, ?)";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, dto.getMember_id());
@@ -44,7 +44,7 @@ public class JoinDAO {
 	
 	public boolean loginCheck(String email, String passw) throws Exception {
 		Connection conn = getConnection();
-		String sql = "SELECT count(*) FROM member_table WHERE email=? AND password=?";
+		String sql = "SELECT count(*) FROM member WHERE email=? AND password=?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, email);
 		pstmt.setString(2, passw);

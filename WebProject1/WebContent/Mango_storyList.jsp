@@ -36,9 +36,10 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>망고플레이트 스토리 - 당신을 위해 엄선한 추천 맛집</title>
+	<title>망고플레이스 스토리 - 당신을 위해 엄선한 추천 맛집</title>
 	<link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css' rel='stylesheet' type='text/css'><!-- 망고폰트 -->
 	<link rel='stylesheet' type='text/css' href='CSS/Mango_storyList.css'/>
+	<link rel="icon" href="Images/profile/mango_favicon.png">
 	<script src="https://code.jquery.com/jquery-3.6.2.js" integrity="sha256-pkn2CUZmheSeyssYw3vMp1+xyub4m+e+QK4sQskvuo4=" crossorigin="anonymous"></script>
 	<script>
 		// 여기부터 쿠키쿠키 ------------------------------------------------------------------------------
@@ -92,23 +93,23 @@
 			});
 			
 			$("#div_header > .header_right").eq(3).find("span").click(function() {
-				alert("EAT딜 이동!");
-				location.href = "Mango_eatDeal.jsp";
+				//alert("EAT딜 이동!");
+				location.href = "eat_deal_main.jsp";
 			});
 			
 			$("#div_header > .header_right").eq(2).find("span").click(function() {
-				alert("맛집 리스트 이동!");
+				//alert("맛집 리스트 이동!");
 				location.href = "Matziplist.jsp";
 			});
 			
 			$("#div_header > .header_right").eq(1).find("span").click(function() {
-				alert("망고 스토리 이동!");
+				//alert("망고 스토리 이동!");
 				location.href = "Mango_storyList.jsp";
 			});
 			
 			$("#img_logo").click(function() {
-				alert("망고플레이트 이동!")
-				location.href = "Mango_home.jsp"
+				//alert("망고플레이스 이동!")
+				location.href = "MangoMain.jsp"
 			});
 			
 			$("#searchkeyword, #searchsubkeyword").keydown(function(key) {	// 콤마로 구분
@@ -193,10 +194,14 @@
 			});
 // 헤더 인기검색어 팝업창 끝--------------------------------------------------------------------------------------
 
-			$(document).on("click",".storyList_wrap > .list_item", function() {
+			/* $(document).on("click",".storyList_wrap > .list_item", function() {
 				var idx = $(this).attr('storyid');
-				alert("idx : " + idx);
-				location.href = "Mango_storyList.jsp" + "?story_id=" + idx;  
+				//alert("idx : " + idx);
+				location.href = "Mango_storyList.jsp?story_id=" + idx;  
+			}); */
+			
+			$(".storyList_wrap > .list_item").click(function() {	
+				location.href = "Mango_storyContent2.jsp" + "?story_id="+Number($(this).attr('storyid'));
 			});
 			
 			$(".btn_more").click(function(){

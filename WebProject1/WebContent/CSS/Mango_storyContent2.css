@@ -555,6 +555,7 @@
 		} */
 		.content_moreView_item_img {
 		    background-position: 50% 50%;
+	        background-size: cover;
 		    border-radius: 10px;
 		    width: 205px;
 		    height: 205px;

@@ -1,0 +1,597 @@
+@charset "UTF-8";
+		@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
+		* {
+			font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+			margin: 0;
+			padding: 0;
+		}
+		#header{
+			position:fixed;
+			top:0;
+			left:0;
+			z-index:900;
+			width:100%;
+			height:61px;
+			border-bottom:1px solid #DBDBDB;
+			box-sizing:border-box;
+			box-shadow:0 4px 11px rgb(0 0 0 / 10%);
+			background-color:#FFFFFF;
+		}
+		a{ text-decoration: none; }
+		.logo_box{
+			margin:0 25px;
+			width: 100px;
+   			height: 33px;
+   			margin-top: 13px;
+		}
+		#logo{
+			width: 106px;
+		    height: 33px;
+		    background-position: center;
+		    background-image: url(../Images/logo.png);
+		    background-size: cover;
+		}
+		#review_writingpage{
+			display:block;
+			width: 678px;
+/* height: 590.725px; */
+    		margin: 101px auto 62px;
+		}
+		
+		.review_writingpage_title{
+			display:flex;
+			margin-bottom: 20px;
+		}
+		.review_writingpage_restaurant_name{
+			max-width: 400px;
+		    font-size: 28px;
+		    line-height: 1.462;
+		    color: #ff7100;
+		    font-weight:400;
+		}
+		.review_writingpage_restaurant_submessagewrap{
+			position: relative;
+    		margin-left: 4px;
+		}
+		.review_writingpage_restaurant_submessage{
+			font-size: 16px;
+			line-height:23.2px;
+		    width: 270px;
+		    margin: 0;
+		    position: absolute;
+		    top: 24.55px;
+		    transform: translateY(-50%);
+    		line-height: 23.2px;
+    		color: #7F7F7F;
+		    font-weight:400;
+		}
+		.review_writingpage_content{
+			display:flex;
+		}
+		.review_writingpage_contentwrap1{
+		    width: 678px;
+		}
+		.review_writingpage_contentwrap3{
+   		    border: 1px solid #DBDBDB;
+		    box-sizing: border-box;
+		    border-radius: 3px;
+		    padding: 16px;
+		}
+		.review_writingpage_tastylike{
+			margin-bottom: 20px;	
+		}
+		.tastylike{
+			margin-right: 24px;
+		}
+		.tastylike.active > .tastylike_good{
+			background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/restaurant_recommend_active_face.svg);
+		}
+		.tastylike:not(.active) > .tastylike_good{
+			background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/restaurant_recommend_face.svg);
+		}
+		.tastylike.active > .tastylike_notbad{
+			background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/restaurant_ok_active_face.svg);
+		}
+		.tastylike:not(.active) > .tastylike_notbad{
+			background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/restaurant_ok_face.svg);
+		}
+		.tastylike.active > .tastylike_bad{
+			background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/restaurant_not_recommend_active_face.svg);
+		}
+		.tastylike:not(.active) > .tastylike_bad{
+			background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/restaurant_not_recommend_face.svg);
+		}
+		.tastylike.active > .tastylike_content{
+			color: #ff7100;
+		}
+		.tastylike:not(.active) > .tastylike_content{
+			color: #CBCBCB;
+		}
+		.tastylike_good{
+			display: inline-block;
+ 		   	width: 36px;
+		   	height: 36px;
+		   	margin-right: 8px;
+		   	background-size: cover;
+		}
+		.tastylike_notbad{
+			display: inline-block;
+ 		   	width: 36px;
+		   	height: 36px;
+		   	margin-right: 8px;
+		   	background-size: cover;
+		}
+		.tastylike_bad{
+			display: inline-block;
+ 		   	width: 36px;
+		   	height: 36px;
+		   	margin-right: 8px;
+		   	background-size: cover;
+		}
+		.tastylike_content{
+			display: block;
+		    font-size: 14px;
+		    margin-top: 8px;
+		    
+		}
+		button{
+		    cursor: pointer;
+		    border: 0px;
+		    border-radius: 0;
+		    background-color: transparent;
+		}
+		.review_content{
+			display: block;
+		    width: 100%;
+		    height: 150px;
+		    border: 0;
+		    font-size: 16px;
+			font-weight:300;
+		    color: #000000;
+		    resize: none;
+	 	    outline-color: #FFFFFF;
+		}
+ 		.review_content::placeholder {
+			color: #CBCBCB;
+		}
+   		.review_content:focus::placeholder {
+			color: #CBCBCB;
+		}
+ 		.review_content:focus {
+			outline: none;	/* 이게 없으면, textarea에 클릭만 한 상태에서는, 커서가 아직 보이지 않음 */
+			caret-color: #CBCBCB;
+		}
+		
+		.review_text_length{
+		    font-size: 12px;
+		    line-height: normal;
+		    color: #7F7F7F;	
+		    margin-top:4px;
+		}
+		.review_writingpage_imgwrap{
+			position: relative;
+		    width: 676px;
+		    margin-bottom: 41px;
+		}
+		.review_img_countwrap{
+    		margin-left: 54px;
+		    display: block;
+	        width: 89px;
+		    font-size: 12px;
+			font-weight: 300;
+		    text-align: right;
+		    color: #7F7F7F;
+		}
+		#review_imgwrap{
+			width:686px;
+			min-height: 98px;
+		}
+		.review_img{
+/* 			position: absolute;
+		    left: 0px;
+   			top: 0px; */
+   			display: block;
+   			width:89px;
+   			height:89px;
+		    margin-right: 9px;
+		    margin-bottom: 9px;
+		}
+		.review_img_button{
+			display:flex;
+			justify-content: center;
+			align-items: center;
+   			width:89px;
+   			height:89px;
+		    border: 1px dashed #DBDBDB;
+		    cursor: pointer;
+		}
+		.preview > img{
+			width:89px;
+   			height:89px;
+   			cursor: pointer;
+   			margin-left: 5px;
+		}
+		.review_img_plus_icon{
+			width: 27px;
+   			height: 27px;
+			background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/plus_icon.svg);
+			background-size: cover;
+		}
+		.review_img_plus{
+			background-size:cover;
+			width:89px;
+   			height:89px;
+   			cursor: pointer;
+   			z-index:2;
+   			position:relative;
+   			margin-right: 5px;
+		}
+		.dark{
+			position:absolute;
+			background-color:rgba(0,0,0,0.5);
+			width:89px;
+   			height:89px;
+   			z-index:3;
+   			display:none;
+		}
+		.close_icon{
+			position:absolute;
+			z-index:3;
+			top: 8px;
+    		right: 8px;
+			width: 13px;
+		    height: 13px;
+			background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/pc-delete-review-photo.svg);
+		}
+		.widely_icon{
+			position:absolute;
+			z-index:3;
+			bottom: 8px;
+    		left: 8px;
+		    width: 13px;
+		    height: 13px;
+			background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/pc-review-photo-extend.svg);
+		}
+/* 		.background_darkwrap{
+			position:relative;
+		} */
+		.img_background_dark{
+display:none;
+			transform: translate(-50%, -50%);
+		    position: fixed;
+		    top: 50%;
+		    left: 50%;
+			width:100%;
+			height: 100%;		
+		    z-index: 1000;
+			background-color:rgba(0,0,0,0.6);
+		}
+		.widely_imgwrap{
+	    	width: 1247.4px;
+	    	height: 629.412px;
+/* 		    min-width: 0px;
+		    max-width: 100%; */
+		    padding: 30px 0;
+    		background-color: #000000;
+			position: absolute;
+			transform: translate(-50%, -50%);
+    		top: 50%;
+    		left: 50%;
+		}
+		.widely_img_content{
+	    	width: 1247px;
+	    	height: 524px;
+		}
+		.widely_img{
+			background-image: url(https://s3-ap-northeast-2.amazonaws.com/mp-seoul-image-production/sources/web/restaurants/87430/2386738_1670544569808); 
+ 			background-size: cover;
+ 			width: 698.667px;
+		    height: 524px;
+		    left: 274.167px;
+ 		    position:absolute;
+		   /* top: 0px; */
+		}
+		.widely_img_arrow_next{
+		    background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/2018022864551sprites_desktop.png);
+		    background-position: -935px -332px;
+		    width: 28px;
+		    height: 45px;
+		    right: 25px;
+		}
+		.widely_img_arrow_prev{
+   		 	background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/2018022864551sprites_desktop.png);
+    		background-position: -935px -281px;	       	
+		    width: 28px;
+		    height: 45px;
+	       	left: 25px;
+		}
+		.widely_img_arrow_button{
+		    transform: translateY(-50%);
+    		position: absolute;
+    		top: 50%;
+		    opacity: .5;
+		}
+		.widely_small_contentwrap{
+			margin-top:37.4125px;
+		}
+		.widely_small_content{
+		    width: 1247px;
+		}
+		.widely_small_imgwrap2{
+		    display:flex; 
+		    justify-content: center;
+		}
+		.widely_small_img{
+			background-size:cover;
+			background-position:50%;
+			width: 60px;
+    		height: 60px;
+		    padding: 2px;
+		    margin-right: 2px;
+		    margin-top: 2px;
+		}
+		.widely_small_img:not(.on){
+			filter: brightness(0.5);
+		}
+		.widely_img_close_buttonwrap{
+			display: flex;
+			justify-content: center;
+			position: absolute;
+		    top: 25px;
+		    right: 25px;
+		    width: 30px;
+		    height: 30px;
+		}
+		.widely_img_close_button{
+			width: 21px;
+		    height: 21px;
+		    background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/white_close.svg);
+		    background-size: cover;
+		}
+		.review_writingpage_buttons{
+			display:flex;
+		    width: 678px;
+		}
+		.review_later_button_Deactive{
+			min-width: 140px;
+		    min-height: 50px;
+		    margin-right: 34px;
+		    padding-left: 14px;
+		    padding-right: 14px;
+		    border: 1px solid #CBCBCB;
+		    border-radius: 50px;
+    		color: #CBCBCB;
+		    font-weight:300;
+		    font-size: 15px;
+		    text-align: center;
+    		background-color: #FFFFFF;
+    		cursor: not-allowed;
+		}
+		.review_later_button{
+			min-width: 140px;
+		    min-height: 50px;
+		    margin-right: 34px;
+		    padding-left: 14px;
+		    padding-right: 14px;
+		    border: 1px solid #ff7100;
+		    border-radius: 50px;
+		    color: #ff7100;
+		    font-weight:300;
+		    font-size: 16px;
+		    text-align: center;
+    		background-color: #FFFFFF;
+		}
+		.review_writing_button_wrap{
+			display:flex;
+			justify-content: flex-end;
+			box-pack: end;
+			width:678px;
+		}
+		.review_cancel_button{
+			min-width: 140px;
+		    min-height: 50px;
+		    margin-right: 16px;
+		    padding-left: 14px;
+		    padding-right: 14px;
+		    border: 1px solid #7F7F7F;
+		    border-radius: 50px;
+		    font-size: 16px;
+		    font-weight:300;
+		    color: #7F7F7F;
+		    text-align: center;
+		    background-color: #FFFFFF;
+		}
+		.review_submit_button{
+			min-width: 140px;
+		    min-height: 50px;
+		    padding-left: 14px;
+		    padding-right: 14px;
+		    border-radius: 50px;
+    		font-size: 16px;
+    		font-weight:300;
+    		text-align: center;
+			color: #FFFFFF;
+			background-color: #ff7100;
+		}
+		.review_submit_button_Deactive{
+			border-color: #E9E9E9;
+		    background-color: #E9E9E9;
+		    color: #FFFFFF;
+		    cursor: not-allowed;
+		}
+		.fl{
+			float:left;
+		}
+		.fr{
+			float:right;
+		}
+		.review_cancel_background_dark{
+display:none;
+			position: fixed;
+	   	 	top: 0;
+	    	left: 0;
+			width:100%;
+			height:100%;
+			z-index: 2000;
+			background-color: rgba(0,0,0,0.4);
+		}
+		.review_LaterWrite_background_dark{
+display:none;
+			position: fixed;
+	   	 	top: 0;
+	    	left: 0;
+			width:100%;
+			height:100%;
+			z-index: 2000;
+			background-color: rgba(0,0,0,0.4);
+		}
+		.review_cancelWrap {
+			transform: translate(-50%, -50%);
+			position: absolute;
+		    top: 50%;
+		    left: 50%;
+		    width: 370px;
+		    height: 167px;
+		    border-radius: 4px;
+		    background-color: #FFFFFF;
+		}
+		.review_cancel_content{
+			padding: 32px 24px 24px;
+		    font-size: 16px;
+		    line-height: 25px;
+		    color: #333333;
+		    text-align: center;
+		}
+		.review_cancel_items{
+			border-top: 1px solid #DBDBDB;
+			display:flex;
+		}
+		.review_cancel_btn{
+			flex:1;
+			height: 60px;
+		    padding: 0 15px;
+		    border-right: 1px solid #DBDBDB;
+		    font-size: 16px;
+		    font-weight: 700;
+	        color: #4F4F4F;
+		    text-align: center;
+		}
+		.review_LaterWrite_cancel_btn{
+			flex:1;
+			height: 60px;
+		    padding: 0 15px;
+		    border-right: 1px solid #DBDBDB;
+		    font-size: 16px;
+		    font-weight: 700;
+	        color: #4F4F4F;
+		    text-align: center;
+		}
+		.review_cancel_items > button:nth-child(2){
+		    color: #ff7100;
+		}
+		.review_cancel_items > button:hover{
+			background-color:#EDEDED;
+		}
+		.new_Review_Update_Img_Wrap{
+		    transform: translate(-50%, -50%);
+		    position: absolute;
+		    top: 50%;
+		    left: 50%;
+		    min-width: 1px;
+		    min-height: 1px;
+		    z-index: 1100;
+		    display:none;
+		}
+		.new_Review_Update_Img{
+			width: 1247.4px;
+   			min-width: 0px;
+    		max-width: 100%;
+    		padding: 30px 0;
+    		background-color: #000000;
+		}
+		.review_Update_Img_wrap{
+		    width: 1247px;
+   		 	height: 524px;
+		}
+		.review_Update_Img{
+			/* background-size:cover; */
+			width: 698.667px;
+    		height: 524px;
+    		position:absolute;
+    		left: 274.167px;
+   		    background-size: contain;
+		    background-repeat: no-repeat;
+		    background-position: center;
+		}
+		.close_button{
+			position:absolute;
+			background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/white_close.svg);
+    		background-size: cover;
+	   		width: 21px;
+	   		height: 21px;
+	   		top: -10px;
+	   		right: -31px;
+		}
+		.black_screen{
+		    position: fixed;
+		    top: 0;
+		    left: 0;
+		    width: 100%;
+		    height: 100%;
+		    z-index: 1000;
+		    background-color: rgba(0,0,0,0.6);
+			display: none;
+		}
+		.review_Big_Img_Wrap{
+			transform: translate(-50%, -50%);
+		    position: absolute;
+		    top:309.8px;
+		    left: 50%;
+		    width: 1247.4px;
+		    min-width: 0px;
+	    	max-width: 100%;
+	   		background-color: #000000;
+	   		z-index: 1100;
+		    padding: 30px 0;
+			display: none;
+		}
+		.review_Big_Img_Items_Wrap{
+			display:flex;
+			justify-content: center;
+		    height: 524px;
+		}
+		.review_Big_Img_Items{
+		    width: 1247px;
+	   		height: 524px;
+		}
+		.review_Big_Img{
+	/* 		position:absolute;
+	    	left: 361.5px;
+	 */		background-size: cover;
+			width: 524px;
+	    	height: 524px;
+		}
+		.review_Big_Img_Content_Wrap{
+			cursor: pointer;
+	  		margin-top: 3%;
+	  		text-align: center;
+		}
+		.review_Big_Img_Content_Items{
+			display:flex;
+		    justify-content: center;
+		}
+		.review_Big_Img_Content{
+			width: 64px;
+	   		height: 64px;
+	   		background-size:cover;
+		}
+		.close_button{
+			position:absolute;
+			width: 21px;
+		    height: 21px;
+		    background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/white_close.svg);
+		    background-size: cover;
+		    top: 25px;
+		    right: 30px;
+			cursor: pointer;	    
+		}

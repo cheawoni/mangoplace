@@ -26,10 +26,11 @@
 <!DOCTYPE html>
 
 <html lang="kor">
- <link rel="stylesheet" href="mango_bener.css">
+
 <head>
 
     <meta charset="UTF-8">
+    <link rel="icon" href="Images/profile/mango_favicon.png">
     <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>eat_deal</title>
@@ -80,24 +81,27 @@
      });
     $(function(){
     	$("#div_header > .header_right").eq(3).find("span").click(function() {
-            alert("EAT딜 이동!");
-            location.href = "Mango_eatDeal.jsp";
+            //alert("EAT딜 이동!");
+            location.href = "eat_deal_main.jsp";
          });
          
          $("#div_header > .header_right").eq(2).find("span").click(function() {
-            alert("맛집 리스트 이동!");
-            location.href = "Mango_resturantList.jsp";
+           // alert("맛집 리스트 이동!");
+            location.href = "Matziplist.jsp";
          });
          
          $("#div_header > .header_right").eq(1).find("span").click(function() {
-            alert("망고 스토리 이동!");
+          //  alert("망고 스토리 이동!");
             location.href = "Mango_storyList.jsp";
          });
          
          $("#img_logo").click(function() {
-            alert("망고플레이트 이동!");
-            location.href = "Mango_home.jsp"
+          //  alert("망고플레이트 이동!");
+            location.href = "MangoMain.jsp";
          });
+         
+         
+         
     $(".input_search_backgroundDark").click(function() {
     $(this).parent().removeClass("open");
     }); 
@@ -295,6 +299,7 @@
     						let list = data;
     						//alert(list[0].area);
     						//console.log(list.size);
+    						
     						$.each(data,function(idx,e){
     							let display1 = "";
     							let display2 = "";
@@ -399,6 +404,7 @@
           margin-top: 13px;
           width: 100px;
           height: 33px;
+          cursor: pointer;
          }
       #img_search {   /* (2)헤더 서치아이콘 로고 */
          margin-left: 40px;
@@ -413,11 +419,11 @@
          position: relative;
          font-size: 16px;
          color: #888888;
-          height: 100%;
-          border-left: 1px solid #dbdbdb;   /* 왼쪽 선 추가 */
+         height: 100%;
+         border-left: 1px solid #dbdbdb;   /* 왼쪽 선 추가 */
       }
       body > #div_header > div:nth-child(2) > label {      /* (2)헤더 왼쪽 서치아이콘 */
-         margin-top: -27px;
+         margin-top: -31px;
          display: block;
          margin-left: 95px;
       }
@@ -464,6 +470,9 @@
       body > #div_header > div:nth-child(6) { /* (6)헤더 오른쪽 EAT딜 아이콘 */
          width: 129px;
          text-align: center;
+      }
+      .header_right {
+    	 cursor: pointer;
       }
       .header_right_new::after {
           content: '';

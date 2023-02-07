@@ -10,8 +10,7 @@
    		word-wrap: break-word;
    		border: 0 none;
 	}
-	
-/* ///////////////////////////  헤더 시작   ////////////////////////////////////////////////// */
+	/* ///////////////////////////  헤더 시작   ////////////////////////////////////////////////// */
       #div_header {   /* 망고 헤더부분 로고,검색기능 등등... */
          position: fixed;
          border-bottom: 1px solid #DBDBDB;
@@ -115,76 +114,70 @@
          margin-top: 22px;
          line-height: 16px;
       }
-      .fl { 
-            float:left;
-        }
-        .fr { 
-            float:right;
-        }
-        /* 인기검색어 팝업창 시작*/
-        .input_search_keyword_open {
-           display: block;
-        }
-        .input_search_keyword:not(.open) {
-           display: none;
-        }
-        .input_search_backgroundDark {
-           display : block;
-           /* display: none;  input_search_open이 되면 none으로 바뀜.*/
-          position: fixed;
-          top: 0;
-          left: 0;
-          z-index: 890;
-          width: 100%;
-          height: 100%;
-          background-color: rgba(0,0,0,0.8);
-        }
-        .input_search_content {
-            position: fixed;
-            top: 61px;
-          left: 214px;
-          z-index: 1100;
-          width: 660px;
-          border: 1px solid #DBDBDB;
-          border-top: 0;
-          border-radius: 0 0 3px 3px;
-          box-sizing: border-box;
-          background-color: #FFFFFF;
-        }
-        .input_search_content_inner {
-           padding: 0 24px;
-        }
-        .input_search_content_list {
-           display: flex;
-          flex-wrap: nowrap;
-          justify-content: space-around;
-          align-items: center;
-           height: 50px;
-            position: relative;
-          width: 100%;
+       /* 인기검색어 팝업창 시작*/
+       .input_search_keyword_open {
+          display: block;
+       }
+       .input_search_keyword:not(.open) {
+          display: none;
+       }
+       .input_search_backgroundDark {
+          display : block;
+          /* display: none;  input_search_open이 되면 none으로 바뀜.*/
+         position: fixed;
+         top: 0;
+         left: 0;
+         z-index: 890;
+         width: 100%;
+         height: 100%;
+         background-color: rgba(0,0,0,0.8);
+       }
+       .input_search_content {
+           position: fixed;
+           top: 61px;
+         left: 214px;
+         z-index: 1100;
+         width: 660px;
+         border: 1px solid #DBDBDB;
+         border-top: 0;
+         border-radius: 0 0 3px 3px;
+         box-sizing: border-box;
+         background-color: #FFFFFF;
+       }
+       .input_search_content_inner {
+          padding: 0 24px;
+       }
+       .input_search_content_list {
+          display: flex;
+         flex-wrap: nowrap;
+         justify-content: space-around;
+         align-items: center;
+          height: 50px;
+           position: relative;
+         width: 100%;
+         border-bottom: 1px solid #DBDBDB;
+          font-size: 16px;
+         color: #7F7F7F;
+       }
+       .input_search_content_keywordList {
+          display: flex;
+         padding: 0px 5px;
+         height: 60px;
+         align-items: center;
           border-bottom: 1px solid #DBDBDB;
-           font-size: 16px;
-          color: #7F7F7F;
+          cursor: pointer;
+       }
+       .keywordList_item_img {
+            background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/2018022864551sprites_desktop.png);
+            background-position: -974px -747px;
+            width: 30px;
+            height: 25px;
         }
-        .input_search_content_keywordList {
-           display: flex;
-          padding: 0px 5px;
-          height: 60px;
-          align-items: center;
-           border-bottom: 1px solid #DBDBDB;
-           cursor: pointer;
-        }
-        .keywordList_item_img {
-             background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/2018022864551sprites_desktop.png);
-             background-position: -974px -747px;
-             width: 30px;
-             height: 25px;
-         }
-        .input_search_keywordList_item {
-           font-size: 14px;
-          color: #7F7F7F;
-          height: 18px;
-        }
+       .input_search_keywordList_item {
+          font-size: 14px;
+         color: #7F7F7F;
+         height: 18px;
+       }
       .keywordListWrap_inner {
          height: 250px;
           overflow-y: scroll;
@@ -193,15 +186,15 @@
       } 
       .keywordListWrap_inner::-webkit-scrollbar-track {
          background-color: #fff;
-        }
-        .keywordListWrap_inner::-webkit-scrollbar {
+      }
+      .keywordListWrap_inner::-webkit-scrollbar {
          width: 7px;
          background-color: #f5f5f5;
-        }
-        .keywordListWrap_inner::-webkit-scrollbar-thumb {
+      }
+      .keywordListWrap_inner::-webkit-scrollbar-thumb {
          border-radius: 7px;
          background-color: #808080;
-        }
+      }
       .inputSearchItem_tapButton-selected:after {
           content: '';
           position: absolute;
@@ -235,9 +228,8 @@
           align-items: center;
       }
 /* ///////////////////////////  헤더 끝   ////////////////////////////////////////////////// */
-
 	.img_left{
-		width:  375px;
+		width: 374px;
 		height: 340px;
 	    border-left: 6px solid #fff;
 	    margin:60.5px 0 0 0;
@@ -340,6 +332,10 @@
 	    display: flex;
 	    align-items: center;
 	    justify-content: center;
+	}
+	#body_contents{
+		display:flex;
+		width: 100%;
 	}
 	#column-contents{
 		display: flex;
@@ -591,16 +587,12 @@
    		color: #9b9b9b;
    		font-weight: 400;
 	}
-	/* .review_content_list{
-	} */
 	.review{
 		padding-top:20px;
 		padding-bottom:52px;
-/* border: 1px solid grey; */
 	}
 	.title_header2 {
-		min-height: 1200px;
-/* border: 1px solid grey; */
+		min-height: 0px;
 	    padding: 27px 138px 0;
 	    width: 830px;
 	    margin: 0 auto;
@@ -617,7 +609,6 @@
 		width: 60px;
 	}
 	.title_header2 > div > .review_content_list {
-/* margin-top: 15px; */
 		padding: 20px 0 55px 0;
 		position: relative;
    		border-bottom: 1px solid #DBDBDB;
@@ -803,7 +794,7 @@
 		}
 		.img_area{
 			position:relative;
-			height: 97%;
+			height: 80%;
    			background-color: rgba(0,0,0,0.8);
    		 	padding: 30px 0;
    		 	border-radius: 4px;
@@ -1206,7 +1197,7 @@ position: relative;
     	margin: 0 auto;
     	margin-top: 20px;
     	padding-top: 33px;
-    	min-height: 1200px;
+    	min-height: 0px;
     	padding-right: 31px;
 	}
 	div.best_restaurant_title{
@@ -1580,7 +1571,8 @@ position: relative;
 	}
 	div.side{
 		width:400px;
-		min-height: 5121.5px;
+		/* min-height: 5121.5px; */
+		min-height: 1000px;
 		background-color:#F6F6F6;
 /* border:2px solid #ff12a1; */
 	}

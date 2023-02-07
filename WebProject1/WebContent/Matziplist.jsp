@@ -35,6 +35,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>맛집리스트 목록</title>
+	<link rel="icon" href="Images/profile/mango_favicon.png">
 	<link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css' rel='stylesheet' type='text/css'>
 	<link rel='stylesheet' type='text/css' href='CSS/Matziplist.css'/>
 	<script src="https://code.jquery.com/jquery-3.6.2.js" integrity="sha256-pkn2CUZmheSeyssYw3vMp1+xyub4m+e+QK4sQskvuo4=" crossorigin="anonymous"></script>
@@ -153,155 +154,39 @@
 	//헤더 인기검색어 팝업창 끝--------------------------------------------------------------------------------------
 			
 	        $("#div_header > .header_right").eq(3).find("span").click(function() {
-	            alert("EAT딜 이동!");
-	            location.href = "Mango_eatDeal.jsp";
+	            //alert("EAT딜 이동!");
+	            location.href = "eat_deal_main.jsp";
 	         });
 	         
 	         $("#div_header > .header_right").eq(2).find("span").click(function() {
-	            alert("맛집 리스트 이동!");
+	           // alert("맛집 리스트 이동!");
 	            location.href = "Matziplist.jsp";
 	         });
 	         
 	         $("#div_header > .header_right").eq(1).find("span").click(function() {
-	            alert("망고 스토리 이동!");
+	           // alert("망고 스토리 이동!");
 	            location.href = "Mango_storyList.jsp";
 	         });
 	         
 	         $("#img_logo").click(function() {
-	            alert("망고플레이트 이동!");
+	           // alert("망고플레이트 이동!");
 	            location.href = "MangoMain.jsp"
 	         });
 			
-			
-			
-			
-			/* $("#logo").click(function( ) {
-				location.href = "http://localhost:9090/WebProject1/MangoMain.jsp";
-			});
-			$(".eatdeal").click(function() {
-				location.href = "잇딜.jsp";
-			});
-			$(".matziplist").click(function() {
-				location.href = "http://localhost:9090/WebProject1/Matziplist.jsp";
-			});
-			$(".mangostory").click(function() {
-				location.href = "망고스토리.jsp";
-			}); */
-			/* $(".main .inner a").addClass("on"); */	// #전체에 불 어떻게 들어오게 할까?!
 			$(".main .inner .hashtag").click(function(e) {		// event라서 보통 소문자 e로 해요. 
 				$(".main .inner .hashtag").removeClass("on");
 				e.preventDefault();    // (기본적인 동작을 막는다) --> 주로, a태그에 사용 --> 이동을 안 해요. 		
 				$(this).addClass("on");
 			});
-			/* $(".header .fl .searchinput").click(function() {
-				$(".keywordsuggester").css('display', 'block');
-				$(".keywordsuggester_black").css('display', 'block');
-				document.documentElement.style.overflowY = "hidden";
-			});
-			$(".keywordsuggester_black").click(function() {
-				$(this).css('display', 'none');
-				$(".popular_search").css('display','none');
-				$(".history_search").css('display','none');
-				$(".recommended_search").css('display','block');
-				$(".keywordsuggester_button").removeClass("keywordsuggester_button_selected");
-				$(".keywordsuggester_recommended").addClass("keywordsuggester_button_selected");
-				$(".keywordsuggester").css('display','none');
-				document.documentElement.style.overflowY = "auto";
-			});
-			$("body .keywordsuggester .keywordsuggester_container .keywordsuggester_navigation .keywordsuggester_list .list_item .keywordsuggester_button").click(function() {
-				$(this).parent().parent().find(".keywordsuggester_button").removeClass("keywordsuggester_button_selected");
-				$(this).addClass("keywordsuggester_button_selected");
-			});
-			$("body .keywordsuggester .keywordsuggester_container .keywordsuggester_navigation .keywordsuggester_list .list_item .keywordsuggester_recommended").click(function() {
-				$(".popular_search").css('display', 'none');
-				$(".recommended_search").css('display', 'block');
-			});
-			$("body .keywordsuggester .keywordsuggester_container .keywordsuggester_navigation .keywordsuggester_list .list_item .keywordsuggester_popular").click(function() {
-				$(".recommended_search").css('display', 'none');
-				$(".popular_search").css('display', 'block');
-			});
-			$(".suggestkeywordlist").mouseenter(function() {
-				$(this).css('overflow','auto');
-			});
-			$(".suggestkeywordlist").mouseleave(function() {
-				$(this).css('overflow','hidden');
-			});
-			$(".suggestkeywordlist li").mouseenter(function() {
-				$(this).css('background','#f7f7f7');
-				$(this).parent().parent().css('overflow','auto');
-			});
-			$(".suggestkeywordlist li").mouseleave(function() {
-				$(this).css('background','#fff');
-			}); */
 			$(document).on("click", ".main .inner .list > div", function() {
 				var idx = $(this).attr('idx');
 				//alert("idx : " + idx);
 				if(idx==121 || idx==119 || idx==23 || idx==22) {
-					location.href = "http://localhost:9090/WebProject1/MatzipDetail.jsp?idx=" + idx;
+					location.href = "MatzipDetail.jsp?idx=" + idx;
 				} else {
 					alert("준비중입니다");
 				}
 			});
-			/* $(".footer .inner .mango .fl #mangologo").click(function() {
-				location.href = "http://localhost:9090/WebProject1/MangoMain.jsp";
-			});
-			$(".footer .inner .bottom .language p span#korean").click(function() {
-				alert("이미 적용되어 있습니다.");
-			});
-			$(".footer .inner .bottom .language p span#english").click(function() {
-				alert("준비중입니다.");
-			});
-			$(".footer .inner .bottom .language p span#chinese").click(function() {
-				alert("준비중입니다.");
-			}); */
-			/* $("#btn_more").click(function() {
-				pageNum += 1;
-				//alert("더보기 눌러서 요청함 : page:" + pageNum);
-				
-				$.ajax({
-					type: "get",
-					url: "MatziplistServlet",
-					data: {"page":pageNum},
-					datatype: "json",
-					success: function(data) {	// data <------ objFinal
-						console.log(data.result);   // data.result <------ objFinal.result (JSONArray)
-						if(data.result.length<20) {
-							$("#btn_more").hide();
-						}
-						for(var i=0; i<=data.result.length-1; i++) {
-							var main_img = data.result[i].main_img;
-							var ment = data.result[i].ment;
-							var restaurant_list = data.result[i].restaurant_list;
-							var restaurant_list_idx = data.result[i].restaurant_list_idx;
-							//console.log(main_img + "/" + ment + "/" + restaurant_list + "/" + restaurant_list_idx);
-							var str ='';
-							if(i%2==0) {   // left-side
-								str = '<div class="left_list" idx="' + restaurant_list_idx + '">'
-										+ '<div>'
-										+ '<span class="title">' + restaurant_list + '</span>'
-										+ '<p class="ment">' + ment + '</p>'
-										+ '</div>'
-										+ '<div class="inner" style="background: center/100% url( Images/mango/'+main_img+');"></div>'
-										+ '<div class="inner" style="background-color: rgba(0,0,0,0.2);"></div>'
-										+ '</div>';
-							} else if(i%2!=0) {   // right-side
-								str = 	'<div class="right_list fr" idx="' + restaurant_list_idx + '">'
-										+ '<div>'
-										+ '<span class="title">' + restaurant_list + '</span>'
-										+ '<p class="ment">' + ment + '</p>'
-										+ '</div>'
-										+ '<div class="inner" style="background: url( Images/mango/' + main_img + ') center/100%;"></div>'
-										+ '<div class="inner" style="background-color: rgba(0,0,0,0.2);"></div>'
-										+ '</div>';
-							}
-							$('.main .list').append(str);	
-						}
-					},
-					error: function(r,s,e) {	// Ex13.jsp 참고
-						alert("에러");
-					}
-				});
-			}); */
 			// 쿠키 --------------------------------------------------------------------------------------------------
 			applyRecentListFromList(arrRecent);
 			// 쿠키 끝--------------------------------------------------------------------------------------------------
@@ -482,29 +367,33 @@
 	
 	
 		<div id="div_header">
-	      <div class="fl"><!-- (1)헤더 왼쪽 망고플레이트 로고 -->
-	         <img id="img_logo" src="Images/mangoplace_logo.png"/>
-	      </div>
-	      <div class="fl"><!-- (2)헤더 왼쪽 서치아이콘 -->
-	         <img id="img_search" src="Images/img_searchicon.png"/>
-	         <label for="Input_search">
-	            <input type="text" id="Input_search" placeholder="지역, 식당 또는 음식"/>
-	         </label>
-	      </div>
-	      <div class="fr header_right"><!-- (3)헤더 오른쪽 유저아이콘 -->
-	         <img class="UserProfileButton_PersonIcon" src="Images/icon_user.png"/>
-	      </div>
-	      <div class="fr header_right"><!-- (4)헤더 오른쪽 망고스토리 아이콘 -->
-	         <span>망고 스토리</span>
-	      </div>
-	      <div class="fr header_right"><!-- (5)헤더 오른쪽 맛집 리스트 아이콘 -->
-	         <span>맛집 리스트</span>
-	      </div>
-	      <div class="fr header_right"><!-- (6)헤더 오른쪽 EAT딜 아이콘 -->
-	         <span class="header_right_new">EAT딜</span>
-	      </div>
-	      <div style="clear:both;"></div>
-	   </div>
+         <div class="fl"><!-- (1)헤더 왼쪽 망고플레이트 로고 -->
+            <img id="img_logo" src="Images/mangoplace_logo.png"/>
+         </div>
+         <div class="fl"><!-- (2)헤더 왼쪽 서치아이콘 -->
+            <img id="img_search" src="Images/img_searchicon.png"/>
+            <label for="Input_search">
+               <input type="text" id="Input_search" placeholder="지역, 식당 또는 음식"/>
+            </label>
+         </div>
+         <div class="fr header_right"><!-- (3)헤더 오른쪽 유저아이콘 -->
+            <div style="background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/2018022864551sprites_desktop.png);background-position: -82px -919px;
+             width: 34px; height: 34px; margin-top: 15px; cursor: pointer; margin-left: 24px;"></div>
+          <span class="history_count" style="position: absolute; width: 24px; height: 24px; top: 10px; z-index: 1; border-radius: 50%; box-sizing: border-box; text-align: center; 
+            font-size: 14px; font-style: normal; color: #FFFFFF; background-color: #ff792a; line-height: 23px;">0
+          </span>
+         </div>
+         <div class="fr header_right"><!-- (4)헤더 오른쪽 망고스토리 아이콘 -->
+            <span>망고 스토리</span>
+         </div>
+         <div class="fr header_right"><!-- (5)헤더 오른쪽 맛집 리스트 아이콘 -->
+            <span>맛집 리스트</span>
+         </div>
+         <div class="fr header_right"><!-- (6)헤더 오른쪽 EAT딜 아이콘 -->
+            <span class="header_right_new">EAT딜</span>
+         </div>
+         <div style="clear:both;"></div>
+      </div>
 	   <div class="input_search_keyword">   <!-- 검색어 클릭 이벤트 발생시 나오는 창 -->
 	      <div class="input_search_backgroundDark"></div>      <!-- $("#input").css({display:"none"}); -->
 	      <div class="input_search_content">

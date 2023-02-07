@@ -25,7 +25,7 @@ public class EatDealMainServlet extends HttpServlet {
 		Connection conn = null;
 		
 		String driver = "oracle.jdbc.driver.OracleDriver";
-		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+		String url = "jdbc:oracle:thin:@203.245.30.223:1521:xe";
 		String dbId = "mango";
 		String dbPw = "1234";
 		
@@ -47,15 +47,15 @@ public class EatDealMainServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 
 		System.out.println("servlet들어옴");
-		int pageNumber = Integer.parseInt( request.getParameter("pageNumber"));
+		int pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
 		JSONArray jsonArrayList = new JSONArray();
 //		ArrayList<Eat_deal_mainDTO> listEatdeal = new ArrayList<Eat_deal_mainDTO>();
 		Connection conn = getConnection();
 		String sql = "SELECT * FROM (SELECT rownum rnum, t1.*"
 				+ " FROM (SELECT name 이름, area 지점, eat_deal_main.menu 메뉴, info 정보, eat_deal_main.price 원가, discount 할인율,"
 				+ " eat_deal_main.price-(eat_deal_main.price*(discount/100)) 할인가, main_theme 썸네일, eat_deal_main.neww 뉴, deal_idx"
-				+ " FROM eat_deal_main, plate_table WHERE eat_deal_main.plate_id=plate_table.plate_id"
-				+ " ORDER BY plate_table.plate_id ) t1) t2  WHERE rnum>=? AND rnum<=?";
+				+ " FROM eat_deal_main, details WHERE eat_deal_main.plate_id=details.plate_id"
+				+ " ORDER BY details.plate_id ) t1) t2  WHERE rnum>=? AND rnum<=?";
 
 		int bnoStart = pageNumber * 20 - 19;
 		int bnoEnd = pageNumber * 20;
